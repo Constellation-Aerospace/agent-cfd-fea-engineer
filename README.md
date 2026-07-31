@@ -49,6 +49,28 @@ to run. Re-verify any time:
 
 Multiphase reference pipeline: see "Typical Study" in [AGENTS.md](AGENTS.md).
 
+## Satellite / high-altitude balloon thermal
+
+Compute the thermal environment and get ready-to-paste boundary conditions:
+
+```powershell
+# stratospheric balloon payload at 30 km (white paint, 0.5 m characteristic size)
+.venv\Scripts\python.exe .github/skills/conjugate_heat_transfer/scripts/environment.py --altitude 30000 --emissivity 0.9 --alpha-solar 0.2 --L-char 0.5
+
+# LEO satellite, sunlit hot case + radiator area hint for 200 W dissipation
+.venv\Scripts\python.exe .github/skills/conjugate_heat_transfer/scripts/environment.py --orbit --altitude 500000 --emissivity 0.88 --alpha-solar 0.2 --internal-power 200
+
+# eclipse cold case
+.venv\Scripts\python.exe .github/skills/conjugate_heat_transfer/scripts/environment.py --orbit --altitude 500000 --emissivity 0.88 --no-sun
+```
+
+Paste the printed `bc_json` onto the exposed surfaces via `assign_materials.py`,
+then run the same CHT pipeline as above. Satellite assemblies are solid-only
+(conduction + radiation, vacuum); balloon studies can model the surrounding
+rarefied air as a fluid region for resolved natural convection. Physics backing:
+US Standard Atmosphere 1976, view-factor-weighted sky sinks, solar/albedo/Earth-IR
+loads — see the `conjugate_heat_transfer` SKILL.md for models and limitations.
+
 ## How it works (DOE architecture)
 
 1. **Skills** — `.github/skills/<name>/SKILL.md` define goals, scripts, and outputs;
@@ -67,7 +89,7 @@ Multiphase reference pipeline: see "Typical Study" in [AGENTS.md](AGENTS.md).
 | `step_assembly` | Multi-part STEP import, per-component material/BC manifest, conformal assembly mesh |
 | `meshing` | Graded tet meshes + mesh independence study with GCI |
 | `multiphase_cfd` | compressibleInterFoam VOF case (gas mixture / seawater, k-omega SST) |
-| `conjugate_heat_transfer` | Multi-region CHT (conduction/convection/radiation) + heat-exchanger KPIs |
+| `conjugate_heat_transfer` | Multi-region CHT (conduction/convection/radiation), heat-exchanger KPIs, satellite/high-altitude environments (`environment.py`) |
 | `fea_analysis` | CalculiX pipe-wall thermal-structural FEA |
 | `post_processing` | Contours, streamlines, temperature decay, back-pressure (PyVista) |
 | `parametric_study` | Operating-point sweeps (temperature/velocity/depth) + comparison |

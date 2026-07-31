@@ -22,7 +22,20 @@ conduction/convection/radiation problem is solved with chtMultiRegionSimpleFoam 
 chtMultiRegionFoam (conjugate_heat_transfer skill) — producing heat-exchanger KPIs
 (heat duty, effectiveness, LMTD, UA, interface fluxes).
 
+The same CHT toolchain covers space and high-altitude thermal analysis (satellites,
+stratospheric balloon payloads): `.tmp/scripts/atmosphere.py` provides the US Standard
+Atmosphere 1976 (0–86 km), sky sink temperatures, and solar/albedo/Earth-IR heat loads;
+manifest BC types `space_environment` (vacuum — exact equivalent-sink radiation) and
+`altitude_environment` (rarefied convection + sky radiation) attach those environments
+to any component surface. Satellite assemblies run solid-only (conduction + surface
+radiation, per-surface radiator rejection in the KPIs); balloon payloads can also model
+the surrounding rarefied air as a fluid region (materials.air_at_altitude) to resolve
+natural convection explicitly. The environment.py helper turns altitude/orbit inputs
+into ready-to-paste boundary conditions and radiator-area hints.
+
 All solvers are open-source and run locally: OpenFOAM 2412 + CalculiX + Gmsh in WSL,
 Python stack (gmsh, pyvista, meshio, fluidfoam, numpy, scipy, matplotlib) on Windows.
 No API keys are required for solving. Skills live in `.github/skills/*/SKILL.md`; the
-WSL bridge utility is `.tmp/scripts/wsl_bridge.py`.
+WSL bridge utility is `.tmp/scripts/wsl_bridge.py`. First-run setup:
+`python first_run_setup.py` (see SETUP.md). Outputs are organised project-wise:
+`outputs/<project>/<study>` with nested `--study <project>/<study>` slugs.

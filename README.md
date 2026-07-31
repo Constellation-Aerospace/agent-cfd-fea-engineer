@@ -95,6 +95,7 @@ loads — see the `conjugate_heat_transfer` SKILL.md for models and limitations.
 | `parametric_study` | Operating-point sweeps (temperature/velocity/depth) + comparison |
 | `report_generation` | Final technical report (Markdown + HTML) |
 | `diagramming` | Editable draw.io/Mermaid diagrams (block diagrams only; pictorial figures are hand-authored inline SVG/CSS) |
+| `self_annealing` | Continuous improvement loop: lessons captured per project (`agent-data/lessons.md`), integrated into skills, session-end commit gate |
 
 ## Repository layout
 

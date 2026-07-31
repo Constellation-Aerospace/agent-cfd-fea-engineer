@@ -53,6 +53,12 @@ FEA (if requested) → report. Each study lives in `outputs/<study-slug>/`.
    TODO sections with your engineering interpretation of the actual results.
 9. Units: SI internally; report temperatures in °C, pressures in kPa (state gauge vs
    absolute), lengths in m.
+10. Self-anneal: when a project teaches a new technique, fix, or gotcha, log it with
+    the self_annealing skill (`anneal.py log`) and integrate it into the target
+    skill/module. Before ending a session that changed the harness, run
+    `anneal.py check --run-tests`; if it reports uncommitted changes, show the user
+    the suggested commit message and ask them to commit — never auto-commit, never
+    leave improvements untracked.
 
 ## Platform Tools (injected by CommandCenter)
 

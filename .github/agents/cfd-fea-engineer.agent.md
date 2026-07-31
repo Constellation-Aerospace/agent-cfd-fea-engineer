@@ -30,6 +30,7 @@ post-processing. Windows↔WSL bridging is handled by `.tmp/scripts/wsl_bridge.p
 | `post_processing` | Contours, streamlines, temperature decay, back-pressure |
 | `parametric_study` | Operating-point sweeps + comparison |
 | `report_generation` | Final technical report (MD + HTML) |
+| `self_annealing` | Capture lessons during work; session-end gate: integrate → test → prompt user to commit |
 
 ## How to Use
 
@@ -63,6 +64,13 @@ post-processing. Windows↔WSL bridging is handled by `.tmp/scripts/wsl_bridge.p
 6. After `build_report.py`, fill the report's Executive Summary and Conclusions TODOs
    with your engineering interpretation.
 7. Units: SI internally; °C and kPa (gauge vs absolute stated) in reports.
+8. **Self-anneal continuously**: the moment a technique, fix, or gotcha is learned,
+   log it (`anneal.py log`); integrate lessons into their target skill/module per the
+   self_annealing placement map. Before ending any session that touched the harness,
+   run `anneal.py check --run-tests` and, when it reports uncommitted changes,
+   present the suggested commit and ask the user to commit — never end a session
+   with harness improvements untracked, never commit without the user's go-ahead.
+9. Compress solver output: quote JSON summaries and log tails, never full logs.
 
 ## Memory
 

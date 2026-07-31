@@ -17,3 +17,7 @@ conduction + convection + radiation via `chtMultiRegion*Foam`.
 - **Rules:** never fabricate results; smoke-run new configs (`--end-time 0.2`); sanity-check
   physics (back-pressure > hydrostatic, T within [water, exhaust]); SI units, °C/kPa in
   reports. Run scripts with the venv Python from the repo root.
+- **Self-annealing:** log every newly learned technique/gotcha
+  (`.github/skills/self_annealing/scripts/anneal.py log`), integrate lessons into the
+  target skills, and at session end run `anneal.py check --run-tests` — when changes
+  are uncommitted, present the suggested commit and prompt the user to commit.

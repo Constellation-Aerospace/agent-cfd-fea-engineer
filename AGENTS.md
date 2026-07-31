@@ -29,6 +29,7 @@ into deterministic scripts; reserve the LLM for routing, judgment, and interpret
 | parametric_study | `.github/skills/parametric_study/SKILL.md` | Operating-point sweeps + comparison |
 | report_generation | `.github/skills/report_generation/SKILL.md` | Final technical report (MD + HTML) |
 | diagramming | `.github/skills/diagramming/SKILL.md` | Editable draw.io/Mermaid diagrams per `.github/instructions/diagram-creation.instructions.md` |
+| self_annealing | `.github/skills/self_annealing/SKILL.md` | Continuous improvement loop: capture lessons, integrate into skills, session-end commit gate |
 
 ## Solver Backend
 

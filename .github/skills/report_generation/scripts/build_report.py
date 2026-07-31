@@ -1,0 +1,234 @@
+#!/usr/bin/env python3
+"""Assemble the final technical report (Markdown + self-contained HTML) for a study.
+
+Example:
+    python build_report.py --study baseline --title "Submerged Exhaust CFD Study"
+"""
+from __future__ import annotations
+
+import argparse
+import base64
+import datetime as dt
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[4] / ".tmp" / "scripts"))
+
+from study_pipeline import study_dir, load_params  # noqa: E402
+
+
+def load_json(path: Path) -> dict:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def table(d: dict, headers=("Quantity", "Value")) -> str:
+    lines = [f"| {headers[0]} | {headers[1]} |", "| --- | --- |"]
+    for k, v in d.items():
+        lines.append(f"| {k} | {v} |")
+    return "\n".join(lines)
+
+
+def fig_block(fig_dir: Path, names: list[str]) -> str:
+    out = []
+    for name in names:
+        p = fig_dir / name
+        if p.exists():
+            out.append(f"![{name}](../figures/{name})\n")
+    return "\n".join(out)
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--study", required=True)
+    ap.add_argument("--title", default="Submerged Marine Exhaust Discharge — CFD/FEA Investigation")
+    ap.add_argument("--author", default="agent-cfd-fea-engineer")
+    args = ap.parse_args()
+
+    d = study_dir(args.study)
+    cfg = load_params(args.study)
+    geo = cfg.get("geometry", {})
+    prep = load_json(d / "prepare_summary.json")
+    run = load_json(d / "run_summary.json")
+    kpis = load_json(d / "kpis.json")
+    mesh_ind = load_json(d / "mesh_independence.json")
+    fea = load_json(d / "fea" / "fea_summary.json")
+    parametric = load_json(d / "parametric_results.json") or []
+    decay = load_json(d / "figures" / "decay_metrics.json")
+    fig_dir = d / "figures"
+
+    md = [f"""# {args.title}
+
+**Study:** `{args.study}` · **Date:** {dt.date.today().isoformat()} · **Prepared by:** {args.author}
+
+## 1. Executive Summary
+
+_TODO (agent): summarise the headline findings — back-pressure margin, thermal decay
+distance, plume behaviour, structural adequacy — in 5-8 sentences._
+
+## 2. Problem Statement
+
+CFD investigation of a submerged marine exhaust discharge system under representative
+marine conditions: multiphase gas-liquid interaction, thermal mixing and temperature
+decay, pressure distribution and exhaust back-pressure, flow field development and
+turbulence characteristics, with comparative assessment under varying operating
+parameters.
+
+## 3. Methodology
+
+| Item | Model |
+| --- | --- |
+| Solver | OpenFOAM v2412 `compressibleInterFoam` (transient, compressible VOF) |
+| Multiphase | Volume of Fluid (MULES interface compression, cAlpha=1) |
+| Turbulence | k-omega SST with standard wall functions |
+| Exhaust gas | Frozen N2/CO2/H2O/O2 ideal-gas mixture, JANAF cp(T), Sutherland viscosity |
+| Water | Constant density {cfg.get('rho_water', 1025)} kg/m3, constant cp/mu |
+| Gravity | 9.81 m/s2, hydrostatic pressure via p_rgh formulation |
+| Energy | Sensible internal energy, thermal mixing resolved |
+
+### 3.1 Operating Conditions
+
+{table({
+    "Exhaust inlet velocity": f"{cfg.get('U_in')} m/s",
+    "Exhaust temperature": f"{cfg.get('T_exhaust_C')} C",
+    "Ambient water temperature": f"{cfg.get('T_water_C')} C",
+    "Turbulence intensity (inlet)": cfg.get('turbulence_intensity'),
+    "Atmospheric pressure": f"{cfg.get('p_atm')} Pa",
+    "Simulated physical time": f"{run.get('final_time_s', '-')} s",
+})}
+
+### 3.2 Boundary Conditions
+
+| Patch | Type |
+| --- | --- |
+| inlet | Velocity inlet, fixed T, turbulence intensity {cfg.get('turbulence_intensity')} |
+| atmosphere | Total-pressure outlet (atmospheric), backflow-tolerant |
+| pipeWall / seaBoundary | No-slip walls; thermal BC adiabatic (to be finalised) |
+| Initial field | Water column below z=0 (hydrostatic), gas-filled exhaust pipe at exhaust T |
+
+## 4. Geometry & Domain
+
+{table({
+    "Pipe bore diameter": f"{geo.get('pipe_diameter', 0.3)} m",
+    "Pipe wall thickness": f"{geo.get('wall_thickness', 0.012)} m",
+    "Submergence (axis below surface)": f"{geo.get('submergence', 2.0)} m",
+    "Domain (L x W)": f"{geo.get('domain_length', 10)} x {geo.get('domain_width', 6)} m",
+    "Water depth / air layer": f"{geo.get('water_depth', 5)} / {geo.get('air_height', 1)} m",
+})}
+
+> Geometry is a representative parametric model; confidential CAD will replace it after
+> NDA execution without changes to the downstream pipeline.
+
+## 5. Mesh
+"""]
+
+    check = prep.get("checkMesh", {})
+    if check:
+        md.append(table({
+            "Cells": check.get("cells"),
+            "Max non-orthogonality": check.get("max_non_ortho"),
+            "Avg non-orthogonality": check.get("avg_non_ortho"),
+            "Max skewness": check.get("max_skewness"),
+            "checkMesh": "OK" if check.get("ok") else "WARNINGS — see log",
+        }))
+
+    if mesh_ind:
+        md.append("\n### 5.1 Mesh Independence (GCI)\n")
+        levels = mesh_ind.get("levels", [])
+        if levels:
+            heads = ["level", "cells", "back_pressure_gauge_Pa", "T_max_axis_K",
+                     "thermal_decay_length_10pct_m"]
+            md.append("| " + " | ".join(heads) + " |")
+            md.append("|" + " --- |" * len(heads))
+            for r in levels:
+                md.append("| " + " | ".join(str(r.get(h, "-")) for h in heads) + " |")
+        for key, g in mesh_ind.get("gci", {}).items():
+            md.append(f"\n- **{key}**: observed order p = {g.get('order_p')}, "
+                      f"GCI_fine = {g.get('gci_fine_pct')}%, "
+                      f"medium vs fine drift = {g.get('medium_vs_fine_pct', '-')}%")
+
+    md.append("\n## 6. Results\n")
+    if kpis:
+        md.append("### 6.1 Headline KPIs\n")
+        md.append(table({k: v for k, v in kpis.items() if k != "study"}, ("KPI", "Value")))
+    md.append("\n### 6.2 Flow Field\n")
+    md.append(fig_block(fig_dir, [f.name for f in sorted(fig_dir.glob("slice_*.png"))]
+                        + [f.name for f in sorted(fig_dir.glob("streamlines_*.png"))]))
+    md.append("### 6.3 Temperature Decay\n")
+    md.append(fig_block(fig_dir, ["temperature_decay.png", "plume_rise.png"]))
+    if decay:
+        md.append(table({t: json.dumps(v) for t, v in decay.items()}, ("Time", "Metrics")))
+    md.append("\n### 6.4 Exhaust Back-Pressure\n")
+    md.append(fig_block(fig_dir, ["back_pressure.png"]))
+
+    if fea:
+        md.append("\n## 7. FEA — Pipe Wall Thermal-Structural\n")
+        md.append(table({
+            "Max von Mises stress": f"{fea.get('max_von_mises_MPa', '-')} MPa",
+            "Max displacement": f"{fea.get('max_displacement_mm', '-')} mm",
+            "Wall temperature range": f"{fea.get('T_min_C', '-')} to {fea.get('T_max_C', '-')} C",
+            "Mesh": f"{fea.get('mesh', {}).get('n_elements', '-')} C3D10 elements",
+        }))
+
+    if parametric:
+        md.append("\n## 8. Parametric Comparison\n")
+        ok = [r for r in parametric if "error" not in r]
+        if ok:
+            heads = list(ok[0].keys())
+            md.append("| " + " | ".join(heads) + " |")
+            md.append("|" + " --- |" * len(heads))
+            for r in ok:
+                md.append("| " + " | ".join(str(r.get(h, "-")) for h in heads) + " |")
+        md.append(fig_block(fig_dir, ["parametric_trends.png"]))
+
+    md.append("""
+## 9. Validation Methodology
+
+- **Mesh independence:** 3-level refinement with Grid Convergence Index (Section 5.1).
+- **Physical plausibility checks:** back-pressure vs. hydrostatic + dynamic head estimate;
+  jet centreline decay vs. classical turbulent jet correlations (T ~ 1/x far field);
+  global mass/energy balance from solver logs.
+- **Benchmark path:** validation against published submerged buoyant jet experiments
+  (e.g. turbulent buoyant jet temperature decay data) recommended before design sign-off.
+- **Limitations:** representative geometry (pre-NDA); frozen exhaust composition
+  (no condensation/dissolution); constant water properties; adiabatic walls pending
+  thermal BC definition; RANS turbulence (no LES of interface breakup).
+
+## 10. Conclusions & Recommendations
+
+_TODO (agent): fill from the results above._
+""")
+
+    report_dir = d / "report"
+    report_dir.mkdir(exist_ok=True)
+    md_text = "\n".join(md)
+    (report_dir / "report.md").write_text(md_text, encoding="utf-8")
+
+    # self-contained HTML with figures embedded as data URIs
+    try:
+        import markdown as md_lib
+        html_body = md_lib.markdown(md_text, extensions=["tables"])
+    except ImportError:
+        html_body = "<pre>" + md_text.replace("&", "&amp;").replace("<", "&lt;") + "</pre>"
+    for fig in fig_dir.glob("*.png"):
+        rel = f"../figures/{fig.name}"
+        if rel in html_body:
+            b64 = base64.b64encode(fig.read_bytes()).decode()
+            html_body = html_body.replace(rel, f"data:image/png;base64,{b64}")
+    html = ("<!doctype html><html><head><meta charset='utf-8'><title>" + args.title +
+            "</title><style>body{font-family:Segoe UI,Arial,sans-serif;max-width:960px;"
+            "margin:2em auto;padding:0 1em;line-height:1.5}table{border-collapse:collapse}"
+            "td,th{border:1px solid #ccc;padding:4px 10px}img{max-width:100%}</style>"
+            "</head><body>" + html_body + "</body></html>")
+    (report_dir / "report.html").write_text(html, encoding="utf-8")
+
+    print(f"Report written:\n  {report_dir / 'report.md'}\n  {report_dir / 'report.html'}")
+    print("\nNOTE: fill the Executive Summary and Conclusions sections (marked TODO).")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

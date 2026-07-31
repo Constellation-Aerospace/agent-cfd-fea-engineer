@@ -1,0 +1,19 @@
+# Auto-generated requirements for this agent workspace
+
+ccx2paraview
+fluidfoam
+gmsh
+jinja2
+markdown
+matplotlib
+meshio
+numpy
+pandas
+python-dotenv
+pyvista
+requests
+scipy
+tabulate
+
+# Optional: Enables semantic/hybrid search in memory system
+# sentence-transformers

@@ -1,0 +1,65 @@
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+
+# Google OAuth credentials
+credentials.json
+token.json
+
+# Temporary files (.tmp/scripts/ IS tracked — shared utilities on PYTHONPATH)
+# NB: "?*.tmp" not "*.tmp" — the bare glob would match the .tmp/ directory itself
+# and no negation can then re-include its contents.
+.tmp/*
+!.tmp/scripts/
+!.tmp/scripts/**
+.tmp/scripts/__pycache__/
+?*.tmp
+?*.temp
+
+# Heavy simulation artifacts (regenerable; keep configs/KPIs/figures/reports).
+# ** because outputs/ is organised project-wise: outputs/<project>/<study>/...
+outputs/**/case/processor*/
+outputs/**/case/VTK/
+outputs/**/case/[0-9]*.[0-9]*/
+outputs/**/case/[1-9]*/
+outputs/**/mesh/*.msh
+outputs/**/fea/*.frd
+outputs/**/fea/*.vtu
+outputs/**/fea/*.msh
+
+# Memory database (regenerated, contains local state)
+memory/*.db
+memory/*.db-wal
+memory/*.db-shm
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Don't ignore .vscode - we want the settings
+!.vscode/
+
+# machine-local first-run setup report
+setup_report.json

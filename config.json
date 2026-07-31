@@ -1,0 +1,15 @@
+{
+  "name": "cfd-fea-engineer",
+  "description": "CFD and FEA engineering simulation agent. Handles computational fluid dynamics (multiphase gas-liquid VOF, thermal mixing, temperature decay, turbulence modelling, pressure distribution, exhaust back-pressure), conjugate heat transfer on multi-part STEP assemblies (per-component material and boundary-condition assignment, conduction/convection/radiation, heat-exchanger effectiveness/LMTD/UA), finite element analysis (thermal and structural), geometry preparation, mesh generation and mesh independence studies, parametric sweeps, post-processing (contours, streamlines, volume fraction), and technical report generation. Trigger keywords: CFD, FEA, simulation, OpenFOAM, CalculiX, Fluent, multiphase, VOF, turbulence, k-omega SST, mesh, thermal, back-pressure, marine exhaust, submerged discharge, gmsh, ParaView, heat exchanger, conjugate heat transfer, CHT, STEP assembly, radiation, chtMultiRegionFoam.",
+  "version": "0.1.0",
+  "skill_repos": [],
+  "integrations": [],
+  "optional_integrations": ["anthropic", "openai"],
+  "tags": ["cfd", "fea", "simulation", "engineering", "openfoam", "multiphase", "thermal", "cht", "heat-exchanger"],
+  "tool_scope": ["web_search", "fetch_page", "write_artifact", "manage_todo_list", "ask_user", "get_errors", "save_note", "recall_notes"],
+  "max_mutation_attempts": 1,
+  "mcp_servers": {},
+  "icon": "Waves",
+  "category": "engineering",
+  "webhook_routes": []
+}

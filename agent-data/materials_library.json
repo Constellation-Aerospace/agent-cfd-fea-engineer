@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "description": "Material property library for conjugate heat transfer studies. Solids: density [kg/m3], cp [J/kg-K], kappa [W/m-K], emissivity [-] (oxidised/as-installed surface unless noted). Fluids: constant properties at the stated reference temperature; gases use perfectGas EOS, liquids rhoConst. Override any value per-study via the assembly manifest.",
+    "units": "SI",
+    "version": "0.1.0"
+  },
+  "solids": {
+    "aluminum_6061": {
+      "rho": 2700, "cp": 896, "kappa": 167, "emissivity": 0.1,
+      "molWeight": 26.98, "note": "T6 temper, lightly oxidised surface"
+    },
+    "copper": {
+      "rho": 8960, "cp": 385, "kappa": 401, "emissivity": 0.5,
+      "molWeight": 63.55, "note": "oxidised; polished is ~0.03"
+    },
+    "brass": {
+      "rho": 8530, "cp": 380, "kappa": 111, "emissivity": 0.22,
+      "molWeight": 64.4, "note": "70/30 cartridge brass"
+    },
+    "stainless_316": {
+      "rho": 8000, "cp": 500, "kappa": 16.3, "emissivity": 0.35,
+      "molWeight": 55.85, "note": "marine-grade austenitic"
+    },
+    "carbon_steel": {
+      "rho": 7850, "cp": 486, "kappa": 45, "emissivity": 0.6,
+      "molWeight": 55.85, "note": "mild steel, oxidised"
+    },
+    "titanium_grade2": {
+      "rho": 4510, "cp": 523, "kappa": 17, "emissivity": 0.3,
+      "molWeight": 47.87, "note": "seawater-resistant HX tubing"
+    },
+    "inconel_718": {
+      "rho": 8190, "cp": 435, "kappa": 11.4, "emissivity": 0.4,
+      "molWeight": 58.7, "note": "high-temperature sections"
+    },
+    "cupronickel_90_10": {
+      "rho": 8900, "cp": 377, "kappa": 40, "emissivity": 0.3,
+      "molWeight": 62.8, "note": "classic marine HX tube alloy"
+    }
+  },
+  "fluids": {
+    "air": {
+      "eos": "perfectGas", "molWeight": 28.96, "cp": 1006,
+      "mu": 1.85e-05, "Pr": 0.71, "absorption_coeff_1_m": 0.0,
+      "T_ref_C": 25, "note": "radiatively transparent"
+    },
+    "exhaust_gas": {
+      "eos": "perfectGas", "molWeight": 28.77, "cp": 1090,
+      "mu": 3.0e-05, "Pr": 0.72, "absorption_coeff_1_m": 0.2,
+      "T_ref_C": 400, "note": "frozen diesel exhaust mix; CO2/H2O make it a participating medium"
+    },
+    "flue_gas": {
+      "eos": "perfectGas", "molWeight": 29.5, "cp": 1130,
+      "mu": 3.4e-05, "Pr": 0.74, "absorption_coeff_1_m": 0.25,
+      "T_ref_C": 600, "note": "combustion products, higher CO2 loading"
+    },
+    "water": {
+      "eos": "rhoConst", "rho": 997, "molWeight": 18.015, "cp": 4181,
+      "mu": 8.9e-04, "Pr": 6.13, "absorption_coeff_1_m": 0.0,
+      "T_ref_C": 25
+    },
+    "seawater": {
+      "eos": "rhoConst", "rho": 1025, "molWeight": 18.015, "cp": 3985,
+      "mu": 1.08e-03, "Pr": 7.2, "absorption_coeff_1_m": 0.0,
+      "T_ref_C": 15
+    },
+    "glycol_water_50": {
+      "eos": "rhoConst", "rho": 1070, "molWeight": 42.0, "cp": 3300,
+      "mu": 3.9e-03, "Pr": 34.8, "absorption_coeff_1_m": 0.0,
+      "T_ref_C": 25, "note": "50/50 ethylene glycol coolant"
+    },
+    "thermal_oil": {
+      "eos": "rhoConst", "rho": 850, "molWeight": 250.0, "cp": 2100,
+      "mu": 1.2e-02, "Pr": 194, "absorption_coeff_1_m": 0.0,
+      "T_ref_C": 60, "note": "mineral heat-transfer oil"
+    }
+  }
+}

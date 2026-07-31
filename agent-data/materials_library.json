@@ -36,6 +36,26 @@
     "cupronickel_90_10": {
       "rho": 8900, "cp": 377, "kappa": 40, "emissivity": 0.3,
       "molWeight": 62.8, "note": "classic marine HX tube alloy"
+    },
+    "fr4_pcb": {
+      "rho": 1850, "cp": 1100, "kappa": 0.3, "emissivity": 0.9,
+      "molWeight": 100.0, "note": "PCB laminate, in-plane kappa higher with copper pours (override)"
+    },
+    "aluminum_honeycomb_panel": {
+      "rho": 130, "cp": 900, "kappa": 2.0, "emissivity": 0.85,
+      "molWeight": 26.98, "note": "effective through-thickness; in-plane differs — override per orientation"
+    },
+    "mli_effective": {
+      "rho": 50, "cp": 1000, "kappa": 0.03, "emissivity": 0.05,
+      "molWeight": 100.0, "note": "multilayer insulation as an effective solid; emissivity = outer layer (VDA ~0.05); use e* ~ 0.01-0.03 as effective emittance via overrides"
+    },
+    "white_paint_aluminum": {
+      "rho": 2700, "cp": 896, "kappa": 167, "emissivity": 0.9,
+      "molWeight": 26.98, "note": "Al 6061 with white thermal paint (alpha_s ~ 0.2, eps ~ 0.9)"
+    },
+    "black_anodized_aluminum": {
+      "rho": 2700, "cp": 896, "kappa": 167, "emissivity": 0.88,
+      "molWeight": 26.98, "note": "Al 6061 black anodize (alpha_s ~ 0.86, eps ~ 0.88) — radiator/internal surfaces"
     }
   },
   "fluids": {

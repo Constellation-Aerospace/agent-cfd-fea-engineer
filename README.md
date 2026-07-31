@@ -11,6 +11,7 @@ a Python orchestration layer (Gmsh OCC, PyVista, matplotlib) on Windows.
 | --- | --- |
 | **Multiphase CFD** | Gas–liquid VOF (`compressibleInterFoam`): thermal mixing, temperature decay, back-pressure, k-omega SST turbulence. Reference workload: submerged marine exhaust discharge |
 | **Conjugate heat transfer** | Multi-part STEP assembly → per-component material/BC assignment → `chtMultiRegionSimpleFoam`/`chtMultiRegionFoam` with conduction, convection, and radiation (P1/fvDOM + surface-to-ambient) → heat-exchanger KPIs (duty, effectiveness, LMTD, UA, interface fluxes) |
+| **Space / high-altitude thermal** | Satellite (vacuum: conduction + radiation, solar/albedo/Earth-IR loads, radiator sizing) and stratospheric balloon payloads (US Standard Atmosphere 1976, rarefied natural convection, sky sinks) via `space_environment` / `altitude_environment` BCs |
 | **FEA** | CalculiX `ccx` thermal-structural analysis |
 | **Supporting** | Parametric geometry (Gmsh OCC), graded tet meshing + mesh independence (GCI), parametric sweeps, post-processing (contours, streamlines, decay curves), technical reports (MD/HTML), draw.io/Mermaid diagramming |
 

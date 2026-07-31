@@ -23,7 +23,7 @@ into deterministic scripts; reserve the LLM for routing, judgment, and interpret
 | step_assembly | `.github/skills/step_assembly/SKILL.md` | Multi-part STEP import, per-component material/BC manifest, conformal assembly mesh |
 | meshing | `.github/skills/meshing/SKILL.md` | Graded tet meshes + mesh independence with GCI |
 | multiphase_cfd | `.github/skills/multiphase_cfd/SKILL.md` | compressibleInterFoam VOF case setup + run |
-| conjugate_heat_transfer | `.github/skills/conjugate_heat_transfer/SKILL.md` | Multi-region CHT (conduction/convection/radiation), heat-exchanger KPIs |
+| conjugate_heat_transfer | `.github/skills/conjugate_heat_transfer/SKILL.md` | Multi-region CHT (conduction/convection/radiation), heat-exchanger KPIs, satellite/high-altitude thermal environments |
 | fea_analysis | `.github/skills/fea_analysis/SKILL.md` | CalculiX pipe-wall thermal-structural FEA |
 | post_processing | `.github/skills/post_processing/SKILL.md` | Contours, streamlines, decay curves, back-pressure |
 | parametric_study | `.github/skills/parametric_study/SKILL.md` | Operating-point sweeps + comparison |

@@ -25,7 +25,7 @@ post-processing. Windows↔WSL bridging is handled by `.tmp/scripts/wsl_bridge.p
 | `step_assembly` | Multi-part STEP import, per-component material/BC manifest, conformal assembly mesh |
 | `meshing` | Graded tet meshes + mesh independence with GCI |
 | `multiphase_cfd` | compressibleInterFoam VOF case setup + run |
-| `conjugate_heat_transfer` | chtMultiRegionFoam heat-exchanger CHT: conduction/convection/radiation, effectiveness/LMTD/UA KPIs |
+| `conjugate_heat_transfer` | chtMultiRegionFoam CHT: conduction/convection/radiation, HX KPIs; space & high-altitude thermal (satellites: vacuum radiation + orbital loads; balloons: US76 atmosphere) via environment.py |
 | `fea_analysis` | CalculiX pipe-wall thermal-structural FEA |
 | `post_processing` | Contours, streamlines, temperature decay, back-pressure |
 | `parametric_study` | Operating-point sweeps + comparison |

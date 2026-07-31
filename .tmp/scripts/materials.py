@@ -126,5 +126,21 @@ mixture
 """
 
 
+def air_at_altitude(altitude_m: float) -> dict:
+    """Property overrides making the 'air' fluid material match a given altitude
+    (rarefied stratospheric air for balloon CHT). Use together with
+    solver.p_ref_Pa = ambient pressure so the perfectGas EOS yields the right
+    density. Returns {'material': 'air', 'overrides': {...}, 'p_ref_Pa': ...,
+    'T_amb_C': ...} ready to merge into a manifest component/solver block."""
+    from atmosphere import atmosphere
+    a = atmosphere(altitude_m)
+    return {
+        "material": "air",
+        "overrides": {"mu": round(a["mu_Pa_s"], 10), "T_ref_C": round(a["T_C"], 2)},
+        "p_ref_Pa": round(a["p_Pa"], 3),
+        "T_amb_C": round(a["T_C"], 2),
+    }
+
+
 if __name__ == "__main__":
     print(json.dumps(list_materials(), indent=2))

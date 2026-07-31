@@ -493,6 +493,47 @@ def _boundary_radiation_body(region: str, patches: dict, manifest: dict,
 
 # ─────────────────────────────── field generation ────────────────────────────
 
+WALLISH_BCS = ("adiabatic", "fixed_temperature", "heat_flux", "convection",
+               "space_environment", "altitude_environment")
+
+
+def _environment_T_spec(bc: dict, kappa_method: str, T0: float) -> dict:
+    """T-field spec for the aerothermal environment BCs.
+
+    space_environment (vacuum, satellites): pure radiation to an equivalent sink
+    that folds absorbed solar/albedo/Earth-IR flux into the sink temperature
+    (exact). altitude_environment (high-altitude balloons, 0-86 km): rarefied
+    natural convection to US76 air temperature + radiation to the sky sink,
+    folded into a single (h, Ta) film — exact at the reference surface
+    temperature (default: air + 20 K), good engineering accuracy around it.
+    """
+    from atmosphere import (atmosphere, sky_sink_temperature,
+                            equivalent_sink_temperature, natural_convection_h,
+                            combined_film, T_SPACE)
+    eps = bc["emissivity"]
+    q_abs = bc.get("absorbed_flux_W_m2", 0.0)
+    if bc["type"] == "space_environment":
+        sink = bc.get("sink_T_C")
+        base = (sink + 273.15) if sink is not None else T_SPACE
+        t_eq = equivalent_sink_temperature(eps, q_abs, base)
+        return {"type": "externalWallHeatFluxTemperature", "mode": "coefficient",
+                "Ta": f"uniform {t_eq:.2f}", "h": "uniform 0",
+                "emissivity": f"{eps}", "kappaMethod": kappa_method,
+                "value": f"uniform {T0}"}
+    alt = float(bc["altitude_m"])
+    a = atmosphere(alt)
+    t_ref = (bc["T_surface_est_C"] + 273.15 if bc.get("T_surface_est_C") is not None
+             else a["T_K"] + 20.0)
+    h_conv = (float(bc["h_W_m2K"]) if bc.get("h_W_m2K") is not None
+              else natural_convection_h(alt, bc.get("L_char_m", 1.0),
+                                        max(abs(t_ref - a["T_K"]), 1.0)))
+    t_sink = equivalent_sink_temperature(eps, q_abs, sky_sink_temperature(alt))
+    film = combined_film(h_conv, a["T_K"], eps, t_sink, t_ref)
+    return {"type": "externalWallHeatFluxTemperature", "mode": "coefficient",
+            "Ta": f"uniform {film['Ta_K']:.2f}", "h": f"uniform {film['h_W_m2K']:.4g}",
+            "kappaMethod": kappa_method, "value": f"uniform {T0}"}
+
+
 def _inlet_velocity_estimate(bc: dict, props: dict, area: float | None) -> float:
     if bc.get("U_m_s"):
         return abs(float(bc["U_m_s"]))
@@ -540,7 +581,7 @@ def _fluid_fields(region: str, patches: dict, manifest: dict, regions: dict,
                 fields[f][pname] = {"type": "symmetry"}
             continue
 
-        if is_iface or btype in ("adiabatic", "fixed_temperature", "heat_flux", "convection"):
+        if is_iface or btype in WALLISH_BCS:
             fields["U"][pname] = {"type": "noSlip"}
             fields["p_rgh"][pname] = {"type": "fixedFluxPressure", "value": f"uniform {p0}"}
             fields["p"][pname] = {"type": "calculated", "value": f"uniform {p0}"}
@@ -573,6 +614,8 @@ def _fluid_fields(region: str, patches: dict, manifest: dict, regions: dict,
                 if bc.get("emissivity"):
                     spec["emissivity"] = f"{bc['emissivity']}"
                 fields["T"][pname] = spec
+            elif btype in ("space_environment", "altitude_environment"):
+                fields["T"][pname] = _environment_T_spec(bc, "fluidThermo", T0)
             else:
                 fields["T"][pname] = {"type": "zeroGradient"}
             if "G" in fields:
@@ -657,6 +700,8 @@ def _solid_T_field(region: str, patches: dict, manifest: dict, regions: dict) ->
             if bc.get("emissivity"):
                 spec["emissivity"] = f"{bc['emissivity']}"
             out[pname] = spec
+        elif btype in ("space_environment", "altitude_environment"):
+            out[pname] = _environment_T_spec(bc, "solidThermo", T0)
         elif btype == "symmetry":
             out[pname] = {"type": "symmetry"}
         else:

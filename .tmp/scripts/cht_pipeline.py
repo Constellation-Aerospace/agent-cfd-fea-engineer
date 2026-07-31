@@ -216,7 +216,8 @@ def extract_cht_kpis(slug: str) -> dict:
     case = d / "case"
     manifest = load_manifest(slug)
     regions = region_map(manifest)
-    kpis: dict = {"study": slug, "streams": {}, "regions": {}, "interfaces_W": {}}
+    kpis: dict = {"study": slug, "streams": {}, "regions": {}, "interfaces_W": {},
+                  "external_W": {}}
 
     # per fluid stream: m_dot, T_in, T_out, Q = m_dot cp (T_out - T_in)
     for r, info in regions.items():
@@ -274,8 +275,11 @@ def extract_cht_kpis(slug: str) -> dict:
     for r in regions:
         whf = _wall_heat_flux(_find_fo_files(case, f"wallHeatFlux_{r}", "wallHeatFlux*.dat"))
         for patch, q in whf.items():
+            key = f"{r}:{patch}"
             if "_to_" in patch:
-                kpis["interfaces_W"][f"{r}:{patch}"] = round(q, 2)
+                kpis["interfaces_W"][key] = round(q, 2)
+            else:   # external walls: radiator rejection / environmental gain
+                kpis["external_W"][key] = round(q, 2)
         tmin = _last_scalar(_find_fo_files(case, f"minMaxT_{r}", "fieldMinMax*.dat"))
         entry: dict = {}
         if tmin is not None:

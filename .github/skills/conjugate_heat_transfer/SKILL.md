@@ -37,6 +37,32 @@ gas stream participates (CO2/H2O), `fvDOM` only when radiation dominates and P1
 accuracy is in doubt. Radiation across a gas gap between two solids requires a
 participating fluid region in the gap with P1/fvDOM active.
 
+## Space & high-altitude thermal (satellites, stratospheric balloons)
+
+Two extra environment BC types (backed by `.tmp/scripts/atmosphere.py` — US Standard
+Atmosphere 1976, solar/albedo/Earth-IR loads, sky sink temperatures):
+
+| BC type | Regime | Physics |
+| --- | --- | --- |
+| `space_environment` | Orbit / vacuum | Pure radiation to an equivalent sink that folds absorbed solar+albedo+Earth-IR flux into the sink temperature (**exact**). Fields: `emissivity` (req), `absorbed_flux_W_m2`, `sink_T_C` |
+| `altitude_environment` | 0–86 km | Rarefied natural convection to US76 air temperature (h estimated from a Churchill sphere correlation with rho² collapse, or given via `h_W_m2K`) + radiation to the sky sink, folded into a single film — exact at `T_surface_est_C` (default air+20 K). Fields: `altitude_m`, `emissivity` (req), `absorbed_flux_W_m2`, `L_char_m` |
+
+Workflow: `scripts/environment.py --altitude 30000 --emissivity 0.9 ...` (add `--orbit`
+for vacuum, `--no-sun` for eclipse) prints the environment state, ready-to-paste
+`bc_json`, and — for balloons — the full-CFD route (model the surrounding air as a
+fluid component with `air_at_altitude()` overrides + `solver.p_ref_Pa` = ambient
+pressure, so rarefied natural convection is resolved rather than estimated).
+Satellite assemblies are **solid-only** (no fluid regions): conduction through
+contacts + radiation at surfaces; `external_W` in the KPIs reports per-surface
+radiator rejection. Spacecraft materials in the library: `mli_effective`, `fr4_pcb`,
+`aluminum_honeycomb_panel`, `white_paint_aluminum` (α_s≈0.2), `black_anodized_aluminum`
+(α_s≈0.86).
+
+Limitations (state in reports): internal cavity radiation between solids needs a
+transparent fluid region + fvDOM (or stays conduction-only); orbital fluxes are
+scoping-grade averages (`solar_projection` = A_proj/A_total), not orbit-propagated;
+run sunlit **and** eclipse cases to bound hot/cold.
+
 ## Scripts
 
 | Script | Purpose |

@@ -198,7 +198,8 @@ def validate_manifest(manifest: dict) -> list[str]:
         bc = patch.get("bc", {})
         btype = bc.get("type")
         known = ("velocity_inlet", "pressure_outlet", "fixed_temperature",
-                 "heat_flux", "convection", "adiabatic", "symmetry")
+                 "heat_flux", "convection", "adiabatic", "symmetry",
+                 "space_environment", "altitude_environment")
         if btype not in known:
             problems.append(f"Patch '{pname}': bc.type '{btype}' not in {known}.")
         elif btype == "velocity_inlet" and not (bc.get("U_m_s") or bc.get("m_dot_kg_s")):
@@ -211,6 +212,12 @@ def validate_manifest(manifest: dict) -> list[str]:
             problems.append(f"Patch '{pname}': fixed_temperature needs T_C.")
         elif btype == "heat_flux" and bc.get("q_W_m2") is None:
             problems.append(f"Patch '{pname}': heat_flux needs q_W_m2.")
+        elif btype == "space_environment" and not bc.get("emissivity"):
+            problems.append(f"Patch '{pname}': space_environment needs emissivity > 0.")
+        elif btype == "altitude_environment" and (
+                not bc.get("emissivity") or bc.get("altitude_m") is None):
+            problems.append(f"Patch '{pname}': altitude_environment needs emissivity > 0 "
+                            "and altitude_m.")
 
     fluids = [n for n, c in comps.items() if c.get("type") == "fluid"]
     for f in fluids:

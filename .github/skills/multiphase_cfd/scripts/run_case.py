@@ -16,6 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[4] / ".tmp" / "scripts"))
 
 from study_pipeline import solve, extract_kpis  # noqa: E402
+from learning_store import harvest  # noqa: E402
 
 
 def main() -> int:
@@ -37,6 +38,7 @@ def main() -> int:
     if kpis:
         print("\nHeadline KPIs:")
         print(json.dumps(kpis, indent=2))
+    harvest(args.study, case_type="multiphase_cfd")
     print("\nNext: post-process with "
           "python .github/skills/post_processing/scripts/plot_fields.py --study", args.study)
     return 0

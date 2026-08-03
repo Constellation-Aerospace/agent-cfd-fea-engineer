@@ -5,6 +5,7 @@ Exit 0 when the full CFD/FEA stack is ready; exit 1 with a remediation hint othe
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -15,6 +16,7 @@ from wsl_bridge import check_environment  # noqa: E402
 
 
 def main() -> int:
+    argparse.ArgumentParser(description=__doc__).parse_args()
     status = check_environment()
     print(json.dumps(status, indent=2))
 

@@ -15,6 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[4] / ".tmp" / "scripts"))
 
 from cht_pipeline import extract_cht_kpis  # noqa: E402
+from learning_store import harvest  # noqa: E402
 
 
 def main() -> int:
@@ -24,6 +25,7 @@ def main() -> int:
 
     kpis = extract_cht_kpis(args.study)
     print(json.dumps(kpis, indent=2))
+    harvest(args.study, case_type="conjugate_heat_transfer")
 
     hx = kpis.get("heat_exchanger")
     if hx and hx.get("energy_imbalance_pct", 0) > 5:

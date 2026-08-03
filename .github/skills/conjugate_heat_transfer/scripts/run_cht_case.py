@@ -17,6 +17,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[4] / ".tmp" / "scripts"))
 
 from cht_pipeline import solve  # noqa: E402
+from learning_store import harvest  # noqa: E402
 
 SMOKE_ITERS = 50
 SMOKE_TIME_S = 0.5
@@ -41,6 +42,7 @@ def main() -> int:
     summary = solve(args.study, n_procs=args.n_procs, time_limit_s=args.time_limit,
                     iterations=iters, end_time_s=end_time)
     print(json.dumps(summary, indent=2))
+    harvest(args.study, case_type="conjugate_heat_transfer")
     if not summary["completed"]:
         print(f"\nWARNING: solver did not complete — inspect "
               f"outputs/{args.study}/case/log.{summary['application']}")

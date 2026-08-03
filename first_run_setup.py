@@ -145,6 +145,8 @@ def stage_verify(report: dict) -> bool:
 
 def stage_tests(report: dict) -> bool:
     print("Running test suite (tests/) ...")
+    run([str(VENV_PY), "-m", "pip", "install", "--quiet",
+         "pytest>=8", "pytest-asyncio>=0.24"])
     r = run([str(VENV_PY), "-m", "pytest", "tests", "-q"], cwd=str(ROOT), timeout=1200)
     tail = (r.stdout or "").strip().splitlines()[-3:]
     ok = r.returncode == 0

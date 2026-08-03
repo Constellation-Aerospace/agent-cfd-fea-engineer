@@ -33,6 +33,7 @@ into deterministic scripts; reserve the LLM for routing, judgment, and interpret
 | report_generation | `.github/skills/report_generation/SKILL.md` | Final technical report (MD + HTML) |
 | diagramming | `.github/skills/diagramming/SKILL.md` | Editable draw.io/Mermaid diagrams per `.github/instructions/diagram-creation.instructions.md` |
 | self_annealing | `.github/skills/self_annealing/SKILL.md` | Continuous improvement loop: capture lessons, integrate into skills, session-end commit gate |
+| self_learning | `.github/skills/self_learning/SKILL.md` | Auto-harvests every completed study's inputs/knobs/quality; recommends solver settings by weighted similarity to past runs, gets more confident with every study |
 
 ## Solver Backend
 
@@ -77,6 +78,11 @@ of executive summary and conclusions.
    in the relevant SKILL.md.
 6. **Use memory across sessions** — `memory_bank.py --read all` at session start;
    log decisions (mesh choices, model settings, validated configs) after milestones.
+7. **Query the learning history before a new case** — run `self_learning`'s
+   `recommend.py` (case type + `--like <similar-study>` or `--param key=value`) to get
+   data-driven starting knobs before `setup_case.py`/`setup_cht_case.py`/
+   `run_pipe_fea.py`; low confidence just means fall back to skill defaults. Harvesting
+   is automatic — every completed run adds itself to the history with no extra step.
 
 ## Quick Start
 

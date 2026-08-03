@@ -75,6 +75,21 @@ rarefied air as a fluid region for resolved natural convection. Physics backing:
 US Standard Atmosphere 1976, view-factor-weighted sky sinks, solar/albedo/Earth-IR
 loads — see the `conjugate_heat_transfer` SKILL.md for models and limitations.
 
+## Learning from every simulation
+
+Every completed study (multiphase CFD, CHT, FEA) is automatically harvested — its
+inputs, the solver knobs used, and an outcome-quality score — into
+`agent-data/learning_history.json`. Query it before setting up a similar case:
+
+```powershell
+.venv\Scripts\python.exe .github/skills/self_learning/scripts/recommend.py `
+    --case-type conjugate_heat_transfer --like <project>/<a-similar-study>
+```
+
+Returns a confidence score, recommended solver knobs, and the nearest past studies
+it drew from — confidence rises automatically as more studies accumulate, with no
+retraining step. See the `self_learning` SKILL.md for what's learned per case type.
+
 ## How it works (DOE architecture)
 
 1. **Skills** — `.github/skills/<name>/SKILL.md` define goals, scripts, and outputs;
@@ -116,6 +131,7 @@ available without changing `agents.py` again.
 | `report_generation` | Final technical report (Markdown + HTML) |
 | `diagramming` | Editable draw.io/Mermaid diagrams (block diagrams only; pictorial figures are hand-authored inline SVG/CSS) |
 | `self_annealing` | Continuous improvement loop: lessons captured per project (`agent-data/lessons.md`), integrated into skills, session-end commit gate |
+| `self_learning` | Auto-harvests every completed study's inputs/knobs/outcome quality (`agent-data/learning_history.json`); recommends solver settings by weighted similarity to past runs — recommendations improve with every simulation, no retraining step |
 
 ## Repository layout
 

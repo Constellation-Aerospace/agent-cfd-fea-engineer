@@ -22,6 +22,7 @@ import numpy as np  # noqa: E402
 
 from wsl_bridge import run_wsl, ccx_binary, win_to_wsl  # noqa: E402
 from study_pipeline import study_dir, load_params  # noqa: E402
+from learning_store import harvest  # noqa: E402
 
 
 def build_tube_mesh(out_inp_mesh: Path, R: float, Ro: float, L: float, size: float) -> dict:
@@ -254,6 +255,7 @@ def main() -> int:
     }
     (fea_dir / "fea_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print(json.dumps(summary, indent=2))
+    harvest(args.study, case_type="fea_analysis")
     return 0
 
 

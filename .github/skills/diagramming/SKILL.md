@@ -1,3 +1,13 @@
+---
+name: diagramming
+description: >
+  Editable, standards-compliant engineering diagrams — domain schematics, boundary-condition
+  maps, workflow charts, programme/Gantt charts — authored as draw.io `.drawio` or Mermaid
+  `.mmd` sources and exported to PNG/SVG for reports and proposals. Use for "draw a diagram",
+  "schematic", "flowchart", "BC map", "programme chart", or any non-solver figure in a
+  deliverable. Follow `.github/instructions/diagram-creation.instructions.md` exactly.
+when_to_use: "Any non-solver figure in a report or proposal; every diagram needs an editable source file."
+---
 # Skill: diagramming
 
 Create editable, standards-compliant engineering diagrams (domain schematics, BC maps,

@@ -17,6 +17,25 @@ That extends the repo-grounded agent behavior; it does not retrain the base mode
 **Why this works:** if you do everything yourself, errors compound. Push mechanical work
 into deterministic scripts; reserve the LLM for routing, judgment, and interpretation.
 
+## Entry Points (one harness, many tools)
+
+This file is the single source of truth for how the agent operates; the skills under
+`.github/skills/` are the single source of truth for how each task is done. Every tool
+reads the same content through its own entry point:
+
+| Tool | Entry point |
+| --- | --- |
+| GitHub Copilot / Copilot Chat | `.github/copilot-instructions.md` |
+| Copilot custom agent | `.github/agents/cfd-fea-engineer.agent.md` |
+| Claude Code / Claude Agent SDK | `CLAUDE.md` (+ generated `.claude/skills/` proxies) |
+| Other AGENTS.md-aware agents | `AGENTS.md` |
+| Hosted / API runs | `.github/prompts/system.md`, `instructions.md` |
+
+Never fork instructions into a tool-specific copy — edit the canonical file under
+`.github/` (or this one) and let every tool inherit the change. After adding, renaming,
+or re-describing a skill, run `python .tmp/scripts/sync_agent_docs.py` to refresh the
+Claude proxies (`tests/test_agent_docs.py` fails when they drift).
+
 ## Available Skills
 
 | Skill | SKILL.md | What it does |
@@ -48,10 +67,12 @@ into deterministic scripts; reserve the LLM for routing, judgment, and interpret
 
 - `SETUP.md` / `first_run_setup.py` — first-run setup automation (venv, deps, WSL
   solvers, verification, tests); run on any new machine before simulation work
-- `.github/skills/` — Skill instructions + feature scripts
+- `.github/skills/` — Skill instructions + feature scripts (canonical)
+- `.claude/skills/` — Generated proxies to the above for Claude Code; regenerate with
+  `.tmp/scripts/sync_agent_docs.py`, never hand-edit
 - `.tmp/scripts/` — Shared utilities on PYTHONPATH (`wsl_bridge`, `foam_case`,
   `marine_exhaust_geometry`, `exhaust_properties`, `study_pipeline`, `step_assembly`,
-  `materials`, `cht_case`, `cht_pipeline`, memory tools)
+  `materials`, `cht_case`, `cht_pipeline`, `sync_agent_docs`, memory tools)
 - `agent-data/` — Reference data (see `agent-data/INDEX.md`)
 - `inputs/` — User-provided files (CAD, specs — per project subfolder)
 - `outputs/<project>/<study-slug>/` — Project-wise organisation (see

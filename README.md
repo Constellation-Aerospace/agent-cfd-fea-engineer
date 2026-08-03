@@ -99,6 +99,14 @@ retraining step. See the `self_learning` SKILL.md for what's learned per case ty
 3. **Execution** — deterministic Python in `.github/skills/*/scripts/` and shared
    utilities in `.tmp/scripts/` (WSL bridge, case factories, pipelines, materials).
 
+The harness is authored once and shared by every agentic tool: GitHub Copilot and
+Copilot Chat enter through `.github/copilot-instructions.md` /
+`.github/agents/cfd-fea-engineer.agent.md`, Claude Code through
+[CLAUDE.md](CLAUDE.md), and any AGENTS.md-aware tool through
+[AGENTS.md](AGENTS.md) — all of them running the same `.github/skills/`.
+`.claude/skills/` holds generated proxies; refresh them with
+`python .tmp/scripts/sync_agent_docs.py` after adding or renaming a skill.
+
 ## Extending with more solvers
 
 Committing new solver code to this repo does not retrain the base model weights. It
@@ -114,6 +122,9 @@ files and can now execute repo skill scripts dynamically.
 
 That keeps solver onboarding version-controlled and makes uploaded solver integrations
 available without changing `agents.py` again.
+
+A new skill is picked up by every tool at once. After adding one, run
+`python .tmp/scripts/sync_agent_docs.py` so Claude Code's proxies include it.
 
 ## Available skills
 
@@ -139,7 +150,9 @@ available without changing `agents.py` again.
 agent-cfd-fea-engineer.code-workspace   ← double-click to open VS Code
 first_run_setup.py / setup.ps1 / SETUP.md   one-command environment bootstrap
 AGENTS.md                 full agent instructions (skills, rules, pipelines)
-.github/skills/           skill definitions + scripts
+CLAUDE.md                 Claude Code entry point → AGENTS.md + Claude-specific notes
+.github/skills/           skill definitions + scripts (canonical)
+.claude/skills/           generated proxies so Claude Code discovers the same skills
 .tmp/scripts/             shared utilities: wsl_bridge, foam_case, cht_case,
                           step_assembly, materials, study/cht pipelines, memory
 agent-data/               reference data + materials_library.json

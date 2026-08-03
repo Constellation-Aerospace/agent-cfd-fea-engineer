@@ -12,6 +12,10 @@ conduction + convection + radiation via `chtMultiRegion*Foam`.
 - **Skills:** `.github/skills/*/SKILL.md` — read the relevant SKILL.md before running
   its scripts. Outputs are project-wise: `outputs/<project>/<study-slug>/`
   (nested `--study` slugs; see `outputs/README.md`).
+- **Shared harness:** `AGENTS.md` holds the full operating instructions; the same skills
+  are consumed by Claude Code via `CLAUDE.md` + generated `.claude/skills/` proxies.
+  Author changes under `.github/` only, then run
+  `python .tmp/scripts/sync_agent_docs.py` (gated by `tests/test_agent_docs.py`).
 - **Pipeline:** geometry → mesh → case → smoke run → production run → post-processing →
   mesh independence → parametric sweep → FEA → report.
 - **Rules:** never fabricate results; smoke-run new configs (`--end-time 0.2`); sanity-check

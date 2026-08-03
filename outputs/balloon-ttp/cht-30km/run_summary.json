@@ -1,0 +1,24 @@
+{
+  "study": "balloon-ttp/cht-30km",
+  "application": "chtMultiRegionSimpleFoam",
+  "mode": "steady",
+  "completed": true,
+  "final_time": 500.0,
+  "n_steps": 500,
+  "wall_clock_s": 26.0,
+  "n_procs": 4,
+  "final_residuals": {
+    "component1/h": 0.004683569,
+    "component11/h": 0.3819248,
+    "component18/h": 0.02634691,
+    "jetson_ttp2/h": 0.01334022,
+    "part_10/h": 0.001284948,
+    "part_11/h": 0.003401498,
+    "part_6/h": 0.005712027,
+    "part_7/h": 0.001304233,
+    "part_8/h": 0.003697948,
+    "part_9/h": 0.006540916,
+    "radiator_plate/h": 0.0005017078,
+    "radiator_plate_2/h": 0.0004969736
+  }
+}

@@ -56,6 +56,10 @@
     "black_anodized_aluminum": {
       "rho": 2700, "cp": 896, "kappa": 167, "emissivity": 0.88,
       "molWeight": 26.98, "note": "Al 6061 black anodize (alpha_s ~ 0.86, eps ~ 0.88) — radiator/internal surfaces"
+    },
+    "eps_foam": {
+      "rho": 25, "cp": 1450, "kappa": 0.033, "emissivity": 0.90,
+      "molWeight": 104.15, "note": "expanded polystyrene insulation, 30km balloon payload enclosure"
     }
   },
   "fluids": {

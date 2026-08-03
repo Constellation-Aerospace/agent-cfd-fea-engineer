@@ -36,6 +36,10 @@ to run. Re-verify any time:
 .venv\Scripts\python.exe .github/skills/solver_environment/scripts/check_environment.py
 ```
 
+Before the first solver run, open Ubuntu once and complete the Linux user creation
+prompt. If WSL reports `Create a default Unix user account`, the solver bridge is not
+ready yet even though WSL itself is installed.
+
 ## First heat-exchanger study (multi-part STEP file)
 
 ```powershell
@@ -79,6 +83,22 @@ loads — see the `conjugate_heat_transfer` SKILL.md for models and limitations.
    judgment (sanity checks, convergence, physics bounds).
 3. **Execution** — deterministic Python in `.github/skills/*/scripts/` and shared
    utilities in `.tmp/scripts/` (WSL bridge, case factories, pipelines, materials).
+
+## Extending with more solvers
+
+Committing new solver code to this repo does not retrain the base model weights. It
+does extend the repo-grounded agent behavior because the agent reads new `SKILL.md`
+files and can now execute repo skill scripts dynamically.
+
+1. Add `.github/skills/<solver_name>/SKILL.md` with the solver workflow, inputs,
+   outputs, and guardrails.
+2. Add Python entry points under `.github/skills/<solver_name>/scripts/`.
+3. Commit the new skill to the repo.
+4. Use `list_available_skill_scripts` to confirm discovery and `run_skill_script` to
+   execute the new solver workflow.
+
+That keeps solver onboarding version-controlled and makes uploaded solver integrations
+available without changing `agents.py` again.
 
 ## Available skills
 

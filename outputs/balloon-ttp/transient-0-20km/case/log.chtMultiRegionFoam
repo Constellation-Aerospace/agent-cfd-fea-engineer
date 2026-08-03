@@ -1,0 +1,415 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b8cf4d35-20260127 OPENFOAM=2412 patch=260127 version=2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : chtMultiRegionFoam -parallel
+Date   : Aug 03 2026
+Time   : 04:52:17
+Host   : workstation
+PID    : 2440
+I/O    : uncollated
+Case   : /root/foamruns/balloon-ttp--transient-0-20km
+nProcs : 4
+Hosts  :
+(
+    (workstation 4)
+)
+Pstream initialized with:
+    floatTransfer      : false
+    maxCommsSize       : 0
+    nProcsSimpleSum    : 0
+    nonBlockingExchange: 0 (tuning: 0)
+    exchange algorithm : 0
+    commsType          : nonBlocking
+    polling iterations : 0
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create solid mesh for region component1 for time = 0
+
+Create solid mesh for region component11 for time = 0
+
+Create solid mesh for region component18 for time = 0
+
+Create solid mesh for region jetson_ttp2 for time = 0
+
+Create solid mesh for region part_10 for time = 0
+
+Create solid mesh for region part_11 for time = 0
+
+Create solid mesh for region part_6 for time = 0
+
+Create solid mesh for region part_7 for time = 0
+
+Create solid mesh for region part_8 for time = 0
+
+Create solid mesh for region part_9 for time = 0
+
+Create solid mesh for region radiator_plate for time = 0
+
+Create solid mesh for region radiator_plate_2 for time = 0
+
+*** Reading solid mesh thermophysical properties for region component1
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region component11
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region component18
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region jetson_ttp2
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region part_10
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region part_11
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region part_6
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region part_7
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region part_8
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region part_9
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region radiator_plate
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+*** Reading solid mesh thermophysical properties for region radiator_plate_2
+
+    Adding to thermos
+
+Selecting thermodynamics package 
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       constIso;
+    thermo          hConst;
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+    Adding to radiations
+
+Selecting radiationModel none
+    Adding fvOptions
+
+Region: component1 Diffusion Number mean: 77.31273 max: 2.478249e+10
+Region: component11 Diffusion Number mean: 0.02287412 max: 1.165577
+Region: component18 Diffusion Number mean: 22.5363 max: 478.2737
+Region: jetson_ttp2 Diffusion Number mean: 1126.734 max: 125044.3
+Region: part_10 Diffusion Number mean: 14.5455 max: 217.3528
+Region: part_11 Diffusion Number mean: 3.579417 max: 552.2487
+Region: part_6 Diffusion Number mean: 58.64257 max: 1236.878
+Region: part_7 Diffusion Number mean: 14.55629 max: 217.3528
+Region: part_8 Diffusion Number mean: 3.685005 max: 552.2487
+Region: part_9 Diffusion Number mean: 63.8612 max: 5.150629e+09
+Region: radiator_plate Diffusion Number mean: 27.44728 max: 2435.662
+Region: radiator_plate_2 Diffusion Number mean: 26.95896 max: 2456.918
+wallHeatFlux wallHeatFlux_component1:
+    processing all (5) wall patches
+
+wallHeatFlux wallHeatFlux_component11:
+    processing all (1) wall patches
+
+wallHeatFlux wallHeatFlux_component18:
+    processing all (2) wall patches
+
+wallHeatFlux wallHeatFlux_jetson_ttp2:
+    processing all (3) wall patches
+
+wallHeatFlux wallHeatFlux_part_10:
+    processing all (3) wall patches
+
+wallHeatFlux wallHeatFlux_part_11:
+    processing all (3) wall patches
+
+wallHeatFlux wallHeatFlux_part_6:
+    processing all (3) wall patches
+
+wallHeatFlux wallHeatFlux_part_7:
+    processing all (3) wall patches
+
+wallHeatFlux wallHeatFlux_part_8:
+    processing all (3) wall patches
+
+wallHeatFlux wallHeatFlux_part_9:
+    processing all (3) wall patches
+
+wallHeatFlux wallHeatFlux_radiator_plate:
+    processing all (2) wall patches
+
+wallHeatFlux wallHeatFlux_radiator_plate_2:
+    processing all (2) wall patches
+
+Region: component1 Diffusion Number mean: 77.31273 max: 2.478249e+10
+Region: component11 Diffusion Number mean: 0.02287412 max: 1.165577
+Region: component18 Diffusion Number mean: 22.5363 max: 478.2737
+Region: jetson_ttp2 Diffusion Number mean: 1126.734 max: 125044.3
+Region: part_10 Diffusion Number mean: 14.5455 max: 217.3528
+Region: part_11 Diffusion Number mean: 3.579417 max: 552.2487
+Region: part_6 Diffusion Number mean: 58.64257 max: 1236.878
+Region: part_7 Diffusion Number mean: 14.55629 max: 217.3528
+Region: part_8 Diffusion Number mean: 3.685005 max: 552.2487
+Region: part_9 Diffusion Number mean: 63.8612 max: 5.150629e+09
+Region: radiator_plate Diffusion Number mean: 27.44728 max: 2435.662
+Region: radiator_plate_2 Diffusion Number mean: 26.95896 max: 2456.918
+Time = 0.5
+
+
+Solving for solid region component1
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 9.227692e-09, No Iterations 42
+Min/max T:295.2716 298.3782
+
+Solving for solid region component11
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 3.94613e-09, No Iterations 7
+Min/max T:270.9702 288.15
+
+Solving for solid region component18
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 8.726624e-09, No Iterations 35
+Min/max T:293.1531 297.9647
+
+Solving for solid region jetson_ttp2
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 7.721427e-09, No Iterations 51
+Min/max T:296.1292 298.1574
+
+Solving for solid region part_10
+DICPCG:  Solving for h, Initial residual = 0.634272, Final residual = 7.923913e-09, No Iterations 43
+Min/max T:295.15 295.15
+
+Solving for solid region part_11
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 5.055924e-09, No Iterations 23
+Min/max T:293.3075 295.15
+
+Solving for solid region part_6
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 7.863227e-09, No Iterations 56
+Min/max T:295.15 296.3634
+
+Solving for solid region part_7
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 8.479163e-09, No Iterations 46
+Min/max T:295.15 295.2351
+
+Solving for solid region part_8
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 5.330597e-09, No Iterations 24
+Min/max T:293.3082 295.15
+
+Solving for solid region part_9
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 7.910217e-09, No Iterations 57
+Min/max T:295.15 296.3585
+
+Solving for solid region radiator_plate
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 7.825557e-09, No Iterations 76
+Min/max T:293.0307 294.0266
+
+Solving for solid region radiator_plate_2
+DICPCG:  Solving for h, Initial residual = 1, Final residual = 9.187105e-09, No Iterations 73
+Min/max T:293.0314 294.0513
+ExecutionTime = 0.14 s  ClockTime = 1 s
+
+End
+
+Finalising parallel run

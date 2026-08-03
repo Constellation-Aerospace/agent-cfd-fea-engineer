@@ -1,0 +1,114 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+13
+(
+    part_7_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1064;
+        startFace       133708;
+    }
+    part_10_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1064;
+        startFace       134772;
+    }
+    foam_box_outer
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          12224;
+        startFace       135836;
+    }
+    radiator_plate_outer
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          3766;
+        startFace       148060;
+    }
+    radiator_plate_2_outer
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          3768;
+        startFace       151826;
+    }
+    component1_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1231;
+        startFace       155594;
+    }
+    jetson_heat_source
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          412;
+        startFace       156825;
+    }
+    jetson_ttp2_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          841;
+        startFace       157237;
+    }
+    component18_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          713;
+        startFace       158078;
+    }
+    part_6_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1159;
+        startFace       158791;
+    }
+    part_8_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          192;
+        startFace       159950;
+    }
+    part_9_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1170;
+        startFace       160142;
+    }
+    part_11_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          192;
+        startFace       161312;
+    }
+)
+
+// ************************************************************************* //

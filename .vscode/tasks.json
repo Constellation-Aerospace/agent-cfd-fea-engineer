@@ -1,101 +1,118 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Setup Agent Environment",
-      "type": "shell",
-      "command": ".\\setup.ps1",
-      "windows": {
-        "command": "powershell",
-        "args": [
-          "-ExecutionPolicy",
-          "Bypass",
-          "-File",
-          ".\\setup.ps1"
-        ]
-      },
-      "linux": {
-        "command": "bash",
-        "args": [
-          "./setup.sh"
-        ]
-      },
-      "osx": {
-        "command": "bash",
-        "args": [
-          "./setup.sh"
-        ]
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      },
-      "runOptions": {
-        "runOn": "folderOpen"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Activate Virtual Environment",
-      "type": "shell",
-      "command": ".venv\\Scripts\\Activate.ps1",
-      "windows": {
-        "command": "powershell",
-        "args": [
-          "-ExecutionPolicy",
-          "Bypass",
-          "-Command",
-          "& .venv\\Scripts\\Activate.ps1"
-        ]
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Install Requirements",
-      "type": "shell",
-      "command": "pip install -r requirements.txt",
-      "dependsOn": "Activate Virtual Environment",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Check Solver Environment",
-      "type": "shell",
-      "command": ".venv\\Scripts\\python.exe .github/skills/solver_environment/scripts/check_environment.py",
-      "windows": {
-        "command": ".venv\\Scripts\\python.exe",
-        "args": [
-          ".github/skills/solver_environment/scripts/check_environment.py"
-        ]
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Run Test Suite",
-      "type": "shell",
-      "command": ".venv\\Scripts\\python.exe",
-      "args": ["-m", "pytest", "tests", "-q"],
-      "group": "test",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      },
-      "problemMatcher": []
-    }
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Setup Agent Environment",
+			"type": "shell",
+			"command": ".\\setup.ps1",
+			"windows": {
+				"command": "powershell",
+				"args": [
+					"-ExecutionPolicy",
+					"Bypass",
+					"-File",
+					".\\setup.ps1"
+				]
+			},
+			"linux": {
+				"command": "bash",
+				"args": [
+					"./setup.sh"
+				]
+			},
+			"osx": {
+				"command": "bash",
+				"args": [
+					"./setup.sh"
+				]
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"runOptions": {
+				"runOn": "folderOpen"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Activate Virtual Environment",
+			"type": "shell",
+			"command": ".venv\\Scripts\\Activate.ps1",
+			"windows": {
+				"command": "powershell",
+				"args": [
+					"-ExecutionPolicy",
+					"Bypass",
+					"-Command",
+					"& .venv\\Scripts\\Activate.ps1"
+				]
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Install Requirements",
+			"type": "shell",
+			"command": "pip install -r requirements.txt",
+			"dependsOn": "Activate Virtual Environment",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Solver Environment",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe .github/skills/solver_environment/scripts/check_environment.py",
+			"windows": {
+				"command": ".venv\\Scripts\\python.exe",
+				"args": [
+					".github/skills/solver_environment/scripts/check_environment.py"
+				]
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Run Test Suite",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe",
+			"args": [
+				"-m",
+				"pytest",
+				"tests",
+				"-q"
+			],
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "validate-dynamic-skills",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-c",
+				"import asyncio; from agents import list_available_skill_scripts, run_skill_script; inventory = asyncio.run(list_available_skill_scripts()); assert 'solver_environment:' in inventory and 'check_environment.py' in inventory; help_text = asyncio.run(run_skill_script('solver_environment', 'check_environment.py', '--help')); assert 'usage:' in help_text.lower(); print('dynamic-skill-validation: ok')"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		}
+	]
 }

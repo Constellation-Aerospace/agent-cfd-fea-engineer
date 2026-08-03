@@ -1,0 +1,5 @@
+# Wall heat-flux
+# Time         	patch          	min            	max            	integral       
+0.5            	part_9_wall	0.0000000e+00	0.0000000e+00	0.0000000e+00
+0.5            	part_9_to_part_10	-1.4053550e+04	-2.3301211e+03	-4.7652730e+00
+0.5            	part_9_to_component1	-5.3591114e+04	6.9320079e+04	4.2614792e+01

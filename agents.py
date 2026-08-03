@@ -57,6 +57,33 @@ def _skill(name: str, script: str) -> str:
     return str(SKILLS_DIR / name / "scripts" / script)
 
 
+def _resolve_skill_script(skill: str, script: str) -> Path:
+    skill_path = (SKILLS_DIR / skill).resolve()
+    scripts_path = (skill_path / "scripts").resolve()
+    script_path = (scripts_path / script).resolve()
+
+    if not skill_path.is_dir():
+        raise ValueError(f"Unknown skill: {skill}")
+    if skill_path.parent != SKILLS_DIR:
+        raise ValueError(f"Invalid skill path: {skill}")
+    if script_path.suffix != ".py":
+        raise ValueError("Only Python skill scripts are supported")
+    if script_path.parent != scripts_path or not script_path.is_file():
+        raise ValueError(f"Unknown script for skill '{skill}': {script}")
+    return script_path
+
+
+def _available_skill_scripts() -> dict[str, list[str]]:
+    inventory: dict[str, list[str]] = {}
+    if not SKILLS_DIR.exists():
+        return inventory
+    for skill_dir in sorted(p for p in SKILLS_DIR.iterdir() if p.is_dir()):
+        scripts_dir = skill_dir / "scripts"
+        scripts = sorted(p.name for p in scripts_dir.glob("*.py")) if scripts_dir.exists() else []
+        inventory[skill_dir.name] = scripts
+    return inventory
+
+
 # ── System prompt ─────────────────────────────────────────────────────────────
 
 def _build_system_prompt() -> str:
@@ -191,6 +218,28 @@ async def build_report(study: str, title: str = "") -> str:
     return await _run(args, timeout=600)
 
 
+async def list_available_skill_scripts() -> str:
+    """List repository skill scripts that can be executed dynamically.
+    Use when checking which uploaded solver skills or helper scripts are available."""
+    lines: list[str] = []
+    for skill, scripts in _available_skill_scripts().items():
+        lines.append(f"{skill}: {', '.join(scripts) if scripts else '(no scripts)'}")
+    return "\n".join(lines) if lines else "No skills found under .github/skills"
+
+
+async def run_skill_script(skill: str, script: str, arguments: str = "",
+                           timeout: int = 3600) -> str:
+    """Run any repository skill script by skill name, script file, and raw CLI arguments.
+    Use this for newly uploaded solver skills so they become executable without editing
+    the agent factory. Example: skill='solver_environment', script='check_environment.py',
+    arguments='--help'."""
+    script_path = _resolve_skill_script(skill, script)
+    args = [sys.executable, str(script_path)]
+    if arguments:
+        args.extend(arguments.split())
+    return await _run(args, timeout=timeout)
+
+
 # ── LiteLLM provider (CommandCenter mode) ────────────────────────────────────
 
 def _llm_provider() -> dict[str, Any]:
@@ -222,6 +271,8 @@ def build_agent() -> "GitHubCopilotAgent":
             plot_results,
             run_parametric_sweep,
             build_report,
+            list_available_skill_scripts,
+            run_skill_script,
         ],
         default_options={
             "model": "tier-balanced",

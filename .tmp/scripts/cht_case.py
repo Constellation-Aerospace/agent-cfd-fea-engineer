@@ -33,6 +33,7 @@ DEFAULT_SOLVER = {
     "write_interval": 250,       # steady: write every N iterations
     "end_time_s": 60.0,          # transient
     "write_interval_s": 5.0,     # transient
+    "deltaT_s": None,            # transient: fixed step (auto 0.5 s if solid-only)
     "max_co": 2.5,
     "max_di": 10.0,              # solid diffusion number limit (transient)
     "n_procs": 4,
@@ -125,7 +126,12 @@ def write_skeleton(case: Path, manifest: dict) -> None:
     slv = merged_solver(manifest)
     _write_controldict(case, manifest, functions_body="")
     _write(case, "system/fvSchemes", _fluid_fvschemes(slv["mode"]))
-    _write(case, "system/fvSolution", "// per-region dictionaries hold the solver settings\n")
+    # chtMultiRegionFoam (transient) reads a top-level PIMPLE dict for the outer
+    # loop; chtMultiRegionSimpleFoam does not and leaves this file as a stub.
+    top_solution = "// per-region dictionaries hold the solver settings\n"
+    if slv["mode"] != "steady":
+        top_solution += "\nPIMPLE\n{\n    nOuterCorrectors 1;\n}\n"
+    _write(case, "system/fvSolution", top_solution)
     _write(case, "system/decomposeParDict",
            f"numberOfSubdomains {slv['n_procs']};\n\nmethod          scotch;\n")
     gx, gy, gz = slv["g"]
@@ -136,6 +142,7 @@ def write_skeleton(case: Path, manifest: dict) -> None:
 
 def _write_controldict(case: Path, manifest: dict, functions_body: str) -> None:
     slv = merged_solver(manifest)
+    fixed_dt = None
     if slv["mode"] == "steady":
         head = f"""application     chtMultiRegionSimpleFoam;
 
@@ -150,13 +157,25 @@ writeInterval   {slv['write_interval']};
 purgeWrite      2;
 """
     else:
-        head = f"""application     chtMultiRegionFoam;
+        # Adaptive stepping needs a Courant number to work from. In a solid-only
+        # assembly there are no fluid regions, so setMultiRegionDeltaT has nothing
+        # valid to scale against and the step collapses towards zero (measured:
+        # 8144 steps to reach t = 1.8e-6 s). Solid conduction with Euler implicit
+        # is unconditionally stable, so use a fixed step there instead.
+        solid_only = all(c.get("type") == "solid"
+                         for c in manifest.get("components", {}).values())
+        fixed_dt = slv.get("deltaT_s") or (0.5 if solid_only else None)
+        if fixed_dt:
+            stepping = f"""deltaT          {fixed_dt};
 
-startFrom       latestTime;
-startTime       0;
-stopAt          endTime;
-endTime         {slv['end_time_s']};
-deltaT          1e-3;
+writeControl    adjustable;
+writeInterval   {slv['write_interval_s']};
+purgeWrite      0;
+
+adjustTimeStep  no;
+"""
+        else:
+            stepping = f"""deltaT          1e-3;
 
 writeControl    adjustable;
 writeInterval   {slv['write_interval_s']};
@@ -167,7 +186,17 @@ maxCo           {slv['max_co']};
 maxDi           {slv['max_di']};
 maxDeltaT       1;
 """
-    _write(case, "system/controlDict", head + f"""writeFormat     binary;
+        head = f"""application     chtMultiRegionFoam;
+
+startFrom       latestTime;
+startTime       0;
+stopAt          endTime;
+endTime         {slv['end_time_s']};
+""" + stepping
+    # Staged transient restarts rewrite Ta/h inside written time directories, which
+    # requires a text-readable format (see stage_transient_bcs.py).
+    write_format = "ascii" if (slv["mode"] != "steady" and fixed_dt) else "binary"
+    _write(case, "system/controlDict", head + f"""writeFormat     {write_format};
 writePrecision  7;
 writeCompression off;
 timeFormat      general;
@@ -779,6 +808,16 @@ def write_regions(case: Path, manifest: dict, patch_areas: dict | None = None) -
                _field("volScalarField", "T", "[0 0 0 1 0 0 0]",
                       f"uniform {regions[r]['T_init']}",
                       _solid_T_field(r, patches, manifest, regions)), "volScalarField")
+        # chtMultiRegionFoam (transient) requires p in every solid region; the
+        # steady solver does not. Solid density is constant, so this field is
+        # inert - it only has to exist and be readable.
+        if slv["mode"] != "steady":
+            p0 = slv["p_ref_Pa"]
+            _write(case, f"0/{r}/p",
+                   _field("volScalarField", "p", "[1 -1 -2 0 0 0 0]",
+                          f"uniform {p0}",
+                          {'".*"': {"type": "calculated", "value": f"uniform {p0}"}}),
+                   "volScalarField")
         _write(case, f"constant/{r}/thermophysicalProperties", solid_thermo_body(props))
         _write(case, f"constant/{r}/radiationProperties",
                "radiation       off;\n\nradiationModel  none;\n")

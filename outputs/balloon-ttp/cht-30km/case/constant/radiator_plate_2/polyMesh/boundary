@@ -1,0 +1,40 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/radiator_plate_2/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+2
+(
+    radiator_plate_2_outer
+    {
+        type            wall;
+        physicalType    wall;
+        nFaces          3768;
+        startFace       9112;
+    }
+    radiator_plate_2_to_part_8
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          76;
+        startFace       12880;
+        sampleMode      nearestPatchFace;
+        sampleRegion    part_8;
+        samplePatch     part_8_to_radiator_plate_2;
+    }
+)
+
+// ************************************************************************* //

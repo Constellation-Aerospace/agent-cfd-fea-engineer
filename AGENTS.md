@@ -11,6 +11,9 @@
 **Layer 2 — Orchestration:** You (the LLM) read SKILL.md, call scripts, apply judgment.
 **Layer 3 — Execution:** `.github/skills/*/scripts/` and `.tmp/scripts/` do the actual work.
 
+New solver integrations should be added as new skill folders under `.github/skills/`.
+That extends the repo-grounded agent behavior; it does not retrain the base model.
+
 **Why this works:** if you do everything yourself, errors compound. Push mechanical work
 into deterministic scripts; reserve the LLM for routing, judgment, and interpretation.
 

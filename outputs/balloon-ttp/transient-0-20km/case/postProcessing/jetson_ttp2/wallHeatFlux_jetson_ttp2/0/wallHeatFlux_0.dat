@@ -1,0 +1,5 @@
+# Wall heat-flux
+# Time         	patch          	min            	max            	integral       
+0.5            	jetson_ttp2_wall	0.0000000e+00	0.0000000e+00	0.0000000e+00
+0.5            	jetson_ttp2_to_component18	-1.1860266e+05	6.1130872e+04	-8.1561776e+01
+0.5            	jetson_ttp2_to_component1	-2.1078699e+04	7.6377345e+04	4.4386893e+01

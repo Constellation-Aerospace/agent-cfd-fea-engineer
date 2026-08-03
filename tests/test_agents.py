@@ -1,4 +1,6 @@
 """CommandCenter CI gate — these tests must pass for the agent to be registered."""
+import asyncio
+
 import pytest
 
 
@@ -45,3 +47,20 @@ def test_system_prompt_contains_skills():
     assert len(SYSTEM_PROMPT) > 100
     for skill in ("solver_environment", "multiphase_cfd", "meshing", "post_processing"):
         assert skill in SYSTEM_PROMPT, f"SKILL.md for '{skill}' not embedded in system prompt"
+
+
+def test_dynamic_skill_inventory_lists_repo_skills():
+    """Repo skills should be discoverable without hard-coding them into the tool list."""
+    from agents import list_available_skill_scripts
+
+    output = asyncio.run(list_available_skill_scripts())
+    assert "solver_environment:" in output
+    assert "check_environment.py" in output
+
+
+def test_dynamic_skill_runner_executes_repo_script_help():
+    """A newly uploaded skill script should be runnable through the generic executor."""
+    from agents import run_skill_script
+
+    output = asyncio.run(run_skill_script("solver_environment", "check_environment.py", "--help"))
+    assert "usage:" in output.lower()

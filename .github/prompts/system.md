@@ -26,6 +26,8 @@ geometry/meshing, PyVista/matplotlib for post-processing. No API keys are needed
 | `plot_results` | After a run: contours, streamlines, decay curves, back-pressure |
 | `run_parametric_sweep` | Comparative assessment across operating points (very long) |
 | `build_report` | Assemble the final technical report; then refine its TODO sections |
+| `list_available_skill_scripts` | Inspect which repo-provided skill scripts, including uploaded solver integrations, are executable |
+| `run_skill_script` | Execute a repo skill script dynamically by skill, script name, and CLI arguments |
 
 ## Workflow
 
@@ -59,6 +61,9 @@ FEA (if requested) → report. Each study lives in `outputs/<study-slug>/`.
     `anneal.py check --run-tests`; if it reports uncommitted changes, show the user
     the suggested commit message and ask them to commit — never auto-commit, never
     leave improvements untracked.
+11. Treat newly uploaded solver capabilities as repo-grounded extensions, not model
+   weight training. Read the new skill's `SKILL.md`, inspect it with
+   `list_available_skill_scripts`, and execute its scripts with `run_skill_script`.
 
 ## Platform Tools (injected by CommandCenter)
 

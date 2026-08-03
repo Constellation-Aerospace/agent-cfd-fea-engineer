@@ -23,6 +23,10 @@ wsl --install -d Ubuntu
 
 …then re-run `.\setup.ps1`.
 
+If Ubuntu is installed but has never been opened, launch it once from the Start menu
+and complete the first-run Linux user creation. Until that finishes, WSL can still
+prompt with `Create a default Unix user account`, which blocks the solver bridge.
+
 ## What gets installed, and where
 
 | Stage | What | Where | Size / time |
@@ -83,6 +87,7 @@ Heat-exchanger CHT pipeline (with your own multi-part STEP file):
 | Symptom | Cause / fix |
 | --- | --- |
 | `wsl` not found or no Ubuntu listed | `wsl --install -d Ubuntu` in admin PowerShell, reboot, re-run setup |
+| `Create a default Unix user account` | Ubuntu first-run setup is incomplete; open Ubuntu once, create the Linux user, close it, then re-run setup |
 | OpenFOAM commands not found in WSL | `python .github/skills/solver_environment/scripts/install_solvers.py` (add `--force` to reinstall) |
 | Solver fails on paths with spaces | Handled automatically — `wsl_bridge` reroutes through an NTFS junction; don't move the repo mid-run |
 | `$VAR` mangled when running WSL commands by hand | PowerShell expands `$` in double quotes — use single quotes or the bash tool; scripts are unaffected |

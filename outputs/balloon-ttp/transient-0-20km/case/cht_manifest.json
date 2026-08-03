@@ -1,0 +1,497 @@
+{
+  "step_file": "D:\\Github\\agent-cfd-fea-engineer\\inputs\\balloon-ttp\\assembly.step",
+  "components": {
+    "radiator_plate": {
+      "step_label": "Shapes/3/Radiator plate:1/Radiator plate",
+      "type": "solid",
+      "material": "white_paint_aluminum",
+      "overrides": {
+        "emissivity": 0.85
+      },
+      "T_init_C": 20.0,
+      "solids": [
+        1
+      ],
+      "volume_m3": 5.396e-05,
+      "centroid_m": [
+        0.062,
+        0.15804,
+        0.0
+      ],
+      "bbox_m": [
+        0.061,
+        0.008,
+        -0.045,
+        0.063,
+        0.308,
+        0.045
+      ]
+    },
+    "radiator_plate_2": {
+      "step_label": "Shapes/3/Radiator plate:2/Radiator plate",
+      "type": "solid",
+      "material": "white_paint_aluminum",
+      "overrides": {
+        "emissivity": 0.85
+      },
+      "T_init_C": 20.0,
+      "solids": [
+        2
+      ],
+      "volume_m3": 5.396e-05,
+      "centroid_m": [
+        -0.072,
+        0.15804,
+        -1e-06
+      ],
+      "bbox_m": [
+        -0.073,
+        0.008,
+        -0.045001,
+        -0.071,
+        0.308,
+        0.044999
+      ]
+    },
+    "component1": {
+      "step_label": "Shapes/3/Jetson thermal plate:1/Jetson thermal plate/TTP Assembly:1/TTP Assembly/Component1:1/Component1",
+      "type": "solid",
+      "material": "aluminum_6061",
+      "overrides": {},
+      "T_init_C": 25.0,
+      "solids": [
+        3
+      ],
+      "volume_m3": 2.8784e-05,
+      "centroid_m": [
+        -0.005208,
+        0.19866,
+        0.0
+      ],
+      "bbox_m": [
+        -0.052,
+        0.19616,
+        -0.035001,
+        0.041592,
+        0.20116,
+        0.034999
+      ]
+    },
+    "jetson_ttp2": {
+      "step_label": "Shapes/3/Jetson thermal plate:1/Jetson thermal plate/TTP Assembly:1/TTP Assembly/Jetson TTP2:1/Jetson TTP2",
+      "type": "solid",
+      "material": "aluminum_6061",
+      "overrides": {},
+      "T_init_C": 25.0,
+      "solids": [
+        4
+      ],
+      "volume_m3": 9.709e-06,
+      "centroid_m": [
+        -0.004001,
+        0.203593,
+        0.000454
+      ],
+      "bbox_m": [
+        -0.0309,
+        0.20116,
+        -0.019501,
+        0.0229,
+        0.20616,
+        0.019499
+      ]
+    },
+    "component18": {
+      "step_label": "Shapes/3/Jetson thermal plate:1/Jetson thermal plate/603:1/603/Component18:1/Component18",
+      "type": "solid",
+      "material": "aluminum_6061",
+      "overrides": {},
+      "T_init_C": 20.0,
+      "solids": [
+        5
+      ],
+      "volume_m3": 0.000140085,
+      "centroid_m": [
+        -0.011707,
+        0.22031,
+        -0.004917
+      ],
+      "bbox_m": [
+        -0.056707,
+        0.20616,
+        -0.032417,
+        0.033293,
+        0.23446,
+        0.022583
+      ]
+    },
+    "part_6": {
+      "step_label": "",
+      "type": "solid",
+      "material": "aluminum_6061",
+      "overrides": {},
+      "T_init_C": 22.0,
+      "solids": [
+        6
+      ],
+      "volume_m3": 2.9006e-05,
+      "centroid_m": [
+        -0.036905,
+        0.18916,
+        -1e-06
+      ],
+      "bbox_m": [
+        -0.052,
+        0.18216,
+        -0.035001,
+        -0.022,
+        0.19616,
+        0.034999
+      ]
+    },
+    "part_7": {
+      "step_label": "",
+      "type": "solid",
+      "material": "copper",
+      "overrides": {
+        "kappa": 390
+      },
+      "T_init_C": 22.0,
+      "solids": [
+        7
+      ],
+      "volume_m3": 8.6256e-05,
+      "centroid_m": [
+        -0.063435,
+        0.142976,
+        -1e-06
+      ],
+      "bbox_m": [
+        -0.07,
+        0.088,
+        -0.032501,
+        -0.052,
+        0.19516,
+        0.032499
+      ]
+    },
+    "part_8": {
+      "step_label": "",
+      "type": "solid",
+      "material": "aluminum_6061",
+      "overrides": {},
+      "T_init_C": 22.0,
+      "solids": [
+        8
+      ],
+      "volume_m3": 2.94e-05,
+      "centroid_m": [
+        -0.064,
+        0.073,
+        -1e-06
+      ],
+      "bbox_m": [
+        -0.071,
+        0.058,
+        -0.035001,
+        -0.057,
+        0.088,
+        0.034999
+      ]
+    },
+    "part_9": {
+      "step_label": "",
+      "type": "solid",
+      "material": "aluminum_6061",
+      "overrides": {},
+      "T_init_C": 22.0,
+      "solids": [
+        9
+      ],
+      "volume_m3": 2.9006e-05,
+      "centroid_m": [
+        0.026905,
+        0.18916,
+        0.0
+      ],
+      "bbox_m": [
+        0.012,
+        0.18216,
+        -0.035,
+        0.042,
+        0.19616,
+        0.035
+      ]
+    },
+    "part_10": {
+      "step_label": "",
+      "type": "solid",
+      "material": "copper",
+      "overrides": {
+        "kappa": 390
+      },
+      "T_init_C": 22.0,
+      "solids": [
+        10
+      ],
+      "volume_m3": 8.6256e-05,
+      "centroid_m": [
+        0.053435,
+        0.142976,
+        0.0
+      ],
+      "bbox_m": [
+        0.042,
+        0.088,
+        -0.0325,
+        0.06,
+        0.19516,
+        0.0325
+      ]
+    },
+    "part_11": {
+      "step_label": "",
+      "type": "solid",
+      "material": "aluminum_6061",
+      "overrides": {},
+      "T_init_C": 22.0,
+      "solids": [
+        11
+      ],
+      "volume_m3": 2.94e-05,
+      "centroid_m": [
+        0.054,
+        0.073,
+        0.0
+      ],
+      "bbox_m": [
+        0.047,
+        0.058,
+        -0.035,
+        0.061,
+        0.088,
+        0.035
+      ]
+    },
+    "component11": {
+      "step_label": "Shapes/3/Component11:1/Component11",
+      "type": "solid",
+      "material": "eps_foam",
+      "overrides": {},
+      "T_init_C": 15.0,
+      "solids": [
+        12
+      ],
+      "volume_m3": 0.00693075,
+      "centroid_m": [
+        -0.005,
+        0.163487,
+        -0.0
+      ],
+      "bbox_m": [
+        -0.09,
+        -0.052,
+        -0.085,
+        0.08,
+        0.378,
+        0.085
+      ]
+    }
+  },
+  "interfaces": [
+    {
+      "components": [
+        "part_8",
+        "radiator_plate_2"
+      ],
+      "area_m2": 0.0021,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "part_11",
+        "radiator_plate"
+      ],
+      "area_m2": 0.0021,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "component1",
+        "jetson_ttp2"
+      ],
+      "area_m2": 0.002089925,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "component1",
+        "part_6"
+      ],
+      "area_m2": 0.002067703,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "component1",
+        "part_9"
+      ],
+      "area_m2": 0.002039094,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "component18",
+        "jetson_ttp2"
+      ],
+      "area_m2": 0.001846015,
+      "n_surfaces": 2
+    },
+    {
+      "components": [
+        "part_7",
+        "part_8"
+      ],
+      "area_m2": 0.00078,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "part_6",
+        "part_7"
+      ],
+      "area_m2": 0.00078,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "part_10",
+        "part_11"
+      ],
+      "area_m2": 0.00078,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "part_10",
+        "part_9"
+      ],
+      "area_m2": 0.00078,
+      "n_surfaces": 1
+    }
+  ],
+  "patches": {
+    "radiator_plate_outer": {
+      "component": "radiator_plate",
+      "select": "remaining",
+      "bc": {
+        "type": "altitude_environment",
+        "altitude_m": 1667,
+        "emissivity": 0.85,
+        "absorbed_flux_W_m2": 0.0,
+        "L_char_m": 0.15,
+        "h_W_m2K": 13.0
+      }
+    },
+    "radiator_plate_2_outer": {
+      "component": "radiator_plate_2",
+      "select": "remaining",
+      "bc": {
+        "type": "altitude_environment",
+        "altitude_m": 1667,
+        "emissivity": 0.85,
+        "absorbed_flux_W_m2": 0.0,
+        "L_char_m": 0.15,
+        "h_W_m2K": 13.0
+      }
+    },
+    "foam_box_outer": {
+      "component": "component11",
+      "select": "remaining",
+      "bc": {
+        "type": "altitude_environment",
+        "altitude_m": 1667,
+        "emissivity": 0.9,
+        "absorbed_flux_W_m2": 0.0,
+        "L_char_m": 0.3,
+        "h_W_m2K": 13.0
+      }
+    },
+    "jetson_heat_source": {
+      "component": "component1",
+      "select": "ymax",
+      "bc": {
+        "type": "heat_flux",
+        "q_W_m2": 17943.227627785687,
+        "description": "37.5 W over the TTP contact area (0.00209 m2)"
+      }
+    }
+  },
+  "thermal_contact_resistances": {
+    "component1_jetson_ttp2": {
+      "components": [
+        "component1",
+        "jetson_ttp2"
+      ],
+      "R_total_K_per_W": 0.2,
+      "material": "Phase Change Material PTM7950",
+      "note": "Die-to-TTP interface, ~0.1 K/W at full contact area"
+    },
+    "part_6_part_7": {
+      "components": [
+        "part_6",
+        "part_7"
+      ],
+      "R_total_K_per_W": 0.5,
+      "material": "Indium Foil",
+      "note": "TTP plate to copper strap block \u2014 bolted with indium"
+    },
+    "part_9_part_10": {
+      "components": [
+        "part_9",
+        "part_10"
+      ],
+      "R_total_K_per_W": 0.5,
+      "material": "Indium Foil",
+      "note": "TTP plate to copper strap block \u2014 bolted with indium (second strap)"
+    },
+    "part_7_part_8": {
+      "components": [
+        "part_7",
+        "part_8"
+      ],
+      "R_total_K_per_W": 0.54,
+      "material": "Indium Foil",
+      "note": "Copper strap terminal to aluminium radiator bracket \u2014 bolted (target 1.58 K/W total path; 0.54 K/W here)"
+    },
+    "part_10_part_11": {
+      "components": [
+        "part_10",
+        "part_11"
+      ],
+      "R_total_K_per_W": 0.54,
+      "material": "Indium Foil",
+      "note": "Copper strap terminal to aluminium radiator bracket \u2014 bolted (second strap)"
+    }
+  },
+  "radiation": {
+    "model": "none",
+    "emissivity_default": 0.85,
+    "T_ambient_K": 193.15,
+    "note": "Surface-to-surface radiation is the sole rejection mechanism at 30km; convection disabled"
+  },
+  "solver": {
+    "type": "chtSteadyState",
+    "convection_disabled": true,
+    "ambient_pressure_Pa": 1197,
+    "ambient_T_K": 193.15,
+    "note": "30 km US Standard Atmosphere: P=1197 Pa (~1.2% sea-level); convection negligible",
+    "mode": "transient",
+    "end_time_s": 1200,
+    "write_interval_s": 20,
+    "max_di": 10,
+    "n_procs": 4,
+    "p_ref_Pa": 101325,
+    "T_init_C": 20
+  }
+}

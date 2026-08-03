@@ -1,0 +1,91 @@
+{
+  "study": "balloon-ttp/cht-30km",
+  "streams": {},
+  "regions": {
+    "radiator_plate": {
+      "T_min_C": 13.617,
+      "T_max_C": 21.852
+    },
+    "radiator_plate_2": {
+      "T_min_C": 13.75,
+      "T_max_C": 21.945
+    },
+    "component1": {
+      "T_min_C": 26.742,
+      "T_max_C": 28.612
+    },
+    "jetson_ttp2": {
+      "T_min_C": 26.664,
+      "T_max_C": 27.394
+    },
+    "component18": {
+      "T_min_C": 26.486,
+      "T_max_C": 26.898
+    },
+    "part_6": {
+      "T_min_C": 26.278,
+      "T_max_C": 28.195
+    },
+    "part_7": {
+      "T_min_C": 22.218,
+      "T_max_C": 26.683
+    },
+    "part_8": {
+      "T_min_C": 21.418,
+      "T_max_C": 22.368
+    },
+    "part_9": {
+      "T_min_C": 26.027,
+      "T_max_C": 27.871
+    },
+    "part_10": {
+      "T_min_C": 22.101,
+      "T_max_C": 26.452
+    },
+    "part_11": {
+      "T_min_C": 21.335,
+      "T_max_C": 22.268
+    },
+    "component11": {
+      "T_min_C": -60.95,
+      "T_max_C": -60.95
+    }
+  },
+  "interfaces_W": {
+    "radiator_plate:radiator_plate_to_part_11": 8.22,
+    "radiator_plate_2:radiator_plate_2_to_part_8": 8.36,
+    "component1:component1_to_jetson_ttp2": -13.6,
+    "component1:component1_to_part_9": -23.48,
+    "component1:component1_to_part_6": -24.05,
+    "jetson_ttp2:jetson_ttp2_to_component18": -8.85,
+    "jetson_ttp2:jetson_ttp2_to_component1": 11.97,
+    "component18:component18_to_jetson_ttp2": 7.41,
+    "part_6:part_6_to_component1": 22.35,
+    "part_6:part_6_to_part_7": -17.4,
+    "part_7:part_7_to_part_8": -9.83,
+    "part_7:part_7_to_part_6": 16.87,
+    "part_8:part_8_to_radiator_plate_2": -9.11,
+    "part_8:part_8_to_part_7": 9.63,
+    "part_9:part_9_to_part_10": -16.88,
+    "part_9:part_9_to_component1": 21.83,
+    "part_10:part_10_to_part_11": -9.57,
+    "part_10:part_10_to_part_9": 16.34,
+    "part_11:part_11_to_part_10": 9.38,
+    "part_11:part_11_to_radiator_plate": -8.92
+  },
+  "external_W": {
+    "radiator_plate:radiator_plate_outer": -12.52,
+    "radiator_plate_2:radiator_plate_2_outer": -12.53,
+    "component1:component1_wall": 0.0,
+    "component1:jetson_heat_source": 66.01,
+    "jetson_ttp2:jetson_ttp2_wall": 0.0,
+    "component18:component18_wall": 0.0,
+    "part_6:part_6_wall": 0.0,
+    "part_7:part_7_wall": 0.0,
+    "part_8:part_8_wall": 0.0,
+    "part_9:part_9_wall": 0.0,
+    "part_10:part_10_wall": 0.0,
+    "part_11:part_11_wall": 0.0,
+    "component11:foam_box_outer": -0.0
+  }
+}

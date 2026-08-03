@@ -40,7 +40,7 @@ def main() -> int:
         return 0
 
     print("Installing OpenFOAM 2412 + CalculiX + Gmsh into WSL (several minutes, ~2 GB)...")
-    run_wsl(INSTALL_CMD, timeout=1800)
+    run_wsl(INSTALL_CMD, timeout=None)  # no cap — OpenFOAM is ~1.5 GB and varies by connection
 
     status = check_environment()
     ok = status["openfoam"] and status["calculix"]

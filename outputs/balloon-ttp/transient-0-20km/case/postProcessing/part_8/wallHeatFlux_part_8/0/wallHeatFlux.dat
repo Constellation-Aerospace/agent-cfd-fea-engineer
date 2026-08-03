@@ -1,0 +1,5 @@
+# Wall heat-flux
+# Time         	patch          	min            	max            	integral       
+0.5            	part_8_wall	0.0000000e+00	0.0000000e+00	0.0000000e+00
+0.5            	part_8_to_radiator_plate_2	-7.8662158e+04	-3.5232258e+04	-1.1180286e+02
+0.5            	part_8_to_part_7	8.1470713e+03	5.6963886e+04	1.9358533e+01

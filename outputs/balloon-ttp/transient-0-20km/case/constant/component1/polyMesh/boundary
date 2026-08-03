@@ -1,0 +1,67 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/component1/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+5
+(
+    component1_wall
+    {
+        type            wall;
+        physicalType    wall;
+        nFaces          1231;
+        startFace       8447;
+    }
+    jetson_heat_source
+    {
+        type            wall;
+        physicalType    wall;
+        nFaces          412;
+        startFace       9678;
+    }
+    component1_to_jetson_ttp2
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          216;
+        startFace       10090;
+        sampleMode      nearestPatchFace;
+        sampleRegion    jetson_ttp2;
+        samplePatch     jetson_ttp2_to_component1;
+    }
+    component1_to_part_9
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          738;
+        startFace       10306;
+        sampleMode      nearestPatchFace;
+        sampleRegion    part_9;
+        samplePatch     part_9_to_component1;
+    }
+    component1_to_part_6
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          725;
+        startFace       11044;
+        sampleMode      nearestPatchFace;
+        sampleRegion    part_6;
+        samplePatch     part_6_to_component1;
+    }
+)
+
+// ************************************************************************* //

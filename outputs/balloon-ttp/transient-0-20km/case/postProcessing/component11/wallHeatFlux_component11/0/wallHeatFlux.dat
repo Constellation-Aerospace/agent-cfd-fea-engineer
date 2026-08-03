@@ -1,0 +1,3 @@
+# Wall heat-flux
+# Time         	patch          	min            	max            	integral       
+0.5            	foam_box_outer	-2.6387272e+02	-1.1906168e+02	-7.9665078e+01

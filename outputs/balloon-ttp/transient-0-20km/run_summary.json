@@ -1,0 +1,24 @@
+{
+  "study": "balloon-ttp/transient-0-20km",
+  "application": "chtMultiRegionFoam",
+  "mode": "transient",
+  "completed": true,
+  "final_time": 0.5,
+  "n_steps": 1,
+  "wall_clock_s": 7.4,
+  "n_procs": 4,
+  "final_residuals": {
+    "component1/h": 1.0,
+    "component11/h": 1.0,
+    "component18/h": 1.0,
+    "jetson_ttp2/h": 1.0,
+    "part_10/h": 0.634272,
+    "part_11/h": 1.0,
+    "part_6/h": 1.0,
+    "part_7/h": 1.0,
+    "part_8/h": 1.0,
+    "part_9/h": 1.0,
+    "radiator_plate/h": 1.0,
+    "radiator_plate_2/h": 1.0
+  }
+}

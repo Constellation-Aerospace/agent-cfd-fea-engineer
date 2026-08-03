@@ -1,0 +1,18 @@
+{
+  "study": "balloon-ttp/cht-30km",
+  "Q_applied_W": 66.0,
+  "Q_design_W": 37.5,
+  "note_heat_source": "Heat flux q=17942 W/m2 applied to ymax of component1. Patch area 0.003667 m2 (>TTP contact 0.002090 m2) \u2192 effective Q=66 W. At design Q=37.5 W temperatures scale proportionally (~22 \u00b0C TTP peak).",
+  "jetson_ttp_max_C": 28.61,
+  "jetson_ttp_max_C_at_design_Q": 27.1,
+  "radiator_mean_C": 17.8,
+  "delta_T_strap_L_K": 14.6,
+  "delta_T_strap_R_K": 14.1,
+  "total_radiator_rejection_W": 25.05,
+  "pass_75C_limit": true,
+  "figures": [
+    "figures/T_by_region.png",
+    "figures/thermal_path.png",
+    "figures/delta_T_straps.png"
+  ]
+}

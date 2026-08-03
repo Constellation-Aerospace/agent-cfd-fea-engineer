@@ -1,0 +1,67 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/interface_plate/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+5
+(
+    interface_plate_wall
+    {
+        type            wall;
+        physicalType    wall;
+        nFaces          1601;
+        startFace       10942;
+    }
+    jetson_heat_source
+    {
+        type            wall;
+        physicalType    wall;
+        nFaces          582;
+        startFace       12543;
+    }
+    interface_plate_to_jetson_heatsink
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          264;
+        startFace       13125;
+        sampleMode      nearestPatchFace;
+        sampleRegion    jetson_heatsink;
+        samplePatch     jetson_heatsink_to_interface_plate;
+    }
+    interface_plate_to_part_6
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          669;
+        startFace       13389;
+        sampleMode      nearestPatchFace;
+        sampleRegion    part_6;
+        samplePatch     part_6_to_interface_plate;
+    }
+    interface_plate_to_part_9
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          896;
+        startFace       14058;
+        sampleMode      nearestPatchFace;
+        sampleRegion    part_9;
+        samplePatch     part_9_to_interface_plate;
+    }
+)
+
+// ************************************************************************* //

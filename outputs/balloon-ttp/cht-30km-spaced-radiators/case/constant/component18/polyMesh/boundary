@@ -1,0 +1,40 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/component18/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+2
+(
+    component18_wall
+    {
+        type            wall;
+        physicalType    wall;
+        nFaces          985;
+        startFace       8369;
+    }
+    component18_to_jetson_heatsink
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          633;
+        startFace       9354;
+        sampleMode      nearestPatchFace;
+        sampleRegion    jetson_heatsink;
+        samplePatch     jetson_heatsink_to_component18;
+    }
+)
+
+// ************************************************************************* //

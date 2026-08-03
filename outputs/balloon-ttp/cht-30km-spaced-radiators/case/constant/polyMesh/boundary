@@ -1,0 +1,107 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+12
+(
+    part_7_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1562;
+        startFace       89617;
+    }
+    part_10_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1560;
+        startFace       91179;
+    }
+    radiator_plate_outer
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          5584;
+        startFace       92739;
+    }
+    radiator_plate_2_outer
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          5654;
+        startFace       98323;
+    }
+    interface_plate_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1601;
+        startFace       103977;
+    }
+    jetson_heat_source
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          582;
+        startFace       105578;
+    }
+    jetson_heatsink_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          965;
+        startFace       106160;
+    }
+    component18_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          985;
+        startFace       107125;
+    }
+    part_6_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1543;
+        startFace       108110;
+    }
+    part_8_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          218;
+        startFace       109653;
+    }
+    part_9_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1596;
+        startFace       109871;
+    }
+    part_11_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          220;
+        startFace       111467;
+    }
+)
+
+// ************************************************************************* //

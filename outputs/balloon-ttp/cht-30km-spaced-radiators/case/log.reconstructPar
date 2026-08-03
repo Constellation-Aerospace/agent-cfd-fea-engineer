@@ -1,0 +1,1887 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b8cf4d35-20260127 OPENFOAM=2412 patch=260127 version=2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : reconstructPar -allRegions
+Date   : Aug 03 2026
+Time   : 12:57:07
+Host   : FracktalCore
+PID    : 838
+I/O    : uncollated
+Case   : /root/foamruns/balloon-ttp--cht-30km-spaced-radiators
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Using all regions: (component18 interface_plate jetson_heatsink part_10 part_11 part_6 part_7 part_8 part_9 radiator_plate radiator_plate_2)
+
+
+Reconstructing fields
+region=component18
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+
+Reconstructing fields
+region=interface_plate
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+
+Reconstructing fields
+region=jetson_heatsink
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+
+Reconstructing fields
+region=part_10
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+
+Reconstructing fields
+region=part_11
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+
+Reconstructing fields
+region=part_6
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+
+Reconstructing fields
+region=part_7
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+
+Reconstructing fields
+region=part_8
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+
+Reconstructing fields
+region=part_9
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+
+Reconstructing fields
+region=radiator_plate
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+
+Reconstructing fields
+region=radiator_plate_2
+
+Time = 50
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 100
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 150
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 200
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 250
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 300
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 350
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 400
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 450
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+Time = 500
+
+Reconstructing FV fields
+
+    Reconstructing volScalarFields
+
+        T
+        p
+        wallHeatFlux
+
+Reconstructing point fields
+
+No point fields
+
+No lagrangian fields
+
+No FA fields
+
+
+End
+

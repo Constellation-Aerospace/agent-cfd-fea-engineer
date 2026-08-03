@@ -1,0 +1,779 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b8cf4d35-20260127 OPENFOAM=2412 patch=260127 version=2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : foamToVTK -allRegions
+Date   : Aug 03 2026
+Time   : 12:57:07
+Host   : FracktalCore
+PID    : 839
+I/O    : uncollated
+Case   : /root/foamruns/balloon-ttp--cht-30km-spaced-radiators
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Using all regions: (component18 interface_plate jetson_heatsink part_10 part_11 part_6 part_7 part_8 part_9 radiator_plate radiator_plate_2)
+Initial memory 121608 kB
+Create mesh component18 for time = 0
+Create mesh interface_plate for time = 0
+Create mesh jetson_heatsink for time = 0
+Create mesh part_10 for time = 0
+Create mesh part_11 for time = 0
+Create mesh part_6 for time = 0
+Create mesh part_7 for time = 0
+Create mesh part_8 for time = 0
+Create mesh part_9 for time = 0
+Create mesh radiator_plate for time = 0
+Create mesh radiator_plate_2 for time = 0
+
+VTK mesh topology: 0.02 s, 129060 kB
+Time: 0
+region = component18
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_0/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_0/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_0/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_0/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_0/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_0/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_0/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_0/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_0/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_0/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_0/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_0/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_0/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : T cellToRegion p
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_0/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_0/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_0/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.11 s, 149136 kB
+Time: 50
+region = component18
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_1/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_1/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_1/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_1/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_1/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_1/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_1/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_1/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_1/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_1/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_1/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_1/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_1/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_1/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_1/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_1/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.03 s, 149136 kB
+Time: 100
+region = component18
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_2/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_2/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_2/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_2/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_2/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_2/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_2/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_2/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_2/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_2/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_2/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_2/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_2/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_2/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_2/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_2/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.04 s, 149136 kB
+Time: 150
+region = component18
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_3/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_3/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_3/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_3/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_3/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_3/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_3/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_3/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_3/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_3/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_3/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_3/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_3/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_3/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_3/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_3/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.04 s, 149136 kB
+Time: 200
+region = component18
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_4/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_4/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_4/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_4/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_4/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_4/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_4/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_4/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_4/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_4/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_4/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_4/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_4/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_4/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_4/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_4/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.03 s, 149136 kB
+Time: 250
+region = component18
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_250/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_250/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_250/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_250/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_250/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_250/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_250/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_250/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_250/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_250/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_250/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_250/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_250/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_250/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_250/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_250/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.06 s, 149136 kB
+Time: 300
+region = component18
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_6/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_6/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_6/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_6/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_6/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_6/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_6/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_6/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_6/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_6/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_6/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_6/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_6/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_6/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_6/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_6/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.03 s, 149136 kB
+Time: 350
+region = component18
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_7/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_7/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_7/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_7/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_7/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_7/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_7/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_7/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_7/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_7/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_7/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_7/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_7/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_7/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_7/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_7/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.05 s, 149136 kB
+Time: 400
+region = component18
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_8/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_8/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_8/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_8/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_8/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_8/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_8/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_8/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_8/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_8/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_8/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_8/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_8/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_8/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_8/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_8/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.04 s, 149136 kB
+Time: 450
+region = component18
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_9/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_9/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_9/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_9/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_9/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_9/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_9/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_9/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_9/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_9/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_9/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_9/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_9/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : wallHeatFlux
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_9/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_9/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_9/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.04 s, 149136 kB
+Time: 500
+region = component18
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_500/boundary/component18_wall.vtp"
+    Boundary  : "VTK/component18/balloon-ttp--cht-30km-spaced-radiators_500/boundary/component18_to_jetson_heatsink.vtp"
+region = interface_plate
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_500/boundary/interface_plate_wall.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_500/boundary/jetson_heat_source.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_500/boundary/interface_plate_to_jetson_heatsink.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_500/boundary/interface_plate_to_part_6.vtp"
+    Boundary  : "VTK/interface_plate/balloon-ttp--cht-30km-spaced-radiators_500/boundary/interface_plate_to_part_9.vtp"
+region = jetson_heatsink
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_500/boundary/jetson_heatsink_wall.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_500/boundary/jetson_heatsink_to_component18.vtp"
+    Boundary  : "VTK/jetson_heatsink/balloon-ttp--cht-30km-spaced-radiators_500/boundary/jetson_heatsink_to_interface_plate.vtp"
+region = part_10
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_10_wall.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_10_to_part_11.vtp"
+    Boundary  : "VTK/part_10/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_10_to_part_9.vtp"
+region = part_11
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_11_wall.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_11_to_part_10.vtp"
+    Boundary  : "VTK/part_11/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_11_to_radiator_plate.vtp"
+region = part_6
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_6_wall.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_6_to_interface_plate.vtp"
+    Boundary  : "VTK/part_6/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_6_to_part_7.vtp"
+region = part_7
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_7_wall.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_7_to_part_8.vtp"
+    Boundary  : "VTK/part_7/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_7_to_part_6.vtp"
+region = part_8
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_8_wall.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_8_to_radiator_plate_2.vtp"
+    Boundary  : "VTK/part_8/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_8_to_part_7.vtp"
+region = part_9
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_9_wall.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_9_to_part_10.vtp"
+    Boundary  : "VTK/part_9/balloon-ttp--cht-30km-spaced-radiators_500/boundary/part_9_to_interface_plate.vtp"
+region = radiator_plate
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_500/boundary/radiator_plate_outer.vtp"
+    Boundary  : "VTK/radiator_plate/balloon-ttp--cht-30km-spaced-radiators_500/boundary/radiator_plate_to_part_11.vtp"
+region = radiator_plate_2
+    volScalar    : T p wallHeatFlux
+    Internal  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_500/internal.vtu"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_500/boundary/radiator_plate_2_outer.vtp"
+    Boundary  : "VTK/radiator_plate_2/balloon-ttp--cht-30km-spaced-radiators_500/boundary/radiator_plate_2_to_part_8.vtp"
+Wrote in 0.06 s, 149136 kB
+
+End: 0.55 s, 149136 kB (peak)
+

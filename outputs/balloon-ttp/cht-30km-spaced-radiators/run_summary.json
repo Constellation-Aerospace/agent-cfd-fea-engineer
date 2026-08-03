@@ -1,0 +1,23 @@
+{
+  "study": "balloon-ttp/cht-30km-spaced-radiators",
+  "application": "chtMultiRegionSimpleFoam",
+  "mode": "steady",
+  "completed": true,
+  "final_time": 500.0,
+  "n_steps": 500,
+  "wall_clock_s": 20.9,
+  "n_procs": 4,
+  "final_residuals": {
+    "component18/h": 0.0208775,
+    "interface_plate/h": 0.00386637,
+    "jetson_heatsink/h": 0.01051333,
+    "part_10/h": 0.0009679382,
+    "part_11/h": 0.001937469,
+    "part_6/h": 0.005820868,
+    "part_7/h": 0.001004648,
+    "part_8/h": 0.002288712,
+    "part_9/h": 0.006207342,
+    "radiator_plate/h": 0.0005553361,
+    "radiator_plate_2/h": 0.0005544298
+  }
+}

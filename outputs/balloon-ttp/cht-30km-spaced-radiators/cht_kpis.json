@@ -1,0 +1,86 @@
+{
+  "study": "balloon-ttp/cht-30km-spaced-radiators",
+  "streams": {},
+  "regions": {
+    "radiator_plate": {
+      "T_min_C": 14.132,
+      "T_max_C": 21.205
+    },
+    "radiator_plate_2": {
+      "T_min_C": 14.148,
+      "T_max_C": 21.281
+    },
+    "interface_plate": {
+      "T_min_C": 26.332,
+      "T_max_C": 28.53
+    },
+    "jetson_heatsink": {
+      "T_min_C": 26.253,
+      "T_max_C": 27.138
+    },
+    "component18": {
+      "T_min_C": 25.999,
+      "T_max_C": 26.532
+    },
+    "part_6": {
+      "T_min_C": 26.243,
+      "T_max_C": 28.057
+    },
+    "part_7": {
+      "T_min_C": 21.469,
+      "T_max_C": 26.621
+    },
+    "part_8": {
+      "T_min_C": 20.805,
+      "T_max_C": 21.598
+    },
+    "part_9": {
+      "T_min_C": 25.901,
+      "T_max_C": 27.679
+    },
+    "part_10": {
+      "T_min_C": 21.35,
+      "T_max_C": 26.249
+    },
+    "part_11": {
+      "T_min_C": 20.737,
+      "T_max_C": 21.498
+    }
+  },
+  "interfaces_W": {
+    "radiator_plate:radiator_plate_to_part_11": 6.79,
+    "radiator_plate_2:radiator_plate_2_to_part_8": 6.93,
+    "interface_plate:interface_plate_to_jetson_heatsink": -15.5,
+    "interface_plate:interface_plate_to_part_6": -22.93,
+    "interface_plate:interface_plate_to_part_9": -22.5,
+    "jetson_heatsink:jetson_heatsink_to_component18": -11.05,
+    "jetson_heatsink:jetson_heatsink_to_interface_plate": 13.96,
+    "component18:component18_to_jetson_heatsink": 9.6,
+    "part_6:part_6_to_interface_plate": 21.29,
+    "part_6:part_6_to_part_7": -16.35,
+    "part_7:part_7_to_part_8": -7.76,
+    "part_7:part_7_to_part_6": 15.92,
+    "part_8:part_8_to_radiator_plate_2": -7.33,
+    "part_8:part_8_to_part_7": 7.64,
+    "part_9:part_9_to_part_10": -15.55,
+    "part_9:part_9_to_interface_plate": 20.92,
+    "part_10:part_10_to_part_11": -7.47,
+    "part_10:part_10_to_part_9": 15.11,
+    "part_11:part_11_to_part_10": 7.37,
+    "part_11:part_11_to_radiator_plate": -7.12
+  },
+  "external_W": {
+    "radiator_plate:radiator_plate_outer": -12.52,
+    "radiator_plate_2:radiator_plate_2_outer": -12.53,
+    "interface_plate:interface_plate_wall": 0.0,
+    "interface_plate:jetson_heat_source": 65.99,
+    "jetson_heatsink:jetson_heatsink_wall": 0.0,
+    "component18:component18_wall": 0.0,
+    "part_6:part_6_wall": 0.0,
+    "part_7:part_7_wall": 0.0,
+    "part_8:part_8_wall": 0.0,
+    "part_9:part_9_wall": 0.0,
+    "part_10:part_10_wall": 0.0,
+    "part_11:part_11_wall": 0.0
+  }
+}

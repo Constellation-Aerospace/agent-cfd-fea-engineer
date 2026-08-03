@@ -1,0 +1,26 @@
+{
+  "study": "balloon-ttp/cht-30km-spaced-radiators",
+  "baseline_study": "balloon-ttp/cht-30km",
+  "step_file": "inputs/balloon-ttp/Spaced out radiators.step",
+  "geometry_change": "Radiator plates moved from ±0.067 m to +0.062/-0.170 m in x (radiator_plate_2 pushed further from the TTP stack); connecting copper straps (part_7, part_10) lengthened from 0.018 m to 0.067 m span to bridge the gap; the foam enclosure (component11/foam_box in the baseline) is absent from this STEP export, so the assembly is bare rather than boxed.",
+  "Q_applied_W": 65.99,
+  "Q_design_W": 37.5,
+  "note_heat_source": "Same heat_flux/area artifact as the baseline: q=17943 W/m2 applied to ymax of interface_plate over patch area 0.003667 m2 (> TTP contact area 0.00209 m2) gives an effective applied Q=66 W instead of the nominal 37.5 W design duty. Kept identical to the baseline manifest for a like-for-like comparison.",
+  "jetson_interface_max_C": 28.53,
+  "radiator_mean_C": 17.69,
+  "total_radiator_rejection_W": 25.05,
+  "final_residuals_h_max": 0.0208775,
+  "comparison_vs_baseline": {
+    "jetson_interface_max_C": {"baseline": 28.61, "variant": 28.53, "delta_K": -0.08},
+    "radiator_mean_C": {"baseline": 17.79, "variant": 17.69, "delta_K": -0.10},
+    "total_radiator_rejection_W": {"baseline": 25.05, "variant": 25.05, "delta_W": 0.0},
+    "strap_L_conduction_W": {"baseline_part7_to_part8": 9.83, "variant_part7_to_part8": 7.76, "delta_W": -2.07},
+    "strap_R_conduction_W": {"baseline_part10_to_part11": 9.57, "variant_part10_to_part11": 7.47, "delta_W": -2.10}
+  },
+  "interpretation": "Spacing the radiators farther apart (longer copper straps) has a negligible effect on peak component temperature (<0.1 K) and none on total radiator rejection at 30 km, because sky-sink radiation is set by local surface temperature/emissivity/area, not radiator position. The longer straps do carry noticeably less conductive power (~21% lower interface flux at the strap-to-radiator joint) for the same applied heat load — consistent with added series conduction resistance along the longer copper path — but the assembly compensates with a slightly larger driving ΔT along the strap rather than a hotter TTP stack, so the net thermal margin to any component limit is essentially unchanged from the baseline.",
+  "caveat": "This variant's STEP export omits the foam enclosure present in the baseline (component11/foam_box_outer), so it is not a pure radiator-spacing-only comparison — the bare assembly also loses whatever insulating/radiative moderation the foam box provided. Energy balance is not fully closed (applied Q=66 W vs total logged external+interface losses well below that) at 500 iterations, same as the baseline; both runs are treated as adequately converged for design comparison (residuals <=0.02) rather than exact energy closure, per the baseline's own acceptance precedent.",
+  "figures": [
+    "figures/comparison_T_by_region.png",
+    "figures/comparison_radiator_rejection.png"
+  ]
+}

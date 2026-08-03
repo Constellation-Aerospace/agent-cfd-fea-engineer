@@ -808,16 +808,16 @@ def write_regions(case: Path, manifest: dict, patch_areas: dict | None = None) -
                _field("volScalarField", "T", "[0 0 0 1 0 0 0]",
                       f"uniform {regions[r]['T_init']}",
                       _solid_T_field(r, patches, manifest, regions)), "volScalarField")
-        # chtMultiRegionFoam (transient) requires p in every solid region; the
-        # steady solver does not. Solid density is constant, so this field is
-        # inert - it only has to exist and be readable.
-        if slv["mode"] != "steady":
-            p0 = slv["p_ref_Pa"]
-            _write(case, f"0/{r}/p",
-                   _field("volScalarField", "p", "[1 -1 -2 0 0 0 0]",
-                          f"uniform {p0}",
-                          {'".*"': {"type": "calculated", "value": f"uniform {p0}"}}),
-                   "volScalarField")
+        # Both chtMultiRegionFoam (transient) and chtMultiRegionSimpleFoam (steady)
+        # read p for every region, solids included, even with zero fluid regions.
+        # Solid density is constant, so this field is inert - it only has to
+        # exist and be readable.
+        p0 = slv["p_ref_Pa"]
+        _write(case, f"0/{r}/p",
+               _field("volScalarField", "p", "[1 -1 -2 0 0 0 0]",
+                      f"uniform {p0}",
+                      {'".*"': {"type": "calculated", "value": f"uniform {p0}"}}),
+               "volScalarField")
         _write(case, f"constant/{r}/thermophysicalProperties", solid_thermo_body(props))
         _write(case, f"constant/{r}/radiationProperties",
                "radiation       off;\n\nradiationModel  none;\n")

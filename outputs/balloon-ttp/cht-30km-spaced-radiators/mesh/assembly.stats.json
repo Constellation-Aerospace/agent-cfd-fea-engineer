@@ -1,0 +1,36 @@
+{
+  "msh_file": "C:\\Users\\valla\\Github\\agent-cfd-fea-engineer\\outputs\\balloon-ttp\\cht-30km-spaced-radiators\\mesh\\assembly.msh",
+  "mesh_size_factor": 1.0,
+  "size_max_m": 0.007819,
+  "size_min_m": 0.000977,
+  "n_nodes": 14060,
+  "n_cells_3d": 50326,
+  "components": {
+    "radiator_plate": 1,
+    "radiator_plate_2": 1,
+    "interface_plate": 1,
+    "jetson_heatsink": 1,
+    "component18": 1,
+    "part_6": 1,
+    "part_7": 1,
+    "part_8": 1,
+    "part_9": 1,
+    "part_10": 1,
+    "part_11": 1
+  },
+  "patches": {
+    "jetson_heat_source": 0.003666837,
+    "radiator_plate_outer": 0.053483374,
+    "radiator_plate_2_outer": 0.053483374,
+    "interface_plate_wall": 0.003799316,
+    "jetson_heatsink_wall": 0.001409398,
+    "component18_wall": 0.016260985,
+    "part_6_wall": 0.00446842,
+    "part_7_wall": 0.021496056,
+    "part_8_wall": 0.00412,
+    "part_9_wall": 0.004497029,
+    "part_10_wall": 0.021496056,
+    "part_11_wall": 0.00412
+  },
+  "elapsed_s": 1.9
+}

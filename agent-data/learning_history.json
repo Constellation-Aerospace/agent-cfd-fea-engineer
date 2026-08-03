@@ -27,6 +27,33 @@
       "quality": 0.8,
       "slug": "balloon-ttp/cht-30km"
     },
+    "balloon-ttp/cht-30km-spaced-radiators": {
+      "features": {
+        "ambient_T_K": 193.15,
+        "ambient_pressure_Pa": 1197.0,
+        "n_components": 11.0,
+        "n_fluid": 0.0,
+        "n_interfaces": 10.0,
+        "n_patches": 3.0,
+        "n_radiative_patches": 2.0,
+        "n_solid": 11.0,
+        "total_heat_flux_in_W_m2": 17943.227627785687,
+        "total_interface_area_m2": 0.015362737,
+        "total_volume_m3": 0.000621062
+      },
+      "harvested": "2026-08-03",
+      "knobs": {
+        "n_procs": 4.0
+      },
+      "outcome": {
+        "completed": true,
+        "energy_imbalance_pct": null,
+        "wall_clock_s": 20.9,
+        "worst_residual": 0.0208775
+      },
+      "quality": 0.8,
+      "slug": "balloon-ttp/cht-30km-spaced-radiators"
+    },
     "balloon-ttp/transient-0-20km": {
       "features": {
         "ambient_T_K": 193.15,

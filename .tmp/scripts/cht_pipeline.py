@@ -119,13 +119,20 @@ def solve(slug: str, n_procs: int | None = None, time_limit_s: int = 14400,
 
     wsl_case = win_to_wsl(case)
     work = f"/root/foamruns/{flat_slug(slug)}"
+    # A handful of solid-only assemblies carry a CAD sliver face (sub-micron gap)
+    # that Gmsh must still conform to, producing one or two near-degenerate cells.
+    # Their huge local diffusion number is a diagnostic, not evidence of a diverging
+    # solve (Euler-implicit solid conduction is unconditionally stable) — but with
+    # FOAM_SIGFPE trapping on, the intermediate overflow it prints aborts the run.
+    # Opt in per-study via manifest solver.disable_fpe_trap; default is unchanged.
+    env_prefix = "export FOAM_SIGFPE=false; " if slv.get("disable_fpe_trap") else ""
     if np_ > 1:
         solver = (f"decomposePar -allRegions -force > log.decomposePar 2>&1 && "
-                  f"mpirun --allow-run-as-root --use-hwthread-cpus -np {np_} {app} -parallel "
+                  f"{env_prefix}mpirun --allow-run-as-root --use-hwthread-cpus -np {np_} {app} -parallel "
                   f"> log.{app} 2>&1 && "
                   f"reconstructPar -allRegions > log.reconstructPar 2>&1")
     else:
-        solver = f"{app} > log.{app} 2>&1"
+        solver = f"{env_prefix}{app} > log.{app} 2>&1"
     script = (
         f"set -e; rm -rf {work}; mkdir -p /root/foamruns; "
         f"cp -r '{wsl_case}' {work}; cd {work}; rm -rf processor* VTK; "
@@ -169,12 +176,26 @@ def _final_residuals(log: str) -> dict:
 # ─────────────────────────────── KPI extraction ──────────────────────────────
 
 def _find_fo_files(case: Path, fo_name: str, file_glob: str) -> list[Path]:
-    """Locate function-object output regardless of the region-nesting layout."""
+    """Locate function-object output regardless of the region-nesting layout.
+
+    Sorted by the numeric OpenFOAM start-time each file's parent directory is
+    named after (postProcessing/<fo>/<startTime>/<file>), not lexicographically —
+    a staged/restarted transient run (see run_transient_10km.py) writes one
+    <startTime> directory per segment, and e.g. "900" > "2100" as plain strings
+    would silently make an earlier segment look like the latest one to every
+    consumer below (_last_scalar, _minmax_max, _wall_heat_flux all take the LAST
+    file in this list as authoritative)."""
     hits = []
     for base in case.glob("postProcessing/**/" + fo_name):
         if base.is_dir():
             hits.extend(base.glob("**/" + file_glob))
-    return sorted(hits)
+
+    def _start_time(p: Path) -> float:
+        try:
+            return float(p.parent.name)
+        except ValueError:
+            return -1.0
+    return sorted(hits, key=lambda p: (_start_time(p), str(p)))
 
 
 def _last_scalar(files: list[Path]) -> float | None:

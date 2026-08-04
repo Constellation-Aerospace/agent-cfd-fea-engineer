@@ -1,0 +1,330 @@
+[
+  {
+    "segment": [
+      0,
+      300
+    ],
+    "end_time_s": 300,
+    "stage": {
+      "time_dir": "0",
+      "t_mid_s": 150.0,
+      "T_amb_C": 10.938,
+      "h_W_m2K": 14.5,
+      "Ta_sun_K": 302.847,
+      "Ta_shaded_K": 284.088
+    },
+    "run_summary": {
+      "study": "balloon-ttp/transient-0-10km",
+      "application": "chtMultiRegionFoam",
+      "mode": "transient",
+      "completed": true,
+      "final_time": 300.0,
+      "n_steps": 150,
+      "wall_clock_s": 24.1,
+      "n_procs": 4,
+      "final_residuals": {
+        "connector_block_left/h": 0.01953013,
+        "connector_block_right/h": 0.02245647,
+        "copper_strap_left/h": 0.01991745,
+        "copper_strap_right/h": 0.02392886,
+        "interface_plate/h": 0.01254109,
+        "jetson_heatsink/h": 0.0633001,
+        "jetson_module/h": 0.001219483,
+        "radiator_bracket_left/h": 0.003433243,
+        "radiator_bracket_right/h": 0.224028,
+        "radiator_plate/h": 0.00445203,
+        "radiator_plate_2/h": 0.0002087562,
+        "styrofoam_box/h": 0.02534675
+      }
+    },
+    "wall_clock_s": 24.1,
+    "ok": true
+  },
+  {
+    "segment": [
+      300,
+      600
+    ],
+    "end_time_s": 600,
+    "stage": {
+      "time_dir": "300",
+      "t_mid_s": 450.0,
+      "T_amb_C": 2.814,
+      "h_W_m2K": 13.5,
+      "Ta_sun_K": 296.112,
+      "Ta_shaded_K": 275.964
+    },
+    "run_summary": {
+      "study": "balloon-ttp/transient-0-10km",
+      "application": "chtMultiRegionFoam",
+      "mode": "transient",
+      "completed": true,
+      "final_time": 600.0,
+      "n_steps": 150,
+      "wall_clock_s": 47.5,
+      "n_procs": 4,
+      "final_residuals": {
+        "connector_block_left/h": 0.01409953,
+        "connector_block_right/h": 0.01769564,
+        "copper_strap_left/h": 0.01199578,
+        "copper_strap_right/h": 0.01552032,
+        "interface_plate/h": 0.007901347,
+        "jetson_heatsink/h": 0.04443371,
+        "jetson_module/h": 0.0008809856,
+        "radiator_bracket_left/h": 0.01041449,
+        "radiator_bracket_right/h": 0.0773983,
+        "radiator_plate/h": 0.008692115,
+        "radiator_plate_2/h": 0.0003719208,
+        "styrofoam_box/h": 0.02570989
+      }
+    },
+    "wall_clock_s": 47.6,
+    "ok": true
+  },
+  {
+    "segment": [
+      600,
+      900
+    ],
+    "end_time_s": 900,
+    "stage": {
+      "time_dir": "600",
+      "t_mid_s": 750.0,
+      "T_amb_C": -5.31,
+      "h_W_m2K": 12.5,
+      "Ta_sun_K": 289.6,
+      "Ta_shaded_K": 267.84
+    },
+    "run_summary": {
+      "study": "balloon-ttp/transient-0-10km",
+      "application": "chtMultiRegionFoam",
+      "mode": "transient",
+      "completed": true,
+      "final_time": 900.0,
+      "n_steps": 150,
+      "wall_clock_s": 71.6,
+      "n_procs": 4,
+      "final_residuals": {
+        "connector_block_left/h": 0.01065194,
+        "connector_block_right/h": 0.01427215,
+        "copper_strap_left/h": 0.008043542,
+        "copper_strap_right/h": 0.01075782,
+        "interface_plate/h": 0.006258287,
+        "jetson_heatsink/h": 0.0369008,
+        "jetson_module/h": 0.0007788427,
+        "radiator_bracket_left/h": 0.008361332,
+        "radiator_bracket_right/h": 0.03772529,
+        "radiator_plate/h": 0.00172265,
+        "radiator_plate_2/h": 0.0002810917,
+        "styrofoam_box/h": 0.02527873
+      }
+    },
+    "wall_clock_s": 71.6,
+    "ok": true
+  },
+  {
+    "segment": [
+      900,
+      1200
+    ],
+    "end_time_s": 1200,
+    "stage": {
+      "time_dir": "900",
+      "t_mid_s": 1050.0,
+      "T_amb_C": -13.434,
+      "h_W_m2K": 11.5,
+      "Ta_sun_K": 283.368,
+      "Ta_shaded_K": 259.716
+    },
+    "run_summary": {
+      "study": "balloon-ttp/transient-0-10km",
+      "application": "chtMultiRegionFoam",
+      "mode": "transient",
+      "completed": true,
+      "final_time": 1200.0,
+      "n_steps": 150,
+      "wall_clock_s": 97.1,
+      "n_procs": 4,
+      "final_residuals": {
+        "connector_block_left/h": 0.008184498,
+        "connector_block_right/h": 0.01193198,
+        "copper_strap_left/h": 0.005707821,
+        "copper_strap_right/h": 0.007779555,
+        "interface_plate/h": 0.00508036,
+        "jetson_heatsink/h": 0.03073752,
+        "jetson_module/h": 0.0007258857,
+        "radiator_bracket_left/h": 0.005503926,
+        "radiator_bracket_right/h": 0.02272431,
+        "radiator_plate/h": 0.0008379502,
+        "radiator_plate_2/h": 0.0001801903,
+        "styrofoam_box/h": 0.02553699
+      }
+    },
+    "wall_clock_s": 97.1,
+    "ok": true
+  },
+  {
+    "segment": [
+      1200,
+      1500
+    ],
+    "end_time_s": 1500,
+    "stage": {
+      "time_dir": "1200",
+      "t_mid_s": 1350.0,
+      "T_amb_C": -21.558,
+      "h_W_m2K": 10.625,
+      "Ta_sun_K": 277.192,
+      "Ta_shaded_K": 251.592
+    },
+    "run_summary": {
+      "study": "balloon-ttp/transient-0-10km",
+      "application": "chtMultiRegionFoam",
+      "mode": "transient",
+      "completed": true,
+      "final_time": 1500.0,
+      "n_steps": 150,
+      "wall_clock_s": 120.5,
+      "n_procs": 4,
+      "final_residuals": {
+        "connector_block_left/h": 0.00632819,
+        "connector_block_right/h": 0.01004666,
+        "copper_strap_left/h": 0.004166142,
+        "copper_strap_right/h": 0.005768973,
+        "interface_plate/h": 0.004226961,
+        "jetson_heatsink/h": 0.02561923,
+        "jetson_module/h": 0.000690906,
+        "radiator_bracket_left/h": 0.002962319,
+        "radiator_bracket_right/h": 0.01449143,
+        "radiator_plate/h": 0.0004799436,
+        "radiator_plate_2/h": 0.0001006093,
+        "styrofoam_box/h": 0.02542712
+      }
+    },
+    "wall_clock_s": 120.5,
+    "ok": true
+  },
+  {
+    "segment": [
+      1500,
+      1800
+    ],
+    "end_time_s": 1800,
+    "stage": {
+      "time_dir": "1500",
+      "t_mid_s": 1650.0,
+      "T_amb_C": -29.682,
+      "h_W_m2K": 9.875,
+      "Ta_sun_K": 271.012,
+      "Ta_shaded_K": 243.468
+    },
+    "run_summary": {
+      "study": "balloon-ttp/transient-0-10km",
+      "application": "chtMultiRegionFoam",
+      "mode": "transient",
+      "completed": true,
+      "final_time": 1800.0,
+      "n_steps": 150,
+      "wall_clock_s": 146.3,
+      "n_procs": 4,
+      "final_residuals": {
+        "connector_block_left/h": 0.004884065,
+        "connector_block_right/h": 0.008330312,
+        "copper_strap_left/h": 0.003072899,
+        "copper_strap_right/h": 0.004329769,
+        "interface_plate/h": 0.003533494,
+        "jetson_heatsink/h": 0.02120626,
+        "jetson_module/h": 0.0006644174,
+        "radiator_bracket_left/h": 0.0008752526,
+        "radiator_bracket_right/h": 0.009136478,
+        "radiator_plate/h": 0.0002841111,
+        "radiator_plate_2/h": 4.191604e-05,
+        "styrofoam_box/h": 0.02530565
+      }
+    },
+    "wall_clock_s": 146.3,
+    "ok": true
+  },
+  {
+    "segment": [
+      1800,
+      2100
+    ],
+    "end_time_s": 2100,
+    "stage": {
+      "time_dir": "1800",
+      "t_mid_s": 1950.0,
+      "T_amb_C": -37.806,
+      "h_W_m2K": 9.125,
+      "Ta_sun_K": 265.152,
+      "Ta_shaded_K": 235.344
+    },
+    "run_summary": {
+      "study": "balloon-ttp/transient-0-10km",
+      "application": "chtMultiRegionFoam",
+      "mode": "transient",
+      "completed": true,
+      "final_time": 2100.0,
+      "n_steps": 150,
+      "wall_clock_s": 169.3,
+      "n_procs": 4,
+      "final_residuals": {
+        "connector_block_left/h": 0.003748285,
+        "connector_block_right/h": 0.007108083,
+        "copper_strap_left/h": 0.002273016,
+        "copper_strap_right/h": 0.00328242,
+        "interface_plate/h": 0.002980918,
+        "jetson_heatsink/h": 0.01766899,
+        "jetson_module/h": 0.000642972,
+        "radiator_bracket_left/h": 0.0005890326,
+        "radiator_bracket_right/h": 0.006021867,
+        "radiator_plate/h": 0.0001806306,
+        "radiator_plate_2/h": 3.329941e-05,
+        "styrofoam_box/h": 0.02556547
+      }
+    },
+    "wall_clock_s": 169.3,
+    "ok": true
+  },
+  {
+    "segment": [
+      2100,
+      2400
+    ],
+    "end_time_s": 2400,
+    "stage": {
+      "time_dir": "2100",
+      "t_mid_s": 2250.0,
+      "T_amb_C": -45.93,
+      "h_W_m2K": 8.375,
+      "Ta_sun_K": 259.698,
+      "Ta_shaded_K": 227.22
+    },
+    "run_summary": {
+      "study": "balloon-ttp/transient-0-10km",
+      "application": "chtMultiRegionFoam",
+      "mode": "transient",
+      "completed": true,
+      "final_time": 2400.0,
+      "n_steps": 150,
+      "wall_clock_s": 195.1,
+      "n_procs": 4,
+      "final_residuals": {
+        "connector_block_left/h": 0.002855573,
+        "connector_block_right/h": 0.005835656,
+        "copper_strap_left/h": 0.001680719,
+        "copper_strap_right/h": 0.002516831,
+        "interface_plate/h": 0.002537584,
+        "jetson_heatsink/h": 0.01451978,
+        "jetson_module/h": 0.0006250006,
+        "radiator_bracket_left/h": 0.001349446,
+        "radiator_bracket_right/h": 0.004308241,
+        "radiator_plate/h": 0.0001261676,
+        "radiator_plate_2/h": 5.269485e-05,
+        "styrofoam_box/h": 0.02499183
+      }
+    },
+    "wall_clock_s": 195.1,
+    "ok": true
+  }
+]

@@ -69,3 +69,10 @@ inlet turbulence estimates downstream).
   Renaming the component keys in the manifest is safe (matching is geometric, not
   by name) — do it before assigning patches, and keep names OpenFOAM-safe.
 - Do not put `_to_` in component names — it is reserved for interface patch names.
+- **Renaming does not survive a second `inspect_step.py` run.** "Assignments
+  preserved across re-inspection" covers `material`/`type`/`T_init_C`/patches/
+  radiation/solver — component *names* are always regenerated fresh from the STEP
+  part labels on every run, so a hand-renamed `part_6` reverts straight back to
+  `part_6` if you re-inspect afterward. Rename once, directly in `manifest.json`
+  (components keys + every `interfaces[].components` reference), and do not run
+  `inspect_step.py` again for that study unless the STEP file itself changed.

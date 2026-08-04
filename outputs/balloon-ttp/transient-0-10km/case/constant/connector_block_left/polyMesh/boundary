@@ -1,0 +1,50 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/connector_block_left/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+3
+(
+    connector_block_left_wall
+    {
+        type            wall;
+        physicalType    wall;
+        nFaces          1044;
+        startFace       8680;
+    }
+    connector_block_left_to_interface_plate
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          794;
+        startFace       9724;
+        sampleMode      nearestPatchFace;
+        sampleRegion    interface_plate;
+        samplePatch     interface_plate_to_connector_block_left;
+    }
+    connector_block_left_to_copper_strap_left
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          30;
+        startFace       10518;
+        sampleMode      nearestPatchFace;
+        sampleRegion    copper_strap_left;
+        samplePatch     copper_strap_left_to_connector_block_left;
+    }
+)
+
+// ************************************************************************* //

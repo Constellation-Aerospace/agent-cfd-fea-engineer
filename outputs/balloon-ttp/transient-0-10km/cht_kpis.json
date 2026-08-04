@@ -1,0 +1,91 @@
+{
+  "study": "balloon-ttp/transient-0-10km",
+  "streams": {},
+  "regions": {
+    "radiator_plate": {
+      "T_min_C": 3.639,
+      "T_max_C": 32.379
+    },
+    "radiator_plate_2": {
+      "T_min_C": -20.734,
+      "T_max_C": 17.686
+    },
+    "interface_plate": {
+      "T_min_C": 117.788,
+      "T_max_C": 120.619
+    },
+    "jetson_heatsink": {
+      "T_min_C": 117.776,
+      "T_max_C": 118.39
+    },
+    "jetson_module": {
+      "T_min_C": 30.853,
+      "T_max_C": 118.287
+    },
+    "connector_block_left": {
+      "T_min_C": 70.133,
+      "T_max_C": 73.439
+    },
+    "copper_strap_left": {
+      "T_min_C": 58.507,
+      "T_max_C": 70.538
+    },
+    "radiator_bracket_left": {
+      "T_min_C": 16.513,
+      "T_max_C": 19.24
+    },
+    "connector_block_right": {
+      "T_min_C": 76.112,
+      "T_max_C": 79.053
+    },
+    "copper_strap_right": {
+      "T_min_C": 66.181,
+      "T_max_C": 76.45
+    },
+    "radiator_bracket_right": {
+      "T_min_C": 31.382,
+      "T_max_C": 33.665
+    },
+    "styrofoam_box": {
+      "T_min_C": 20.0,
+      "T_max_C": 20.0
+    }
+  },
+  "interfaces_W": {
+    "radiator_plate:radiator_plate_to_radiator_bracket_right": 20.0,
+    "radiator_plate_2:radiator_plate_2_to_radiator_bracket_left": 25.72,
+    "interface_plate:interface_plate_to_jetson_heatsink": -4.15,
+    "interface_plate:interface_plate_to_connector_block_right": -26.1,
+    "interface_plate:interface_plate_to_connector_block_left": -29.29,
+    "jetson_heatsink:jetson_heatsink_to_jetson_module": -3.74,
+    "jetson_heatsink:jetson_heatsink_to_interface_plate": 3.97,
+    "jetson_module:jetson_module_to_jetson_heatsink": 3.73,
+    "connector_block_left:connector_block_left_to_interface_plate": 29.28,
+    "connector_block_left:connector_block_left_to_copper_strap_left": -28.76,
+    "copper_strap_left:copper_strap_left_to_radiator_bracket_left": -25.35,
+    "copper_strap_left:copper_strap_left_to_connector_block_left": 27.85,
+    "radiator_bracket_left:radiator_bracket_left_to_radiator_plate_2": -25.4,
+    "radiator_bracket_left:radiator_bracket_left_to_copper_strap_left": 25.35,
+    "connector_block_right:connector_block_right_to_copper_strap_right": -25.44,
+    "connector_block_right:connector_block_right_to_interface_plate": 26.09,
+    "copper_strap_right:copper_strap_right_to_radiator_bracket_right": -21.0,
+    "copper_strap_right:copper_strap_right_to_connector_block_right": 24.26,
+    "radiator_bracket_right:radiator_bracket_right_to_copper_strap_right": 20.99,
+    "radiator_bracket_right:radiator_bracket_right_to_radiator_plate": -20.85
+  },
+  "external_W": {
+    "radiator_plate:radiator_plate_outer": -19.92,
+    "radiator_plate_2:radiator_plate_2_outer": -25.95,
+    "interface_plate:interface_plate_wall": 0.0,
+    "interface_plate:jetson_heat_source": 60.2,
+    "jetson_heatsink:jetson_heatsink_wall": 0.0,
+    "jetson_module:jetson_module_wall": 0.0,
+    "connector_block_left:connector_block_left_wall": 0.0,
+    "copper_strap_left:copper_strap_left_wall": 0.0,
+    "radiator_bracket_left:radiator_bracket_left_wall": 0.0,
+    "connector_block_right:connector_block_right_wall": 0.0,
+    "copper_strap_right:copper_strap_right_wall": 0.0,
+    "radiator_bracket_right:radiator_bracket_right_wall": 0.0,
+    "styrofoam_box:foam_box_outer": 0.0
+  }
+}

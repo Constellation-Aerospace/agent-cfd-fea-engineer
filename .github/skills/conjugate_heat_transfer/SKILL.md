@@ -98,3 +98,44 @@ skill (PyVista reads `case/VTK/<region>/...`).
   few percent (reported per region in `interfaces_W`).
 - Steady runs: check `final_residuals` in run_summary.json (h and p_rgh ≲ 1e-4).
 - Mesh independence: repeat at `--mesh-factor` 1.3/1.0/0.72 and compare Q/effectiveness.
+
+## Gotchas
+
+- **Solid-only assemblies (no fluid regions) always use a fixed transient step,
+  never `adjustTimeStep`.** `setMultiRegionDeltaT` needs a Courant number from a
+  fluid region to scale against; with none present the step collapses toward zero
+  (measured: 8144 steps to reach 1.8e-6 s). `deltaT_s` is mandatory for a solid-only
+  `solver.mode: "transient"` study — pick it directly, don't rely on `max_co`/`max_di`.
+  Corollary: `run_cht_case.py --smoke`'s hard-coded 0.5 s window silently produces
+  `n_steps: 0` if your fixed `deltaT_s` is larger than 0.5 s — use an explicit
+  `--end-time` that's a multiple of `deltaT_s` instead for solid-only smoke tests.
+- **A `FOAM FATAL ERROR`-free, silent death right after the per-region "Diffusion
+  Number" printout, before any `Time = ` line, at `n_steps: 0`** is a `FOAM_SIGFPE`
+  trap firing on a degenerate cell (near-zero volume from an unresolvable CAD sliver
+  face), not a real divergence — solid conduction under implicit Euler is
+  unconditionally stable regardless of how large the reported diffusion number is.
+  Confirm by re-running the same case in WSL with `FOAM_SIGFPE=false` exported before
+  `mpirun`; if it then completes cleanly and the KPIs stay physical (heat source
+  integrates to the injected wattage, adiabatic walls read 0.0 W), opt the study in
+  via manifest `solver.disable_fpe_trap: true` rather than re-meshing — coarsening or
+  refining the global mesh size does not remove a fixed-size CAD topology artifact
+  (confirmed: identical high-aspect-ratio cell count/ratio at `--factor` 1.0 and 1.3).
+  Default is unchanged (trap stays on) for every study that doesn't set the flag.
+- **`cht_kpis.py` region T_min/T_max used to silently pick a mid-run segment, not
+  the final one, on any staged/restarted transient.** `_find_fo_files()` sorted
+  `postProcessing/**/<startTime>/<file>` paths as plain strings; for a run staged
+  in 300 s segments (`0,300,600,900,1200,...,2400`), `"900" > "2100"` lexically, so
+  the KPI script quietly reported the 900→1200 s segment's numbers as if they were
+  the run's final state. Fixed by sorting on the numeric `<startTime>` instead —
+  confirmed against `transient_history.py`'s independently-aggregated CSV (which
+  was never affected; it de-dupes by numeric time already). Re-run `cht_kpis.py`
+  after any multi-segment transient if you suspect stale numbers from before this
+  fix.
+- **Thermal contact resistances are opt-in, not automatic.** A coupled `<A>_to_<B>`
+  interface (`turbulentTemperatureRadCoupledMixed`) assumes perfect contact unless
+  the manifest's top-level `thermal_contact_resistances` (hand-edited — no CLI flag
+  yet) names that pair with `R_total_K_per_W` + `area_m2`; `cht_case.py` then adds
+  `thicknessLayers (0.001)` / `kappaLayers (<computed>)` to both sides of that patch
+  (`kappa = thickness / (R_total * area)`). Omitting a joint from that block silently
+  models it as perfectly bonded — decide per joint, don't assume the doc's contact
+  resistance table is applied just because it's transcribed into the manifest.

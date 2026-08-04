@@ -1,0 +1,38 @@
+{
+  "msh_file": "D:\\Github\\agent-cfd-fea-engineer\\outputs\\balloon-ttp\\transient-0-10km\\mesh\\assembly.msh",
+  "mesh_size_factor": 1.0,
+  "size_max_m": 0.010364,
+  "size_min_m": 0.001296,
+  "n_nodes": 19200,
+  "n_cells_3d": 73960,
+  "components": {
+    "radiator_plate": 1,
+    "radiator_plate_2": 1,
+    "interface_plate": 1,
+    "jetson_heatsink": 1,
+    "jetson_module": 1,
+    "connector_block_left": 1,
+    "copper_strap_left": 1,
+    "radiator_bracket_left": 1,
+    "connector_block_right": 1,
+    "copper_strap_right": 1,
+    "radiator_bracket_right": 1,
+    "styrofoam_box": 1
+  },
+  "patches": {
+    "jetson_heat_source": 0.003666837,
+    "radiator_plate_outer": 0.053483374,
+    "radiator_plate_2_outer": 0.053483374,
+    "interface_plate_wall": 0.003799316,
+    "jetson_heatsink_wall": 0.001409398,
+    "jetson_module_wall": 0.016260985,
+    "connector_block_left_wall": 0.00446842,
+    "copper_strap_left_wall": 0.021496056,
+    "radiator_bracket_left_wall": 0.00412,
+    "connector_block_right_wall": 0.004497029,
+    "copper_strap_right_wall": 0.021496056,
+    "radiator_bracket_right_wall": 0.00412,
+    "foam_box_outer": 0.54437
+  },
+  "elapsed_s": 3.5
+}

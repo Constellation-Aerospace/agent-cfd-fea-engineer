@@ -1,0 +1,302 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b8cf4d35-20260127 OPENFOAM=2412 patch=260127 version=2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : splitMeshRegions -cellZones -overwrite
+Date   : Aug 03 2026
+Time   : 17:07:22
+Host   : workstation
+PID    : 2044
+I/O    : uncollated
+Case   : /mnt/d/Github/agent-cfd-fea-engineer/outputs/balloon-ttp/transient-0-10km/case
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Creating single patch per inter-region interface.
+
+Trying to match regions to existing cell zones.
+
+
+Number of regions:12
+
+Writing region per cell file (for manual decomposition) to "/mnt/d/Github/agent-cfd-fea-engineer/outputs/balloon-ttp/transient-0-10km/case/constant/cellToRegion"
+
+Writing region per cell as volScalarField to "/mnt/d/Github/agent-cfd-fea-engineer/outputs/balloon-ttp/transient-0-10km/case/0/cellToRegion"
+
+Region	Cells
+------	-----
+0	4736
+1	4751
+2	4980
+3	2251
+4	2730
+5	4807
+6	1878
+7	310
+8	4844
+9	1864
+10	310
+11	40499
+
+Region	Zone	Name
+------	----	----
+0	(0)	radiator_plate
+1	(1)	radiator_plate_2
+2	(2)	interface_plate
+3	(3)	jetson_heatsink
+4	(4)	jetson_module
+5	(5)	connector_block_left
+6	(6)	copper_strap_left
+7	(7)	radiator_bracket_left
+8	(8)	connector_block_right
+9	(9)	copper_strap_right
+10	(10)	radiator_bracket_right
+11	(11)	styrofoam_box
+
+Sizes of interfaces between regions:
+
+Interface	Region	Region	Faces
+---------	------	------	-----
+0		3	4	482
+1		9	10	30
+2		8	9	30
+3		2	3	216
+4		1	7	58
+5		0	10	58
+6		2	8	722
+7		2	5	794
+8		6	7	30
+9		5	6	30
+
+Reading volScalarField: cellToRegion
+
+
+Adding patches
+
+
+Adding patches
+
+For interface between region jetson_heatsink and jetson_module added patches
+    13	jetson_heatsink_to_jetson_module
+    14	jetson_module_to_jetson_heatsink
+For interface between region copper_strap_right and radiator_bracket_right added patches
+    15	copper_strap_right_to_radiator_bracket_right
+    16	radiator_bracket_right_to_copper_strap_right
+For interface between region connector_block_right and copper_strap_right added patches
+    17	connector_block_right_to_copper_strap_right
+    18	copper_strap_right_to_connector_block_right
+For interface between region interface_plate and jetson_heatsink added patches
+    19	interface_plate_to_jetson_heatsink
+    20	jetson_heatsink_to_interface_plate
+For interface between region radiator_plate_2 and radiator_bracket_left added patches
+    21	radiator_plate_2_to_radiator_bracket_left
+    22	radiator_bracket_left_to_radiator_plate_2
+For interface between region radiator_plate and radiator_bracket_right added patches
+    23	radiator_plate_to_radiator_bracket_right
+    24	radiator_bracket_right_to_radiator_plate
+For interface between region interface_plate and connector_block_right added patches
+    25	interface_plate_to_connector_block_right
+    26	connector_block_right_to_interface_plate
+For interface between region interface_plate and connector_block_left added patches
+    27	interface_plate_to_connector_block_left
+    28	connector_block_left_to_interface_plate
+For interface between region copper_strap_left and radiator_bracket_left added patches
+    29	copper_strap_left_to_radiator_bracket_left
+    30	radiator_bracket_left_to_copper_strap_left
+For interface between region connector_block_left and copper_strap_left added patches
+    31	connector_block_left_to_copper_strap_left
+    32	copper_strap_left_to_connector_block_left
+
+Region 0
+-------- 
+Creating mesh for region 0 radiator_plate
+Writing dummy "radiator_plate/fvSchemes"
+Writing dummy "radiator_plate/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region0 points back to base mesh.
+Writing map faceRegionAddressing from region0 faces back to base mesh.
+Writing map cellRegionAddressing from region0 cells back to base mesh.
+Writing map boundaryRegionAddressing from region0 boundary back to base mesh.
+
+Region 1
+-------- 
+Creating mesh for region 1 radiator_plate_2
+Writing dummy "radiator_plate_2/fvSchemes"
+Writing dummy "radiator_plate_2/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region1 points back to base mesh.
+Writing map faceRegionAddressing from region1 faces back to base mesh.
+Writing map cellRegionAddressing from region1 cells back to base mesh.
+Writing map boundaryRegionAddressing from region1 boundary back to base mesh.
+
+Region 2
+-------- 
+Creating mesh for region 2 interface_plate
+Writing dummy "interface_plate/fvSchemes"
+Writing dummy "interface_plate/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region2 points back to base mesh.
+Writing map faceRegionAddressing from region2 faces back to base mesh.
+Writing map cellRegionAddressing from region2 cells back to base mesh.
+Writing map boundaryRegionAddressing from region2 boundary back to base mesh.
+
+Region 3
+-------- 
+Creating mesh for region 3 jetson_heatsink
+Writing dummy "jetson_heatsink/fvSchemes"
+Writing dummy "jetson_heatsink/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region3 points back to base mesh.
+Writing map faceRegionAddressing from region3 faces back to base mesh.
+Writing map cellRegionAddressing from region3 cells back to base mesh.
+Writing map boundaryRegionAddressing from region3 boundary back to base mesh.
+
+Region 4
+-------- 
+Creating mesh for region 4 jetson_module
+Writing dummy "jetson_module/fvSchemes"
+Writing dummy "jetson_module/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region4 points back to base mesh.
+Writing map faceRegionAddressing from region4 faces back to base mesh.
+Writing map cellRegionAddressing from region4 cells back to base mesh.
+Writing map boundaryRegionAddressing from region4 boundary back to base mesh.
+
+Region 5
+-------- 
+Creating mesh for region 5 connector_block_left
+Writing dummy "connector_block_left/fvSchemes"
+Writing dummy "connector_block_left/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region5 points back to base mesh.
+Writing map faceRegionAddressing from region5 faces back to base mesh.
+Writing map cellRegionAddressing from region5 cells back to base mesh.
+Writing map boundaryRegionAddressing from region5 boundary back to base mesh.
+
+Region 6
+-------- 
+Creating mesh for region 6 copper_strap_left
+Writing dummy "copper_strap_left/fvSchemes"
+Writing dummy "copper_strap_left/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region6 points back to base mesh.
+Writing map faceRegionAddressing from region6 faces back to base mesh.
+Writing map cellRegionAddressing from region6 cells back to base mesh.
+Writing map boundaryRegionAddressing from region6 boundary back to base mesh.
+
+Region 7
+-------- 
+Creating mesh for region 7 radiator_bracket_left
+Writing dummy "radiator_bracket_left/fvSchemes"
+Writing dummy "radiator_bracket_left/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region7 points back to base mesh.
+Writing map faceRegionAddressing from region7 faces back to base mesh.
+Writing map cellRegionAddressing from region7 cells back to base mesh.
+Writing map boundaryRegionAddressing from region7 boundary back to base mesh.
+
+Region 8
+-------- 
+Creating mesh for region 8 connector_block_right
+Writing dummy "connector_block_right/fvSchemes"
+Writing dummy "connector_block_right/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region8 points back to base mesh.
+Writing map faceRegionAddressing from region8 faces back to base mesh.
+Writing map cellRegionAddressing from region8 cells back to base mesh.
+Writing map boundaryRegionAddressing from region8 boundary back to base mesh.
+
+Region 9
+-------- 
+Creating mesh for region 9 copper_strap_right
+Writing dummy "copper_strap_right/fvSchemes"
+Writing dummy "copper_strap_right/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region9 points back to base mesh.
+Writing map faceRegionAddressing from region9 faces back to base mesh.
+Writing map cellRegionAddressing from region9 cells back to base mesh.
+Writing map boundaryRegionAddressing from region9 boundary back to base mesh.
+
+Region 10
+-------- 
+Creating mesh for region 10 radiator_bracket_right
+Writing dummy "radiator_bracket_right/fvSchemes"
+Writing dummy "radiator_bracket_right/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region10 points back to base mesh.
+Writing map faceRegionAddressing from region10 faces back to base mesh.
+Writing map cellRegionAddressing from region10 cells back to base mesh.
+Writing map boundaryRegionAddressing from region10 boundary back to base mesh.
+
+Region 11
+-------- 
+Creating mesh for region 11 styrofoam_box
+Writing dummy "styrofoam_box/fvSchemes"
+Writing dummy "styrofoam_box/fvSolution"
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region11 points back to base mesh.
+Writing map faceRegionAddressing from region11 faces back to base mesh.
+Writing map cellRegionAddressing from region11 cells back to base mesh.
+Writing map boundaryRegionAddressing from region11 boundary back to base mesh.
+End
+

@@ -1,0 +1,67 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/interface_plate/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+5
+(
+    interface_plate_wall
+    {
+        type            wall;
+        physicalType    wall;
+        nFaces          1134;
+        startFace       8322;
+    }
+    jetson_heat_source
+    {
+        type            wall;
+        physicalType    wall;
+        nFaces          410;
+        startFace       9456;
+    }
+    interface_plate_to_jetson_heatsink
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          216;
+        startFace       9866;
+        sampleMode      nearestPatchFace;
+        sampleRegion    jetson_heatsink;
+        samplePatch     jetson_heatsink_to_interface_plate;
+    }
+    interface_plate_to_connector_block_right
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          722;
+        startFace       10082;
+        sampleMode      nearestPatchFace;
+        sampleRegion    connector_block_right;
+        samplePatch     connector_block_right_to_interface_plate;
+    }
+    interface_plate_to_connector_block_left
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          794;
+        startFace       10804;
+        sampleMode      nearestPatchFace;
+        sampleRegion    connector_block_left;
+        samplePatch     connector_block_left_to_interface_plate;
+    }
+)
+
+// ************************************************************************* //

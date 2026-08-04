@@ -701,6 +701,30 @@ def _fluid_fields(region: str, patches: dict, manifest: dict, regions: dict,
     return fields
 
 
+def _tcr_kappa(manifest: dict, region: str, other: str,
+               thickness_m: float = 0.001) -> float | None:
+    """Equivalent thin-layer conductivity [W/m-K] reproducing a manifest thermal
+    contact resistance (`thermal_contact_resistances`) at the region/other coupled
+    interface, for the `thicknessLayers`/`kappaLayers` fields of
+    turbulentTemperatureRadCoupledMixed: R_total = thickness / (kappa * area), so
+    kappa = thickness / (R_total * area)."""
+    pair = frozenset((region, other))
+    for entry in manifest.get("thermal_contact_resistances", {}).values():
+        if frozenset(entry.get("components", [])) != pair:
+            continue
+        r = entry.get("R_total_K_per_W")
+        area = entry.get("area_m2")
+        if area is None:
+            for iface in manifest.get("interfaces", []):
+                if frozenset(iface.get("components", [])) == pair:
+                    area = iface.get("area_m2")
+                    break
+        if not r or not area:
+            return None
+        return thickness_m / (r * area)
+    return None
+
+
 def _solid_T_field(region: str, patches: dict, manifest: dict, regions: dict) -> dict:
     rad_model = manifest.get("radiation", {}).get("model", "none")
     T0 = regions[region]["T_init"]
@@ -713,9 +737,14 @@ def _solid_T_field(region: str, patches: dict, manifest: dict, regions: dict) ->
             other = pname.split("_to_")[-1]
             nbr_fluid = regions.get(other, {}).get("type") == "fluid"
             qr_nbr = "qr" if (rad_model != "none" and nbr_fluid) else "none"
-            out[pname] = {"type": "compressible::turbulentTemperatureRadCoupledMixed",
-                          "Tnbr": "T", "qrNbr": qr_nbr, "qr": "none",
-                          "kappaMethod": "solidThermo", "value": f"uniform {T0}"}
+            spec = {"type": "compressible::turbulentTemperatureRadCoupledMixed",
+                    "Tnbr": "T", "qrNbr": qr_nbr, "qr": "none",
+                    "kappaMethod": "solidThermo", "value": f"uniform {T0}"}
+            k_eq = _tcr_kappa(manifest, region, other)
+            if k_eq is not None:
+                spec["thicknessLayers"] = "(0.001)"
+                spec["kappaLayers"] = f"({k_eq:.6g})"
+            out[pname] = spec
         elif btype == "fixed_temperature":
             out[pname] = {"type": "fixedValue", "value": f"uniform {bc['T_C'] + 273.15}"}
         elif btype == "heat_flux":

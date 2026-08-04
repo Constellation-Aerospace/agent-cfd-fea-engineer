@@ -1,0 +1,114 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+13
+(
+    copper_strap_left_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1216;
+        startFace       134333;
+    }
+    copper_strap_right_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1210;
+        startFace       135549;
+    }
+    foam_box_outer
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          12782;
+        startFace       136759;
+    }
+    radiator_plate_outer
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          3270;
+        startFace       149541;
+    }
+    radiator_plate_2_outer
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          3286;
+        startFace       152811;
+    }
+    interface_plate_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1134;
+        startFace       156097;
+    }
+    jetson_heat_source
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          410;
+        startFace       157231;
+    }
+    jetson_heatsink_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          762;
+        startFace       157641;
+    }
+    jetson_module_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          648;
+        startFace       158403;
+    }
+    connector_block_left_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1044;
+        startFace       159051;
+    }
+    radiator_bracket_left_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          164;
+        startFace       160095;
+    }
+    connector_block_right_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          1084;
+        startFace       160259;
+    }
+    radiator_bracket_right_wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          164;
+        startFace       161343;
+    }
+)
+
+// ************************************************************************* //

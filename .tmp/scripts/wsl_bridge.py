@@ -121,7 +121,7 @@ def run_foam(tool: str, case_dir: str | Path, args: str = "",
 def check_environment() -> dict:
     """Verify the whole solver toolchain. Returns a status dict."""
     status: dict = {"wsl": False, "distro": WSL_DISTRO, "openfoam": None,
-                    "openfoam_cht": None, "calculix": None, "gmsh_wsl": None,
+                    "openfoam_cht": None, "calculix": None, "elmer": None, "gmsh_wsl": None,
                     "python_packages": {}}
     try:
         r = run_wsl("echo ok", check=False)
@@ -147,6 +147,9 @@ def check_environment() -> dict:
     r = run_wsl("ccx_2.21 -v 2>/dev/null || ccx -v 2>/dev/null", check=False)
     m = re.search(r"[Vv]ersion\s*([\d.]+)", r.stdout or "")
     status["calculix"] = m.group(1) if m else (None if r.returncode else "installed")
+
+    r = run_wsl("command -v ElmerSolver && command -v ElmerGrid", check=False)
+    status["elmer"] = "installed" if r.returncode == 0 else None
 
     r = run_wsl("gmsh --version 2>&1", check=False)
     status["gmsh_wsl"] = (r.stdout or r.stderr or "").strip() or None

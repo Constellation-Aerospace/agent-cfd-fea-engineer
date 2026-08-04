@@ -7,13 +7,13 @@ scripts** — the Markdown is the contract, the scripts are the execution.
 
 | Skill | Purpose |
 | --- | --- |
-| `solver_environment` | Verify/install OpenFOAM v2412, CalculiX, Gmsh in WSL (`check_environment.py` is the readiness gate) |
+| `solver_environment` | Verify/install OpenFOAM v2412, CalculiX, Gmsh in WSL; track additional FEM backends |
 | `geometry_domain` | Parametric exhaust-discharge domain (Gmsh OCC) + STEP export |
 | `step_assembly` | Multi-part STEP import, per-component material/BC manifest, conformal assembly mesh |
 | `meshing` | Graded tet meshes + mesh independence study with GCI |
 | `multiphase_cfd` | `compressibleInterFoam` VOF case (gas mixture / seawater, k-omega SST) |
 | `conjugate_heat_transfer` | Multi-region CHT (conduction/convection/radiation), heat-exchanger KPIs, satellite/high-altitude environments (`environment.py`) |
-| `fea_analysis` | CalculiX thermal-structural FEA |
+| `fea_analysis` | CalculiX thermal-structural FEA, extensible to other FEM backends |
 | `post_processing` | Contours, streamlines, temperature decay, back-pressure (PyVista) |
 | `parametric_study` | Operating-point sweeps (temperature/velocity/depth) + comparison |
 | `report_generation` | Final technical report (Markdown + HTML) |

@@ -9,10 +9,11 @@ development and turbulence (k-omega SST), and comparative parametric studies.
 
 The pipeline covers: parametric geometry preparation (Gmsh), domain and mesh generation
 with mesh independence studies, multiphase CFD simulation (OpenFOAM compressibleInterFoam
-running inside WSL Ubuntu), FEA thermal/structural analysis (CalculiX ccx in WSL),
-post-processing (PyVista: velocity/temperature/pressure contours, volume fraction,
-streamlines, temperature decay curves, back-pressure monitoring), parametric sweeps, and
-a final technical report (Markdown/HTML with embedded figures).
+running inside WSL Ubuntu), FEA thermal/structural analysis with a default CalculiX ccx
+path and other FEM backends when the problem needs them, post-processing (PyVista:
+velocity/temperature/pressure contours, volume fraction, streamlines, temperature decay
+curves, back-pressure monitoring), parametric sweeps, and a final technical report
+(Markdown/HTML with embedded figures).
 
 It also handles conjugate heat transfer on user-supplied CAD: a multi-part STEP assembly
 is imported (step_assembly skill), each sub-component is typed fluid/solid and assigned a
@@ -33,7 +34,8 @@ the surrounding rarefied air as a fluid region (materials.air_at_altitude) to re
 natural convection explicitly. The environment.py helper turns altitude/orbit inputs
 into ready-to-paste boundary conditions and radiator-area hints.
 
-All solvers are open-source and run locally: OpenFOAM 2412 + CalculiX + Gmsh in WSL,
+All solvers are open-source and run locally: OpenFOAM 2412 + Gmsh in WSL, with a default
+FEA path through CalculiX and other FEM backends available for the right physics,
 Python stack (gmsh, pyvista, meshio, fluidfoam, numpy, scipy, matplotlib) on Windows.
 No API keys are required for solving. Skills live in `.github/skills/*/SKILL.md`; the
 WSL bridge utility is `.tmp/scripts/wsl_bridge.py`. First-run setup:

@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
-"""CalculiX FEA: steady coupled thermal-structural analysis of the exhaust pipe wall.
+"""FEA: steady coupled thermal-structural analysis of the exhaust pipe wall.
 
-Pipeline: Gmsh (annular tube, C3D10 tets) -> Abaqus-format mesh via meshio ->
-CalculiX deck (materials, temperature BCs, fixed end) -> ccx in WSL ->
-frd -> vtu (ccx2paraview) -> summary KPIs.
+Pipeline: Gmsh (annular tube, C3D10 tets, tagged physical groups) -> solver-specific
+deck -> WSL solve -> results extraction -> summary KPIs. Two interchangeable FEM
+backends, selected with --solver:
+
+  ccx   (default) Abaqus-format mesh via meshio -> CalculiX deck -> ccx -> .frd
+  elmer            ElmerGrid mesh conversion -> .sif deck -> ElmerSolver -> .vtu
+                    (requires install_solvers.py --with-elmer)
 
 Example:
     python run_pipe_fea.py --study baseline --t-inner 400 --t-outer 15
+    python run_pipe_fea.py --study baseline --solver elmer
 """
 from __future__ import annotations
 
@@ -20,13 +25,35 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[4] / ".tmp" / "scripts")
 
 import numpy as np  # noqa: E402
 
-from wsl_bridge import run_wsl, ccx_binary, win_to_wsl  # noqa: E402
+from wsl_bridge import run_wsl, ccx_binary  # noqa: E402
 from study_pipeline import study_dir, load_params  # noqa: E402
 from learning_store import harvest  # noqa: E402
 
+# Physical-group tag numbers baked into both the mesh (gmsh) and the Elmer .sif deck.
+ELMER_TAG_INNER, ELMER_TAG_OUTER, ELMER_TAG_FIXED, ELMER_TAG_FAR, ELMER_TAG_BODY = 1, 2, 3, 4, 1
+
+
+def _classify_surfaces(R: float, Ro: float, L: float) -> dict:
+    """Bounding-box classification of the tube's 4 boundary surfaces (gmsh must already
+    be initialized with the cut geometry synchronized). Thin-in-x => end cap (fixed at
+    x=0, far at x=L); otherwise a cylindrical wall, split by radial half-extent."""
+    import gmsh
+
+    tags: dict[str, list[int]] = {"INNER": [], "OUTER": [], "FIXED": [], "FAR": []}
+    for dim, tag in gmsh.model.getEntities(2):
+        xmin, ymin, zmin, xmax, ymax, zmax = gmsh.model.getBoundingBox(dim, tag)
+        if (xmax - xmin) < L * 1e-3:
+            tags["FIXED" if abs(xmin) < L * 1e-3 else "FAR"].append(tag)
+        else:
+            r_half = (ymax - ymin) / 2.0
+            tags["OUTER" if abs(r_half - Ro) < abs(r_half - R) else "INNER"].append(tag)
+    return tags
+
 
 def build_tube_mesh(out_inp_mesh: Path, R: float, Ro: float, L: float, size: float) -> dict:
-    """Annular tube along x from 0 to L; quadratic tets written in Abaqus format."""
+    """Annular tube along x from 0 to L; quadratic tets. Surfaces are tagged with Elmer
+    physical groups (harmless for the CalculiX path, which locates node sets by
+    geometry instead) so the same mesh serves both FEM backends."""
     import gmsh
     import meshio
 
@@ -39,17 +66,26 @@ def build_tube_mesh(out_inp_mesh: Path, R: float, Ro: float, L: float, size: flo
         inner = occ.addCylinder(0, 0, 0, L, 0, 0, R)
         occ.cut([(3, outer)], [(3, inner)])
         occ.synchronize()
+
+        surf_tags = _classify_surfaces(R, Ro, L)
+        gmsh.model.addPhysicalGroup(2, surf_tags["INNER"], tag=ELMER_TAG_INNER, name="inner")
+        gmsh.model.addPhysicalGroup(2, surf_tags["OUTER"], tag=ELMER_TAG_OUTER, name="outer")
+        gmsh.model.addPhysicalGroup(2, surf_tags["FIXED"], tag=ELMER_TAG_FIXED, name="fixed")
+        gmsh.model.addPhysicalGroup(2, surf_tags["FAR"], tag=ELMER_TAG_FAR, name="far")
+        vols = [t for d, t in gmsh.model.getEntities(3)]
+        gmsh.model.addPhysicalGroup(3, vols, tag=ELMER_TAG_BODY, name="pipe")
+
         gmsh.option.setNumber("Mesh.MeshSizeMax", size)
         gmsh.option.setNumber("Mesh.MeshSizeMin", size / 3)
         gmsh.model.mesh.generate(3)
         gmsh.model.mesh.setOrder(2)
-        tmp_msh = out_inp_mesh.with_suffix(".msh")
+        msh_path = out_inp_mesh.with_suffix(".msh")
         gmsh.option.setNumber("Mesh.MshFileVersion", 2.2)
-        gmsh.write(str(tmp_msh))
+        gmsh.write(str(msh_path))
     finally:
         gmsh.finalize()
 
-    mesh = meshio.read(tmp_msh)
+    mesh = meshio.read(msh_path)
     tets = [c for c in mesh.cells if c.type == "tetra10"]
     if not tets:
         raise RuntimeError("No quadratic tets generated")
@@ -64,7 +100,8 @@ def build_tube_mesh(out_inp_mesh: Path, R: float, Ro: float, L: float, size: flo
     for eid, nodes in enumerate(conn, start=1):
         lines.append(", ".join(str(v) for v in [eid, *(int(n) + 1 for n in nodes)]))
     out_inp_mesh.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    return {"points": mesh.points, "n_nodes": len(mesh.points), "n_elements": int(len(conn))}
+    return {"points": mesh.points, "n_nodes": len(mesh.points), "n_elements": int(len(conn)),
+            "msh_path": msh_path}
 
 
 def node_sets(points: np.ndarray, R: float, Ro: float, L: float, tol_frac: float = 0.08) -> dict:
@@ -161,7 +198,7 @@ def parse_frd(frd_path: Path) -> dict[str, np.ndarray]:
     return {k: np.asarray(v) for k, v in blocks.items() if v}
 
 
-def extract_results(fea_dir: Path) -> dict:
+def extract_results_ccx(fea_dir: Path) -> dict:
     """Headline KPIs parsed directly from the .frd (robust); VTU conversion best-effort."""
     out: dict = {}
     frd = fea_dir / "pipe.frd"
@@ -196,9 +233,160 @@ def extract_results(fea_dir: Path) -> dict:
     return out
 
 
+def _check_elmer_available() -> None:
+    r = run_wsl("command -v ElmerSolver && command -v ElmerGrid", check=False)
+    if r.returncode != 0:
+        raise RuntimeError(
+            "ElmerFEM not found in WSL (ElmerSolver/ElmerGrid). Install it with:\n"
+            "  python .github/skills/solver_environment/scripts/install_solvers.py --with-elmer")
+
+
+def write_sif(fea_dir: Path, mesh_dir: str, mat: dict,
+              T_inner: float, T_outer: float, T_ref: float) -> Path:
+    """Steady coupled heat + linear-elasticity .sif: HeatSolver feeds Temperature into
+    StressSolver, which picks up thermal strain automatically from the material's
+    Heat Expansion Coefficient / Reference Temperature (Elmer's standard thermal-stress
+    coupling — see the ElasticSolve/StressSolve docs). StressSolver also emits a
+    'vonmises' nodal field directly, no manual tensor combination needed."""
+    sif = fea_dir / "pipe.sif"
+    body = f"""Header
+  CHECK KEYWORDS Warn
+  Mesh DB "." "{mesh_dir}"
+  Include Path ""
+  Results Directory ""
+End
+
+Simulation
+  Max Output Level = 5
+  Coordinate System = Cartesian
+  Coordinate Mapping(3) = 1 2 3
+  Simulation Type = Steady State
+  Steady State Max Iterations = 1
+  Output Intervals = 1
+  Post File = pipe.vtu
+End
+
+Constants
+  Gravity(4) = 0 -1 0 9.82
+  Stefan Boltzmann = 5.67e-08
+End
+
+Body 1
+  Target Bodies(1) = {ELMER_TAG_BODY}
+  Name = "Pipe"
+  Equation = 1
+  Material = 1
+  Initial Condition = 1
+End
+
+Solver 1
+  Equation = Heat Equation
+  Variable = Temperature
+  Procedure = "HeatSolve" "HeatSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Preconditioning = ILU1
+  Linear System Max Iterations = 500
+  Linear System Convergence Tolerance = 1.0e-10
+  Steady State Convergence Tolerance = 1.0e-08
+  Stabilize = True
+End
+
+Solver 2
+  Equation = Linear elasticity
+  Variable = Displacement
+  Variable DOFs = 3
+  Procedure = "StressSolve" "StressSolver"
+  Linear System Solver = Direct
+  Linear System Direct Method = umfpack
+  Steady State Convergence Tolerance = 1.0e-08
+  Calculate Stresses = True
+End
+
+Equation 1
+  Name = "Coupled"
+  Active Solvers(2) = 1 2
+End
+
+Material 1
+  Name = "Steel"
+  Density = {mat['rho']}
+  Heat Conductivity = {mat['k']}
+  Heat Capacity = {mat['cp']}
+  Youngs Modulus = {mat['E']}
+  Poisson Ratio = {mat['nu']}
+  Heat Expansion Coefficient = {mat['alpha']}
+  Reference Temperature = {T_ref}
+End
+
+Initial Condition 1
+  Temperature = {T_ref}
+End
+
+Boundary Condition 1
+  Target Boundaries(1) = {ELMER_TAG_INNER}
+  Name = "Inner"
+  Temperature = {T_inner}
+End
+
+Boundary Condition 2
+  Target Boundaries(1) = {ELMER_TAG_OUTER}
+  Name = "Outer"
+  Temperature = {T_outer}
+End
+
+Boundary Condition 3
+  Target Boundaries(1) = {ELMER_TAG_FIXED}
+  Name = "Fixed"
+  Displacement 1 = 0.0
+  Displacement 2 = 0.0
+  Displacement 3 = 0.0
+End
+"""
+    sif.write_text(body, encoding="utf-8")
+    return sif
+
+
+def run_elmer(fea_dir: Path, msh_path: Path) -> str:
+    """ElmerGrid (gmsh -> Elmer mesh format 2) then ElmerSolver. Returns the mesh
+    subdirectory name (needed to locate the .vtu results afterwards)."""
+    mesh_dir = msh_path.stem
+    run_wsl(f"rm -rf {mesh_dir} && ElmerGrid 14 2 {msh_path.name} > log.elmergrid 2>&1",
+            cwd=fea_dir, timeout=300)
+    (fea_dir / "ELMERSOLVER_STARTINFO").write_text("pipe.sif\n1\n", encoding="utf-8")
+    run_wsl("ElmerSolver > log.elmersolver 2>&1", cwd=fea_dir, timeout=3600)
+    return mesh_dir
+
+
+def extract_results_elmer(fea_dir: Path, mesh_dir: str) -> dict:
+    """KPIs read straight from Elmer's .vtu (nodal temperature/displacement/vonmises)."""
+    out: dict = {}
+    vtus = sorted((fea_dir / mesh_dir).glob("pipe_t*.vtu"))
+    if not vtus:
+        return out
+    out["vtu_file"] = str(vtus[-1])
+
+    import pyvista as pv
+    m = pv.read(str(vtus[-1]))
+    T = m.point_data.get("temperature")
+    if T is not None:
+        out["T_min_C"] = round(float(T.min()), 1)
+        out["T_max_C"] = round(float(T.max()), 1)
+    disp = m.point_data.get("displacement")
+    if disp is not None:
+        mag = np.linalg.norm(disp, axis=1)
+        out["max_displacement_mm"] = round(float(mag.max()) * 1000, 3)
+    vm = m.point_data.get("vonmises")
+    if vm is not None:
+        out["max_von_mises_MPa"] = round(float(vm.max()) / 1e6, 1)
+    return out
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__)
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--study", required=True)
+    ap.add_argument("--solver", choices=["ccx", "elmer"], default="ccx",
+                     help="FEM backend: CalculiX (default) or ElmerFEM")
     ap.add_argument("--t-inner", type=float, default=None, help="Inner wall temp [C] (default: study exhaust T)")
     ap.add_argument("--t-outer", type=float, default=None, help="Outer wall temp [C] (default: study water T)")
     ap.add_argument("--diameter", type=float, default=None, help="Bore D [m] (default from study geometry)")
@@ -220,6 +408,9 @@ def main() -> int:
     T_outer = args.t_outer if args.t_outer is not None else cfg.get("T_water_C", 15.0)
     size = args.mesh_size if args.mesh_size else max(t * 1.2, math.pi * D / 60)
 
+    if args.solver == "elmer":
+        _check_elmer_available()
+
     fea_dir = study_dir(args.study) / "fea"
     fea_dir.mkdir(parents=True, exist_ok=True)
 
@@ -227,26 +418,40 @@ def main() -> int:
     mesh_inp = fea_dir / "pipe_mesh.inp"
     info = build_tube_mesh(mesh_inp, R, Ro, L, size)
     add_nall(mesh_inp, info["n_nodes"])
-    sets = node_sets(np.asarray(info["points"]), R, Ro, L)
-    print(f"  {info['n_nodes']} nodes, {info['n_elements']} C3D10 elements; "
-          f"sets: inner={len(sets['INNER'])}, outer={len(sets['OUTER'])}, fixed={len(sets['FIXED'])}")
+    print(f"  {info['n_nodes']} nodes, {info['n_elements']} C3D10 elements")
 
     mat = {"E": args.E, "nu": args.nu, "alpha": args.alpha, "k": args.conductivity,
            "rho": 7850.0, "cp": 490.0}
-    write_deck(fea_dir, info, sets, mat, T_inner, T_outer, T_ref=T_outer)
 
-    print("Running CalculiX (WSL)...")
-    ccx = ccx_binary()
-    run_wsl(f"OMP_NUM_THREADS=4 {ccx} -i pipe > log.ccx 2>&1", cwd=fea_dir, timeout=3600)
-    log = (fea_dir / "log.ccx").read_text(encoding="utf-8", errors="replace")
-    if "Job finished" not in log:
-        print("ERROR: CalculiX did not finish cleanly. Log tail:")
-        print("\n".join(log.splitlines()[-25:]))
-        return 1
+    if args.solver == "ccx":
+        sets = node_sets(np.asarray(info["points"]), R, Ro, L)
+        print(f"  sets: inner={len(sets['INNER'])}, outer={len(sets['OUTER'])}, fixed={len(sets['FIXED'])}")
+        write_deck(fea_dir, info, sets, mat, T_inner, T_outer, T_ref=T_outer)
 
-    results = extract_results(fea_dir)
+        print("Running CalculiX (WSL)...")
+        ccx = ccx_binary()
+        run_wsl(f"OMP_NUM_THREADS=4 {ccx} -i pipe > log.ccx 2>&1", cwd=fea_dir, timeout=3600)
+        log = (fea_dir / "log.ccx").read_text(encoding="utf-8", errors="replace")
+        if "Job finished" not in log:
+            print("ERROR: CalculiX did not finish cleanly. Log tail:")
+            print("\n".join(log.splitlines()[-25:]))
+            return 1
+        results = extract_results_ccx(fea_dir)
+    else:
+        write_sif(fea_dir, info["msh_path"].stem, mat, T_inner, T_outer, T_ref=T_outer)
+
+        print("Running ElmerFEM (WSL)...")
+        mesh_dir = run_elmer(fea_dir, info["msh_path"])
+        log = (fea_dir / "log.elmersolver").read_text(encoding="utf-8", errors="replace")
+        if "ALL DONE" not in log:
+            print("ERROR: ElmerSolver did not finish cleanly. Log tail:")
+            print("\n".join(log.splitlines()[-25:]))
+            return 1
+        results = extract_results_elmer(fea_dir, mesh_dir)
+
     summary = {
         "study": args.study,
+        "solver": args.solver,
         "geometry": {"bore_D_m": D, "wall_t_m": t, "length_m": L},
         "loads": {"T_inner_C": T_inner, "T_outer_C": T_outer},
         "material": mat,

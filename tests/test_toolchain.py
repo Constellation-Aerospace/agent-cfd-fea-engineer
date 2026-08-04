@@ -74,6 +74,51 @@ def test_wsl_bridge_path_translation():
     assert win_to_wsl("C:\\Users\\x\\case") == "/mnt/c/Users/x/case"
 
 
+def test_wsl_bridge_status_has_elmer_key():
+    """elmer must be a first-class (if optional) status key, like calculix/gmsh_wsl."""
+    sys.path.insert(0, str(SCRIPTS))
+    import wsl_bridge
+    import inspect
+    assert '"elmer"' in inspect.getsource(wsl_bridge.check_environment)
+
+
+def test_fea_pipe_surface_classification():
+    """Elmer needs gmsh physical groups on the tube's 4 boundary surfaces (inner/outer/
+    fixed-end/far-end) so ElmerGrid can carry boundary IDs into the Elmer mesh; this must
+    keep classifying correctly regardless of gmsh's internal surface tag ordering."""
+    fea_scripts = REPO / ".github" / "skills" / "fea_analysis" / "scripts"
+    sys.path.insert(0, str(fea_scripts))
+    import gmsh
+    from run_pipe_fea import _classify_surfaces
+
+    R, Ro, L = 0.15, 0.162, 1.0
+    gmsh.initialize()
+    try:
+        gmsh.option.setNumber("General.Terminal", 0)
+        gmsh.model.add("test_tube")
+        occ = gmsh.model.occ
+        outer = occ.addCylinder(0, 0, 0, L, 0, 0, Ro)
+        inner = occ.addCylinder(0, 0, 0, L, 0, 0, R)
+        occ.cut([(3, outer)], [(3, inner)])
+        occ.synchronize()
+        tags = _classify_surfaces(R, Ro, L)
+    finally:
+        gmsh.finalize()
+
+    assert len(tags["INNER"]) == 1
+    assert len(tags["OUTER"]) == 1
+    assert len(tags["FIXED"]) == 1
+    assert len(tags["FAR"]) == 1
+
+
+def test_run_pipe_fea_solver_flag():
+    """--solver must accept both FEM backends (contract for the fea_analysis skill)."""
+    r = _run([str(REPO / ".github/skills/fea_analysis/scripts/run_pipe_fea.py"), "--help"])
+    assert r.returncode == 0
+    assert "--solver" in r.stdout
+    assert "elmer" in r.stdout
+
+
 @pytest.mark.skipif(subprocess.run(["wsl", "-l", "-q"], capture_output=True).returncode != 0,
                     reason="WSL not available")
 def test_solver_environment_ready():

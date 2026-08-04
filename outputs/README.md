@@ -27,4 +27,4 @@ Conventions:
 
 | Project | What | Status |
 | --- | --- | --- |
-| _(none yet)_ | Add a row per project folder | — |
+| [`balloon-ttp/`](balloon-ttp/PROJECT.md) | Stratospheric balloon payload CHT: Jetson module -> cold plate -> copper straps -> twin radiators, ascent 0-40 km | Active — see `PROJECT.md` for per-study status |

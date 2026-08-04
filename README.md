@@ -1,9 +1,10 @@
 # agent-cfd-fea-engineer
 
 CFD/FEA engineering simulation agent (DOE Framework). Runs complete simulation
-studies end-to-end on a **fully local, open-source solver stack** — no commercial
-licences, **no API keys**: OpenFOAM v2412 + CalculiX + Gmsh inside WSL Ubuntu, with
-a Python orchestration layer (Gmsh OCC, PyVista, matplotlib) on Windows.
+Studies end-to-end on a **fully local, open-source solver stack** — no commercial
+licences, **no API keys**: OpenFOAM v2412 + Gmsh inside WSL Ubuntu, with a default FEA
+path through CalculiX and other FEM backends available when the physics calls for them,
+plus a Python orchestration layer (Gmsh OCC, PyVista, matplotlib) on Windows.
 
 ## Capabilities
 
@@ -12,7 +13,7 @@ a Python orchestration layer (Gmsh OCC, PyVista, matplotlib) on Windows.
 | **Multiphase CFD** | Gas–liquid VOF (`compressibleInterFoam`): thermal mixing, temperature decay, back-pressure, k-omega SST turbulence. Reference workload: submerged marine exhaust discharge |
 | **Conjugate heat transfer** | Multi-part STEP assembly → per-component material/BC assignment → `chtMultiRegionSimpleFoam`/`chtMultiRegionFoam` with conduction, convection, and radiation (P1/fvDOM + surface-to-ambient) → heat-exchanger KPIs (duty, effectiveness, LMTD, UA, interface fluxes) |
 | **Space / high-altitude thermal** | Satellite (vacuum: conduction + radiation, solar/albedo/Earth-IR loads, radiator sizing) and stratospheric balloon payloads (US Standard Atmosphere 1976, rarefied natural convection, sky sinks) via `space_environment` / `altitude_environment` BCs |
-| **FEA** | CalculiX `ccx` thermal-structural analysis |
+| **FEA** | CalculiX `ccx` thermal-structural analysis, with other FEM backends when needed |
 | **Supporting** | Parametric geometry (Gmsh OCC), graded tet meshing + mesh independence (GCI), parametric sweeps, post-processing (contours, streamlines, decay curves), technical reports (MD/HTML), draw.io/Mermaid diagramming |
 
 ## Quick start
@@ -130,13 +131,13 @@ A new skill is picked up by every tool at once. After adding one, run
 
 | Skill | Purpose |
 | --- | --- |
-| `solver_environment` | Verify/install OpenFOAM 2412, CalculiX, Gmsh in WSL |
+| `solver_environment` | Verify/install OpenFOAM 2412, CalculiX, Gmsh in WSL; track additional FEM backends |
 | `geometry_domain` | Parametric exhaust-discharge domain (Gmsh OCC) + STEP export |
 | `step_assembly` | Multi-part STEP import, per-component material/BC manifest, conformal assembly mesh |
 | `meshing` | Graded tet meshes + mesh independence study with GCI |
 | `multiphase_cfd` | compressibleInterFoam VOF case (gas mixture / seawater, k-omega SST) |
 | `conjugate_heat_transfer` | Multi-region CHT (conduction/convection/radiation), heat-exchanger KPIs, satellite/high-altitude environments (`environment.py`) |
-| `fea_analysis` | CalculiX pipe-wall thermal-structural FEA |
+| `fea_analysis` | CalculiX pipe-wall thermal-structural FEA, extensible to other FEM backends |
 | `post_processing` | Contours, streamlines, temperature decay, back-pressure (PyVista) |
 | `parametric_study` | Operating-point sweeps (temperature/velocity/depth) + comparison |
 | `report_generation` | Final technical report (Markdown + HTML) |

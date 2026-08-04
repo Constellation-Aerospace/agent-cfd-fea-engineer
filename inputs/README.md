@@ -33,4 +33,4 @@ inputs/
 
 | Project | Contents |
 | --- | --- |
-| `balloon-ttp/` | `assembly.step` — stratospheric balloon payload assembly (see `outputs/balloon-ttp/`) |
+| `balloon-ttp/` | `assembly.step` (original geometry) plus `spaced out rad+box.step` / `Spaced out radiators.step` (radiator-spacing revision) — stratospheric balloon payload assembly (see `outputs/balloon-ttp/PROJECT.md`) |

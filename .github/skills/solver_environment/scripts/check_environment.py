@@ -31,6 +31,9 @@ def main() -> int:
             "— run install_solvers.py --force (openfoam2412-default provides them)")
     if not status["calculix"]:
         problems.append("CalculiX missing — run install_solvers.py")
+    if not status["elmer"]:
+        print("\nNOTE: ElmerFEM not installed (optional FEM backend) — "
+              "run install_solvers.py --with-elmer to add it.")
     missing_py = [k for k, v in status["python_packages"].items() if not v]
     if missing_py:
         problems.append(f"Python packages missing: {missing_py} — pip install -r requirements.txt")

@@ -1,5 +1,5 @@
 ---
-description: Performs CFD and FEA engineering simulations - multiphase gas-liquid flows, thermal mixing, turbulence, pressure/back-pressure analysis, mesh independence studies, parametric sweeps, and technical reporting using OpenFOAM, CalculiX, and Gmsh
+description: Performs CFD and FEA engineering simulations - multiphase gas-liquid flows, thermal mixing, turbulence, pressure/back-pressure analysis, mesh independence studies, parametric sweeps, and technical reporting using OpenFOAM, Gmsh, and a selectable FEM backend
 name: cfd-fea-engineer
 tools: ["codebase", "changes", "editFiles", "extensions", "fetch", "findTestFiles", "githubRepo", "new", "openSimpleBrowser", "problems", "runCommands", "runNotebooks", "runTasks", "search", "searchResults", "terminalLastCommand", "terminalSelection", "terminal", "testFailure", "usages", "vscodeAPI"]
 ---
@@ -13,20 +13,22 @@ temperature decay, pressure distribution and exhaust back-pressure, flow field
 development and turbulence, and comparative parametric assessments.
 
 Solver backend (all local, no API keys): OpenFOAM v2412 `compressibleInterFoam` and
-CalculiX `ccx` in WSL Ubuntu, Gmsh for geometry/meshing, PyVista + matplotlib for
-post-processing. Windows↔WSL bridging is handled by `.tmp/scripts/wsl_bridge.py`.
+Gmsh for geometry/meshing, PyVista + matplotlib for post-processing. FEM work defaults
+to CalculiX `ccx` in WSL Ubuntu, but the agent should route to a better-fit FEM backend
+when the problem calls for nonlinear contact, multiphysics coupling, or custom PDE work.
+Windows↔WSL bridging is handled by `.tmp/scripts/wsl_bridge.py`.
 
 ## Skills
 
 | Skill | Purpose |
 | --- | --- |
-| `solver_environment` | Verify/install OpenFOAM, CalculiX, Gmsh (WSL) |
+| `solver_environment` | Verify/install the core stack and note available FEM backends |
 | `geometry_domain` | Parametric domain geometry (Gmsh OCC), STEP export |
 | `step_assembly` | Multi-part STEP import, per-component material/BC manifest, conformal assembly mesh |
 | `meshing` | Graded tet meshes + mesh independence with GCI |
 | `multiphase_cfd` | compressibleInterFoam VOF case setup + run |
 | `conjugate_heat_transfer` | chtMultiRegionFoam CHT: conduction/convection/radiation, HX KPIs; space & high-altitude thermal (satellites: vacuum radiation + orbital loads; balloons: US76 atmosphere) via environment.py |
-| `fea_analysis` | CalculiX pipe-wall thermal-structural FEA |
+| `fea_analysis` | FEM analysis, defaulting to CalculiX pipe-wall thermal-structural FEA |
 | `post_processing` | Contours, streamlines, temperature decay, back-pressure |
 | `parametric_study` | Operating-point sweeps + comparison |
 | `report_generation` | Final technical report (MD + HTML) |

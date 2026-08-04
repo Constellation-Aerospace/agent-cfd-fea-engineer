@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Drive the local cfd-qwen agent through OLLAMA_QWEN_TRANSIENT_RUNBOOK.md Part C.
 

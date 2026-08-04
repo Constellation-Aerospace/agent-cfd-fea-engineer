@@ -1,7 +1,8 @@
 """agent-cfd-fea-engineer — MAF Agent definitions.
 
-CFD/FEA engineering simulation agent: multiphase VOF (OpenFOAM), FEA (CalculiX),
-geometry/meshing (Gmsh), post-processing (PyVista), parametric studies, reporting.
+CFD/FEA engineering simulation agent: multiphase VOF (OpenFOAM), FEA with CalculiX as
+the default path and other FEM backends as available, geometry/meshing (Gmsh),
+post-processing (PyVista), parametric studies, reporting.
 
 Exports:
     build_agents() -> list[GitHubCopilotAgent]   (Dynamic Agent Loader entry point)
@@ -175,9 +176,10 @@ async def run_cfd_case(study: str, n_procs: int = 6, end_time: float = 0.0) -> s
 
 
 async def run_fea(study: str, t_inner: float = -1, t_outer: float = -1) -> str:
-    """CalculiX FEA: steady thermal-structural analysis of the exhaust pipe wall.
-    Temperatures in Celsius; -1 uses the study's exhaust/water temperatures.
-    Use for 'FEA', 'thermal stress', 'structural check'."""
+    """FEA: steady thermal-structural analysis of the exhaust pipe wall.
+    CalculiX is the default implementation in this repo; Temperatures are in Celsius;
+    -1 uses the study's exhaust/water temperatures. Use for 'FEA', 'thermal stress',
+    'structural check'."""
     args = [sys.executable, _skill("fea_analysis", "run_pipe_fea.py"), "--study", study]
     if t_inner >= 0:
         args += ["--t-inner", str(t_inner)]

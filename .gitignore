@@ -23,6 +23,12 @@ outputs/**/case/processor*/
 outputs/**/case/VTK/
 outputs/**/case/[0-9]*.[0-9]*/
 outputs/**/case/[1-9]*/
+# CHT multi-region cases (conjugate_heat_transfer, step_assembly): per-region mesh
+# connectivity and function-object dumps, both fully regenerable from mesh_assembly.py
+# + setup_cht_case.py against the study's assembly/manifest.json.
+outputs/**/case/**/polyMesh/
+outputs/**/case/**/cellToRegion
+outputs/**/case/postProcessing/
 outputs/**/mesh/*.msh
 outputs/**/fea/*.frd
 outputs/**/fea/*.vtu

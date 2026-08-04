@@ -7,8 +7,10 @@ transfer on multi-part STEP assemblies (heat exchangers) — per-component mater
 conduction + convection + radiation via `chtMultiRegion*Foam`.
 
 - **Solvers:** OpenFOAM v2412 (`compressibleInterFoam`, `chtMultiRegionSimpleFoam`/
-  `chtMultiRegionFoam`) + CalculiX ccx in WSL Ubuntu;
-  Gmsh + PyVista on the Windows side. Bridge: `.tmp/scripts/wsl_bridge.py`.
+  `chtMultiRegionFoam`) + Gmsh + PyVista on the Windows side. FEM work defaults to
+  CalculiX ccx in WSL Ubuntu, but the agent should prefer the solver that matches the
+  physics when another FEM backend is a better fit. Bridge:
+  `.tmp/scripts/wsl_bridge.py`.
 - **Skills:** `.github/skills/*/SKILL.md` — read the relevant SKILL.md before running
   its scripts. Outputs are project-wise: `outputs/<project>/<study-slug>/`
   (nested `--study` slugs; see `outputs/README.md`).

@@ -60,7 +60,88 @@ def main() -> int:
     decay = load_json(d / "figures" / "decay_metrics.json")
     fig_dir = d / "figures"
 
-    md = [f"""# {args.title}
+    # step_assembly / conjugate_heat_transfer studies (multi-region solid conduction,
+    # e.g. cold plates, heat exchangers, balloon payloads) have an entirely different
+    # solver, physics and boundary-condition set from the marine-exhaust multiphase CFD
+    # study this template was originally written for. Detect that case from the
+    # per-component assembly manifest and branch the narrative sections accordingly —
+    # otherwise every CHT report describes compressibleInterFoam/pipe geometry that was
+    # never run. See self-annealing lesson L007.
+    cht_manifest = load_json(d / "case" / "cht_manifest.json")
+    cht_kpis = load_json(d / "cht_kpis.json")
+    is_cht = bool(cht_manifest.get("components"))
+
+    if is_cht:
+        components = cht_manifest.get("components", {})
+        patches = cht_manifest.get("patches", {})
+        solver = cht_manifest.get("solver", {})
+        tcr = cht_manifest.get("thermal_contact_resistances", {})
+        step_file = cht_manifest.get("step_file", "-")
+
+        comp_rows = {name: comp.get("material", "-") for name, comp in components.items()}
+        bc_rows = {}
+        for patch, spec in patches.items():
+            bc = spec.get("bc", {})
+            comp = spec.get("component", "-")
+            bc_rows[f"`{patch}` ({comp})"] = bc.get("description") or bc.get("type", "-")
+
+        mode = solver.get("mode", "-")
+        end_time = solver.get("end_time_s")
+        problem_statement = (
+            f"Conjugate heat transfer analysis of a {len(components)}-component solid "
+            f"assembly: coupled conduction across all components, with convection and/or "
+            f"radiation applied at the external boundaries listed in Section 3.2. "
+            f"Solved in `{mode}` mode"
+            + (f" to {end_time} s" if mode == "transient" and end_time else "") + "."
+        )
+        methodology_extra = ""
+        if tcr:
+            methodology_extra = ("\n### 3.3 Thermal Contact Resistances\n\n" +
+                table({k: f"{v} K/W" if not isinstance(v, dict) else json.dumps(v)
+                       for k, v in tcr.items()}, ("Joint", "R_total")))
+
+        md = [f"""# {args.title}
+
+**Study:** `{args.study}` · **Date:** {dt.date.today().isoformat()} · **Prepared by:** {args.author}
+
+## 1. Executive Summary
+
+_TODO (agent): summarise the headline findings — peak component temperatures and
+margin, heat rejection at end of run, whether the assembly reached steady state,
+and any assumptions baked into the boundary conditions — in 5-8 sentences._
+
+## 2. Problem Statement
+
+{problem_statement}
+
+Source CAD: `{step_file}`, {len(components)} solid components.
+
+## 3. Methodology
+
+| Item | Model |
+| --- | --- |
+| Solver | OpenFOAM v2412 `chtMultiRegionFoam`/`chtMultiRegionSimpleFoam` (multi-region solid conduction) |
+| Regions | {len(components)} solid regions, one per assembly component, conformally meshed and coupled at contact interfaces |
+| Mode | {mode}{f", deltaT = {solver.get('deltaT_s')} s, end time = {end_time} s" if mode == "transient" else ""} |
+
+### 3.1 Component Materials
+
+{table(comp_rows, ("Component", "Material"))}
+
+### 3.2 Boundary Conditions
+
+{table(bc_rows, ("Patch (component)", "BC"))}
+{methodology_extra}
+
+## 4. Geometry & Domain
+
+{len(components)}-solid assembly imported from the source CAD above and boolean-fragmented
+so contact faces are imprinted and conformal across every part-to-part interface.
+
+## 5. Mesh
+"""]
+    else:
+        md = [f"""# {args.title}
 
 **Study:** `{args.study}` · **Date:** {dt.date.today().isoformat()} · **Prepared by:** {args.author}
 
@@ -151,18 +232,36 @@ parameters.
                       f"medium vs fine drift = {g.get('medium_vs_fine_pct', '-')}%")
 
     md.append("\n## 6. Results\n")
-    if kpis:
-        md.append("### 6.1 Headline KPIs\n")
-        md.append(table({k: v for k, v in kpis.items() if k != "study"}, ("KPI", "Value")))
-    md.append("\n### 6.2 Flow Field\n")
-    md.append(fig_block(fig_dir, [f.name for f in sorted(fig_dir.glob("slice_*.png"))]
-                        + [f.name for f in sorted(fig_dir.glob("streamlines_*.png"))]))
-    md.append("### 6.3 Temperature Decay\n")
-    md.append(fig_block(fig_dir, ["temperature_decay.png", "plume_rise.png"]))
-    if decay:
-        md.append(table({t: json.dumps(v) for t, v in decay.items()}, ("Time", "Metrics")))
-    md.append("\n### 6.4 Exhaust Back-Pressure\n")
-    md.append(fig_block(fig_dir, ["back_pressure.png"]))
+    if is_cht:
+        if cht_kpis:
+            regions = cht_kpis.get("regions", {})
+            if regions:
+                md.append("### 6.1 Component Temperatures (min/max at final time)\n")
+                md.append(table({name: f"{r.get('T_min_C', '-')} to {r.get('T_max_C', '-')} C"
+                                  for name, r in regions.items()}, ("Component", "T range")))
+            ext = cht_kpis.get("external_W", {})
+            if ext:
+                md.append("\n### 6.2 External Heat Flows (final time)\n")
+                md.append(table({k: f"{v} W" for k, v in ext.items()}, ("Patch", "Q")))
+            streams = cht_kpis.get("streams", {})
+            if streams:
+                md.append("\n### 6.3 Stream KPIs\n")
+                md.append(table(streams, ("Stream", "Value")))
+        md.append("\n### 6.4 Figures\n")
+        md.append(fig_block(fig_dir, [f.name for f in sorted(fig_dir.glob("*.png"))]))
+    else:
+        if kpis:
+            md.append("### 6.1 Headline KPIs\n")
+            md.append(table({k: v for k, v in kpis.items() if k != "study"}, ("KPI", "Value")))
+        md.append("\n### 6.2 Flow Field\n")
+        md.append(fig_block(fig_dir, [f.name for f in sorted(fig_dir.glob("slice_*.png"))]
+                            + [f.name for f in sorted(fig_dir.glob("streamlines_*.png"))]))
+        md.append("### 6.3 Temperature Decay\n")
+        md.append(fig_block(fig_dir, ["temperature_decay.png", "plume_rise.png"]))
+        if decay:
+            md.append(table({t: json.dumps(v) for t, v in decay.items()}, ("Time", "Metrics")))
+        md.append("\n### 6.4 Exhaust Back-Pressure\n")
+        md.append(fig_block(fig_dir, ["back_pressure.png"]))
 
     if fea:
         md.append("\n## 7. FEA — Pipe Wall Thermal-Structural\n")
@@ -184,7 +283,29 @@ parameters.
                 md.append("| " + " | ".join(str(r.get(h, "-")) for h in heads) + " |")
         md.append(fig_block(fig_dir, ["parametric_trends.png"]))
 
-    md.append("""
+    if is_cht:
+        md.append("""
+## 9. Validation Methodology
+
+- **Energy balance:** injected heat flux(es) should match the specified load(s) at
+  every checkpoint; external flux at any adiabatic patch should integrate to 0 W.
+- **Interface balance:** each coupled component-to-component interface should agree
+  between the two sides reporting it, within a few percent.
+- **Restart continuity** (transient studies only): no temperature discontinuity at a
+  segment restart boundary greater than ~1 K.
+- **Physical plausibility:** no region colder than the coldest applicable sink
+  temperature or implausibly hot given the load and materials.
+- **Not performed unless noted above:** mesh independence; benchmark against measured
+  hardware data.
+- _TODO (agent): confirm each of the above against this study's actual `cht_kpis.json`
+  and restart logs, and note this study's specific assumptions/limitations here._
+
+## 10. Conclusions & Recommendations
+
+_TODO (agent): fill from the results above._
+""")
+    else:
+        md.append("""
 ## 9. Validation Methodology
 
 - **Mesh independence:** 3-level refinement with Grid Convergence Index (Section 5.1).

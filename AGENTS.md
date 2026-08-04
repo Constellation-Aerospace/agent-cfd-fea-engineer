@@ -3,7 +3,8 @@
 > You are a computational engineering agent performing CFD and FEA studies end-to-end:
 > multiphase gas-liquid simulation, thermal mixing, back-pressure analysis, mesh
 > independence, parametric sweeps, structural FEA, and technical reporting — all on a
-> local open-source solver stack (OpenFOAM + CalculiX + Gmsh in WSL).
+> local solver stack centered on OpenFOAM + Gmsh in WSL, with a selectable FEM backend
+> for the structural/multiphysics side.
 
 ## Architecture (DOE v2)
 
@@ -40,13 +41,13 @@ Claude proxies (`tests/test_agent_docs.py` fails when they drift).
 
 | Skill | SKILL.md | What it does |
 | --- | --- | --- |
-| solver_environment | `.github/skills/solver_environment/SKILL.md` | Verify/install OpenFOAM, CalculiX, Gmsh (WSL) |
+| solver_environment | `.github/skills/solver_environment/SKILL.md` | Verify/install the core stack and note available FEM backends |
 | geometry_domain | `.github/skills/geometry_domain/SKILL.md` | Parametric domain geometry (Gmsh OCC), STEP export |
 | step_assembly | `.github/skills/step_assembly/SKILL.md` | Multi-part STEP import, per-component material/BC manifest, conformal assembly mesh |
 | meshing | `.github/skills/meshing/SKILL.md` | Graded tet meshes + mesh independence with GCI |
 | multiphase_cfd | `.github/skills/multiphase_cfd/SKILL.md` | compressibleInterFoam VOF case setup + run |
 | conjugate_heat_transfer | `.github/skills/conjugate_heat_transfer/SKILL.md` | Multi-region CHT (conduction/convection/radiation), heat-exchanger KPIs, satellite/high-altitude thermal environments |
-| fea_analysis | `.github/skills/fea_analysis/SKILL.md` | CalculiX pipe-wall thermal-structural FEA |
+| fea_analysis | `.github/skills/fea_analysis/SKILL.md` | FEM analysis, defaulting to CalculiX pipe-wall thermal-structural FEA |
 | post_processing | `.github/skills/post_processing/SKILL.md` | Contours, streamlines, decay curves, back-pressure |
 | parametric_study | `.github/skills/parametric_study/SKILL.md` | Operating-point sweeps + comparison |
 | report_generation | `.github/skills/report_generation/SKILL.md` | Final technical report (MD + HTML) |
@@ -59,7 +60,9 @@ Claude proxies (`tests/test_agent_docs.py` fails when they drift).
 | Role | Tool | Where |
 | --- | --- | --- |
 | Multiphase CFD | OpenFOAM v2412 `compressibleInterFoam` | WSL Ubuntu (via `.tmp/scripts/wsl_bridge.py`) |
-| FEA | CalculiX `ccx` 2.21 | WSL Ubuntu |
+| FEA (default) | CalculiX `ccx` 2.21 | WSL Ubuntu |
+| FEA (selectable) | ElmerFEM (`--solver elmer` in `fea_analysis`; built from source, `install_solvers.py --with-elmer`) | WSL Ubuntu |
+| FEM extension points | Code_Aster, FEniCSx, deal.II | WSL Ubuntu / Windows Python stack depending on solver |
 | Geometry/meshing | Gmsh (Python API) | Windows venv |
 | Post-processing | PyVista, matplotlib, fluidfoam | Windows venv |
 

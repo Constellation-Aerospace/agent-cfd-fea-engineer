@@ -130,6 +130,56 @@
       },
       "quality": 0.8,
       "slug": "balloon-ttp/transient-0-40km"
+    },
+    "balloon-ttp/transient-0-40km-dwell-60min": {
+      "features": {
+        "n_components": 12.0,
+        "n_fluid": 0.0,
+        "n_interfaces": 10.0,
+        "n_patches": 4.0,
+        "n_radiative_patches": 2.0,
+        "n_solid": 12.0,
+        "total_heat_flux_in_W_m2": 8181.44,
+        "total_interface_area_m2": 0.015362737,
+        "total_volume_m3": 0.009580212000000001
+      },
+      "harvested": "2026-08-05",
+      "knobs": {
+        "n_procs": 4.0
+      },
+      "outcome": {
+        "completed": true,
+        "energy_imbalance_pct": null,
+        "wall_clock_s": 126.8,
+        "worst_residual": 0.0252425
+      },
+      "quality": 0.8,
+      "slug": "balloon-ttp/transient-0-40km-dwell-60min"
+    },
+    "balloon-ttp/transient-0-40km-hot": {
+      "features": {
+        "n_components": 12.0,
+        "n_fluid": 0.0,
+        "n_interfaces": 10.0,
+        "n_patches": 4.0,
+        "n_radiative_patches": 2.0,
+        "n_solid": 12.0,
+        "total_heat_flux_in_W_m2": 8181.44,
+        "total_interface_area_m2": 0.015362737,
+        "total_volume_m3": 0.009580212000000001
+      },
+      "harvested": "2026-08-05",
+      "knobs": {
+        "n_procs": 4.0
+      },
+      "outcome": {
+        "completed": true,
+        "energy_imbalance_pct": null,
+        "wall_clock_s": 205.5,
+        "worst_residual": 0.025036
+      },
+      "quality": 0.8,
+      "slug": "balloon-ttp/transient-0-40km-hot"
     }
   },
   "fea_analysis": {},

@@ -1,0 +1,24 @@
+{
+  "study": "balloon-ttp/transient-0-40km-hot",
+  "application": "chtMultiRegionFoam",
+  "mode": "transient",
+  "completed": true,
+  "final_time": 9600.0,
+  "n_steps": 600,
+  "wall_clock_s": 205.5,
+  "n_procs": 4,
+  "final_residuals": {
+    "connector_block_left/h": 0.001909322,
+    "connector_block_right/h": 0.003640307,
+    "copper_strap_left/h": 0.001179825,
+    "copper_strap_right/h": 0.001402886,
+    "interface_plate/h": 0.001708145,
+    "jetson_heatsink/h": 0.01076238,
+    "jetson_module/h": 0.0005770305,
+    "radiator_bracket_left/h": 0.007475328,
+    "radiator_bracket_right/h": 0.00920431,
+    "radiator_plate/h": 0.0002493412,
+    "radiator_plate_2/h": 0.0001943225,
+    "styrofoam_box/h": 0.025036
+  }
+}

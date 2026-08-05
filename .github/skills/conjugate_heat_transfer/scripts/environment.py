@@ -69,9 +69,24 @@ def main() -> int:
         out["sky_sink_C"] = round(sky_sink_temperature(args.altitude) - 273.15, 2)
         out["h_natural_est_W_m2K"] = round(
             natural_convection_h(args.altitude, args.L_char), 4)
+        # sky_sink_temperature() already folds Earth's IR emission into the sink
+        # temperature via T_EARTH_EFF (self-consistent with EARTH_IR: sigma*T_EARTH_EFF^4
+        # ~= EARTH_IR, i.e. they are two encodings of the same ~240 W/m2 mean outgoing
+        # longwave flux). Re-adding q_earth_ir here on top, as loads["q_total_W_m2"]
+        # does, double-counts Earth's IR and can shift the effective sink temperature by
+        # several tens of K (e.g. -60 C -> -20 C at 2500 m) -- only the solar + albedo
+        # terms belong in this BC's absorbed_flux_W_m2. q_total_W_m2 (with q_earth_ir
+        # included) is still correct for the --orbit/space_environment path above, where
+        # base_sink_K is T_SPACE alone and there is no separate Earth-IR term to collide
+        # with.
+        q_abs_bc = loads["q_solar_W_m2"] + loads["q_albedo_W_m2"]
+        out["absorbed_flux_bc_note"] = (
+            "absorbed_flux_W_m2 below is q_solar + q_albedo only, excluding "
+            "q_earth_ir_W_m2 -- that term is already represented by sky_sink_temperature() "
+            "via T_EARTH_EFF; adding both would double-count Earth's IR emission")
         out["bc_json"] = {"type": "altitude_environment", "altitude_m": args.altitude,
                           "emissivity": eps,
-                          "absorbed_flux_W_m2": round(loads["q_total_W_m2"], 2),
+                          "absorbed_flux_W_m2": round(q_abs_bc, 2),
                           "L_char_m": args.L_char}
         air = air_at_altitude(args.altitude)
         out["full_cfd_route"] = {

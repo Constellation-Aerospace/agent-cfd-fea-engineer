@@ -47,15 +47,16 @@ study's `assembly/manifest.json` → `thermal_contact_resistances`.
 | `transient-0-40km-dwell-60min-etp-copper` | Transient CHT, `chtMultiRegionFoam` | Continuation of `transient-0-40km-etp-copper` (Cu-ETP straps): identical dwell profile to the OFHC dwell study above | Completed (`final_time: 13200.0`, 600 steps) — see `report/report.md`. Result: `jetson_module` 78.183 °C / `interface_plate` 78.925 °C — **+0.031 K vs the OFHC dwell baseline, smaller than the +0.06 K delta at the ascent's own endpoint** — the material gap shrinks, not grows, over an extended hold. Restart continuity from the ETP ascent verified to 0.045 K |
 
 Full step-by-step reproduction procedures (including the exact CLI commands, BC
-staging, and verification gates for each transient study) live in the repo-root
-runbooks — written for a local Ollama (`cfd-qwen`) agent but equally usable manually:
+staging, and verification gates for each transient study) live in
+[ollama/runbooks/](../../ollama/runbooks/) — written for a local Ollama (`cfd-qwen`)
+agent but equally usable manually:
 
-- [OLLAMA_QWEN_TRANSIENT_RUNBOOK.md](../../OLLAMA_QWEN_TRANSIENT_RUNBOOK.md) — 0→20 km
-- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_10KM.md](../../OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_10KM.md) — 0→10 km
-- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM.md](../../OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM.md) — 0→40 km
-- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN.md](../../OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN.md) — 60 min dwell at 40 km
-- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md](../../OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md) — 0→40 km, Cu-ETP straps
-- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN_ETP_COPPER.md](../../OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN_ETP_COPPER.md) — 60 min dwell at 40 km, Cu-ETP straps
+- [OLLAMA_QWEN_TRANSIENT_RUNBOOK.md](../../ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK.md) — 0→20 km
+- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_10KM.md](../../ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_10KM.md) — 0→10 km
+- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM.md](../../ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM.md) — 0→40 km
+- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN.md](../../ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN.md) — 60 min dwell at 40 km
+- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md](../../ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md) — 0→40 km, Cu-ETP straps
+- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN_ETP_COPPER.md](../../ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN_ETP_COPPER.md) — 60 min dwell at 40 km, Cu-ETP straps
 
 `ollama/run_agent.ps1 -AutoApprove` drives a runbook unattended (no `Read-Host`
 approval loop) with `cfd-qwen`; see the tool's own `-?`/header comment. **Known

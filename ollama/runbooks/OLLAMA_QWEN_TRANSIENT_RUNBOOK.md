@@ -43,13 +43,13 @@ commands yourself and you get the same simulation.
 > | --- | --- |
 > | Ollama | 0.32.5, serving on `127.0.0.1:11434` |
 > | Base model | `qwen2.5-coder:7b` (Q4_K_M, capabilities: completion, **tools**, insert) |
-> | Task model | `cfd-qwen` built from [ollama/Modelfile.cfd](ollama/Modelfile.cfd) — `num_ctx 32768`, temp 0.1 |
+> | Task model | `cfd-qwen` built from [ollama/Modelfile.cfd](../Modelfile.cfd) — `num_ctx 32768`, temp 0.1 |
 > | GPU residency | 6.6 GB, **100 % GPU** on an RTX 3060 12 GB (`ollama ps`) |
 > | Throughput | ~54–62 tok/s eval |
 > | Runbook in context | **15 789 tokens** of 32 768 — ~17 k headroom for the run |
 > | Behaviour | Turn 1 → correct C0 command, nothing else. Turn 2 → "C0 is satisfied. Proceed to C1" + the exact C1 block |
 > | Install guard | Fed the stale `setup_report.json`, the model replies "that is the stale setup_report.json, ignoring it" and re-issues the read-only check. The driver additionally **refuses to execute** any installer |
-> | Driver | [ollama/run_agent.ps1](ollama/run_agent.ps1) `-SelfTest` → **PASS** (both checks) |
+> | Driver | [ollama/run_agent.ps1](../run_agent.ps1) `-SelfTest` → **PASS** (both checks) |
 >
 > Re-verify any time, in one command, executing nothing:
 >
@@ -136,7 +136,7 @@ ollama ps          # shows GPU vs CPU placement once the model is resident
 ## A.3 Build a task-tuned variant (required — the default context is too small)
 
 **Already built on this machine as `cfd-qwen`** from
-[ollama/Modelfile.cfd](ollama/Modelfile.cfd). This section documents how, and how to
+[ollama/Modelfile.cfd](../Modelfile.cfd). This section documents how, and how to
 rebuild it.
 
 Ollama defaults to a 4096-token context. This runbook measures **15 789 tokens** when
@@ -204,7 +204,7 @@ ollama show cfd-qwen
 
 **Environment variables — none are required.** `num_ctx` is baked into the model by
 the Modelfile (confirmed by `ollama ps` reporting `CONTEXT 32768`), and
-[run_agent.ps1](ollama/run_agent.ps1) sends `keep_alive: 30m` on every request, so the
+[run_agent.ps1](../run_agent.ps1) sends `keep_alive: 30m` on every request, so the
 model does not unload during a long solver stage. Set these only if you drive the
 model by hand with bare `ollama run`:
 
@@ -220,7 +220,7 @@ Changing these requires restarting the Ollama service to take effect.
 
 ### Path 1 (recommended) — the driver script
 
-[ollama/run_agent.ps1](ollama/run_agent.ps1) seeds the conversation with this entire
+[ollama/run_agent.ps1](../run_agent.ps1) seeds the conversation with this entire
 runbook, then loops: the model proposes **one** command → you approve it → the script
 runs it → the **real** stdout/stderr goes back as the next message.
 
@@ -269,7 +269,7 @@ $env:LITELLM_MASTER_KEY = "ollama"
 ```
 
 That makes the base URL `http://127.0.0.1:11434/v1`. You must **also** change the
-hardcoded model name in [agents.py:278](agents.py#L278) from `"tier-balanced"` to
+hardcoded model name in [agents.py:278](../../agents.py#L278) from `"tier-balanced"` to
 `"cfd-qwen"`. Note that `build_agent()` instantiates `GitHubCopilotAgent` from
 `agent_framework_github_copilot`; that runtime is not part of the local solver stack
 and is not required to run the simulation. If it is not installed, use Path 1.
@@ -286,10 +286,10 @@ curl.exe http://127.0.0.1:11434/v1/chat/completions -H "Content-Type: applicatio
 
 | Item | Location | Notes |
 | --- | --- | --- |
-| Repository | `D:\Github\agent-cfd-fea-engineer` | Already present. Fresh clones: see the DOE Framework link at the bottom of [README.md](README.md) |
-| CAD assembly | [inputs/balloon-ttp/assembly.step](inputs/balloon-ttp/assembly.step) | 12-body STEP: 2 radiators, 2 copper straps, 4 Al brackets, TTP stack, EPS foam box |
-| Reference steady study | [outputs/balloon-ttp/cht-30km/](outputs/balloon-ttp/cht-30km/) | Validated manifest, mesh, converged 30 km solid-only CHT run — **copy its manifest, do not start from scratch** |
-| Steady BC spec | [simulation_summary_report.md](simulation_summary_report.md) | Source of materials + contact list |
+| Repository | `D:\Github\agent-cfd-fea-engineer` | Already present. Fresh clones: see the DOE Framework link at the bottom of [README.md](../../README.md) |
+| CAD assembly | [inputs/balloon-ttp/assembly.step](../../inputs/balloon-ttp/assembly.step) | 12-body STEP: 2 radiators, 2 copper straps, 4 Al brackets, TTP stack, EPS foam box |
+| Reference steady study | [outputs/balloon-ttp/cht-30km/](../../outputs/balloon-ttp/cht-30km/) | Validated manifest, mesh, converged 30 km solid-only CHT run — **copy its manifest, do not start from scratch** |
+| Steady BC spec | [simulation_summary_report.md](../../simulation_summary_report.md) | Source of materials + contact list |
 | Transient BC spec | `Transient_Thermal_Analysis_0_to_20km_final.md` | Source of the flight profile; every number from it is transcribed into Part C below |
 | Solvers | **Already installed** in WSL Ubuntu: OpenFOAM v2412 (+ CHT solvers), CalculiX 2.21, Gmsh 4.14.0-git | Nothing to download. C0 only confirms |
 
@@ -455,7 +455,7 @@ model in the report.
 
 What this produces: `chtMultiRegionFoam`, `endTime 1200`, `deltaT 1e-3` start,
 `adjustTimeStep yes`, `maxDi 10`, `maxDeltaT 1`, outputs every 20 s
-([cht_case.py:152-169](.tmp/scripts/cht_case.py#L152-L169)).
+([cht_case.py:152-169](../../.tmp/scripts/cht_case.py#L152-L169)).
 
 **Known limitation — thermal contact resistance is not implemented.** The manifest
 carries a `thermal_contact_resistances` block (PTM7950 die interface 0.2 K/W, indium
@@ -501,7 +501,7 @@ For the current mesh this is `0.003666837` m², so
 > `q = 17943.23 W/m²`, derived from the CAD *interface* area 0.002089925 m². The
 > meshed patch is 0.003666837 m², so that run actually injected
 > 17943.23 × 0.003666837 = **65.8 W**, not the 37.5 W stated in
-> [simulation_summary_report.md](simulation_summary_report.md). Verify the new value
+> [simulation_summary_report.md](../../simulation_summary_report.md). Verify the new value
 > against the run's own `wallHeatFlux` output in C9 rather than trusting the arithmetic.
 
 If C6 regenerates the mesh with a different cell size, recompute q from the **new**
@@ -547,7 +547,7 @@ Must print `Manifest is ready for meshing/case setup.`
 >
 > | Missing | Symptom | Fix |
 > | --- | --- | --- |
-> | `p` field in every **solid** region | `cannot find file ".../0/<region>/p"`, 0 time steps | [cht_case.py](.tmp/scripts/cht_case.py) `write_regions()` writes a uniform placeholder `p` for solids when `mode != steady` (solid density is constant, so the field is inert) |
+> | `p` field in every **solid** region | `cannot find file ".../0/<region>/p"`, 0 time steps | [cht_case.py](../../.tmp/scripts/cht_case.py) `write_regions()` writes a uniform placeholder `p` for solids when `mode != steady` (solid density is constant, so the field is inert) |
 > | Top-level `PIMPLE` dict in `system/fvSolution` | `Entry 'PIMPLE' not found in dictionary`, 0 time steps | `write_skeleton()` appends `PIMPLE { nOuterCorrectors 1; }` when `mode != steady` |
 > | **Usable time stepping** | Runs, but the step collapses: **8144 steps to reach t = 1.8 µs**. At that rate 1200 s takes ~10⁹ s of wall clock | `_write_controldict()` switches to a **fixed** step (`adjustTimeStep no; deltaT 0.5;`) for solid-only transient cases, and writes `ascii` so C8 can rewrite BCs |
 >
@@ -583,7 +583,7 @@ Expect ~19 300 nodes / ~73 800 cells / 12 solid regions and `fluid_regions: []`.
 `checkMesh` on this geometry reports `max_non_ortho ≈ 90`, `max_skewness ≈ 4.0` — the
 script will flag it. That is the same mesh the 30 km run converged on, so proceed, but
 say so in the report. `nNonOrthogonalCorrectors 1` is already set for solids
-([cht_case.py:430](.tmp/scripts/cht_case.py#L430)).
+([cht_case.py:430](../../.tmp/scripts/cht_case.py#L430)).
 
 **Confirm the time-stepping and write format.** No hand editing is needed — the
 factory emits these for a solid-only transient case. Check them anyway, because
@@ -677,7 +677,7 @@ The flight profile makes both the ambient temperature **and** the film coefficie
 functions of time. In `externalWallHeatFluxTemperature`, `Ta` can be a time function
 but `h` is a plain field — there is no way to ramp `h` inside a single run. The
 toolchain writes both as constants
-([cht_case.py:532-534](.tmp/scripts/cht_case.py#L532-L534)).
+([cht_case.py:532-534](../../.tmp/scripts/cht_case.py#L532-L534)).
 
 So the flight is run as **six 200 s segments**, each restarting from the previous
 segment's final state (`controlDict` has `startFrom latestTime`) with the environment
@@ -1177,7 +1177,7 @@ Then edit the executive summary and conclusions by hand. The report **must** sta
 
 # Part E — The prompt to give with this runbook
 
-**If you use [ollama/run_agent.ps1](ollama/run_agent.ps1), you need no prompt at all.**
+**If you use [ollama/run_agent.ps1](../run_agent.ps1), you need no prompt at all.**
 The driver loads this file and seeds the conversation itself. Just run:
 
 ```powershell
@@ -1254,13 +1254,13 @@ stage 4: altitude 11667 m, h = 1.910. Start with the prune snippet.
 
 | Path | Role |
 | --- | --- |
-| [ollama/Modelfile.cfd](ollama/Modelfile.cfd) | Builds `cfd-qwen`: 32 k context, low temperature, operating contract as SYSTEM prompt |
-| [ollama/run_agent.ps1](ollama/run_agent.ps1) | Approval-gated agent loop; `-SelfTest` is the Part A readiness gate |
-| [.tmp/scripts/cht_case.py](.tmp/scripts/cht_case.py) | OpenFOAM case factory; `DEFAULT_SOLVER`, controlDict, BC specs |
-| [.tmp/scripts/cht_pipeline.py](.tmp/scripts/cht_pipeline.py) | `prepare()` / `solve()` / `extract_cht_kpis()`; WSL run + copy-back |
-| [.tmp/scripts/atmosphere.py](.tmp/scripts/atmosphere.py) | US76 atmosphere, sky sink, `combined_film` |
-| [.tmp/scripts/step_assembly.py](.tmp/scripts/step_assembly.py) | STEP import, manifest validation, assembly meshing |
-| [.github/skills/conjugate_heat_transfer/SKILL.md](.github/skills/conjugate_heat_transfer/SKILL.md) | Physics coverage, sanity checks |
-| [.github/skills/step_assembly/SKILL.md](.github/skills/step_assembly/SKILL.md) | Manifest schema, BC types, gotchas |
+| [ollama/Modelfile.cfd](../Modelfile.cfd) | Builds `cfd-qwen`: 32 k context, low temperature, operating contract as SYSTEM prompt |
+| [ollama/run_agent.ps1](../run_agent.ps1) | Approval-gated agent loop; `-SelfTest` is the Part A readiness gate |
+| [.tmp/scripts/cht_case.py](../../.tmp/scripts/cht_case.py) | OpenFOAM case factory; `DEFAULT_SOLVER`, controlDict, BC specs |
+| [.tmp/scripts/cht_pipeline.py](../../.tmp/scripts/cht_pipeline.py) | `prepare()` / `solve()` / `extract_cht_kpis()`; WSL run + copy-back |
+| [.tmp/scripts/atmosphere.py](../../.tmp/scripts/atmosphere.py) | US76 atmosphere, sky sink, `combined_film` |
+| [.tmp/scripts/step_assembly.py](../../.tmp/scripts/step_assembly.py) | STEP import, manifest validation, assembly meshing |
+| [.github/skills/conjugate_heat_transfer/SKILL.md](../../.github/skills/conjugate_heat_transfer/SKILL.md) | Physics coverage, sanity checks |
+| [.github/skills/step_assembly/SKILL.md](../../.github/skills/step_assembly/SKILL.md) | Manifest schema, BC types, gotchas |
 | `outputs/balloon-ttp/transient-0-20km/assembly/manifest.json` | Single source of truth for this study |
 | `outputs/balloon-ttp/transient-0-20km/case/` | The OpenFOAM case; time directories are the restart points |

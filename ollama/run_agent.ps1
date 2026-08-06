@@ -1,6 +1,7 @@
 ﻿<#
 .SYNOPSIS
-    Drive the local cfd-qwen agent through OLLAMA_QWEN_TRANSIENT_RUNBOOK.md Part C.
+    Drive the local cfd-qwen agent through a runbook's Part C
+    (default: ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK.md).
 
 .DESCRIPTION
     Seeds the conversation with the full runbook, then loops:
@@ -40,13 +41,13 @@
 .EXAMPLE
     .\ollama\run_agent.ps1 -SelfTest
     .\ollama\run_agent.ps1
-    .\ollama\run_agent.ps1 -AutoApprove -Runbook OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md -TranscriptPath ollama\transcripts\run1.log
+    .\ollama\run_agent.ps1 -AutoApprove -Runbook ollama\runbooks\OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md -TranscriptPath ollama\transcripts\run1.log
 #>
 [CmdletBinding()]
 param(
     [string]$Model = "cfd-qwen",
     [string]$Endpoint = "http://127.0.0.1:11434",
-    [string]$Runbook = "OLLAMA_QWEN_TRANSIENT_RUNBOOK.md",
+    [string]$Runbook = "ollama\runbooks\OLLAMA_QWEN_TRANSIENT_RUNBOOK.md",
     [string]$KeepAlive = "30m",
     [switch]$SelfTest,
     [switch]$AutoApprove,

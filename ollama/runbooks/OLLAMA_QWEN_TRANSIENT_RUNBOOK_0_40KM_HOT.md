@@ -54,7 +54,7 @@ Identical setup to the sibling runbooks — nothing to redo. Verify in one comma
 executing nothing:
 
 ```powershell
-.\ollama\run_agent.ps1 -SelfTest -Runbook OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_HOT.md
+.\ollama\run_agent.ps1 -SelfTest -Runbook ollama\runbooks\OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_HOT.md
 ```
 
 Expect the same readiness signature documented in the sibling runbooks: Ollama on
@@ -78,12 +78,12 @@ install for this study.
 
 | Item | Location | Notes |
 | --- | --- | --- |
-| CAD | [inputs/balloon-ttp/spaced out rad+box.step](inputs/balloon-ttp/spaced%20out%20rad+box.step) | Same file the cold 0→40 km study used |
+| CAD | [inputs/balloon-ttp/spaced out rad+box.step](../../inputs/balloon-ttp/spaced%20out%20rad+box.step) | Same file the cold 0→40 km study used |
 | Reference manifest | `outputs/balloon-ttp/transient-0-40km/assembly/manifest.json` | Already has components renamed, materials assigned, TCR solved for this exact CAD — **copy it, don't re-inspect** |
 | Reference mesh | `outputs/balloon-ttp/transient-0-40km/mesh/` | Same geometry, same `factor 1.0` — **copy it, don't re-mesh** (saves a Gmsh run and guarantees an identical mesh to the cold case for direct comparison) |
-| Staging tool | [stage_transient_bcs.py](stage_transient_bcs.py) | Reused unmodified |
-| Post-processing | [transient_history.py](transient_history.py) | Reused unmodified |
-| Atmosphere/environment model | [.tmp/scripts/atmosphere.py](.tmp/scripts/atmosphere.py), [environment.py](.github/skills/conjugate_heat_transfer/scripts/environment.py) | `environment.py` carries the C-BUG fix above |
+| Staging tool | [stage_transient_bcs.py](../../stage_transient_bcs.py) | Reused unmodified |
+| Post-processing | [transient_history.py](../../transient_history.py) | Reused unmodified |
+| Atmosphere/environment model | [.tmp/scripts/atmosphere.py](../../.tmp/scripts/atmosphere.py), [environment.py](../../.github/skills/conjugate_heat_transfer/scripts/environment.py) | `environment.py` carries the C-BUG fix above |
 
 ---
 
@@ -403,9 +403,9 @@ Start with C0.
 
 | Path | Role |
 | --- | --- |
-| [inputs/balloon-ttp/spaced out rad+box.step](inputs/balloon-ttp/spaced%20out%20rad+box.step) | CAD source, 12 solids |
+| [inputs/balloon-ttp/spaced out rad+box.step](../../inputs/balloon-ttp/spaced%20out%20rad+box.step) | CAD source, 12 solids |
 | `outputs/balloon-ttp/transient-0-40km/assembly/manifest.json`, `.../mesh/` | Source manifest and mesh — copied into this study in C1 |
-| [.github/skills/conjugate_heat_transfer/scripts/environment.py](.github/skills/conjugate_heat_transfer/scripts/environment.py) | Absorbed-flux calculator — carries the C-BUG fix |
-| [stage_transient_bcs.py](stage_transient_bcs.py) | Altitude-indexed BC restaging, reused unmodified |
-| [transient_history.py](transient_history.py) | CSV/PNG assembly across restart segments, reused unmodified |
+| [.github/skills/conjugate_heat_transfer/scripts/environment.py](../../.github/skills/conjugate_heat_transfer/scripts/environment.py) | Absorbed-flux calculator — carries the C-BUG fix |
+| [stage_transient_bcs.py](../../stage_transient_bcs.py) | Altitude-indexed BC restaging, reused unmodified |
+| [transient_history.py](../../transient_history.py) | CSV/PNG assembly across restart segments, reused unmodified |
 | `outputs/balloon-ttp/transient-0-40km-hot/` | This study's manifest, case, figures, and reports |

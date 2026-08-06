@@ -42,7 +42,7 @@ that study's `report/report.md` and `figures/transient_T_history.csv`).
 ## Part A — Ollama + `cfd-qwen`
 
 ```powershell
-.\ollama\run_agent.ps1 -SelfTest -Runbook OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN_ETP_COPPER.md
+.\ollama\run_agent.ps1 -SelfTest -Runbook ollama\runbooks\OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN_ETP_COPPER.md
 ```
 
 Expect the standard readiness signature (Ollama up, `cfd-qwen` built, PASS on the C0
@@ -51,7 +51,7 @@ environment check). Rebuild if needed: `ollama create cfd-qwen -f ollama\Modelfi
 **Driving this fully unattended (the point of this run):**
 
 ```powershell
-.\ollama\run_agent.ps1 -AutoApprove -Runbook OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN_ETP_COPPER.md `
+.\ollama\run_agent.ps1 -AutoApprove -Runbook ollama\runbooks\OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN_ETP_COPPER.md `
   -TranscriptPath ollama\transcripts\transient-0-40km-dwell-60min-etp-copper.log -MaxTurns 150
 ```
 
@@ -74,8 +74,8 @@ run an installer**, see C0). Nothing new to install.
 | --- | --- | --- |
 | Source manifest, surfaces, mesh | `outputs/balloon-ttp/transient-0-40km-etp-copper/assembly/`, `.../mesh/` | Copied wholesale in C1 — materials are **already** `copper_etp`, no reassignment needed this time |
 | **Source solved state** | `outputs/balloon-ttp/transient-0-40km-etp-copper/case/9600/` | The ETP ascent's actual field data — copied wholesale in C1, must exist and be complete before starting |
-| Staging tool | [stage_transient_bcs.py](stage_transient_bcs.py) | Reused unmodified, called with `--altitude 40000` throughout |
-| Post-processing | [transient_history.py](transient_history.py) | Reused unmodified |
+| Staging tool | [stage_transient_bcs.py](../../stage_transient_bcs.py) | Reused unmodified, called with `--altitude 40000` throughout |
+| Post-processing | [transient_history.py](../../transient_history.py) | Reused unmodified |
 | Comparison baseline | `outputs/balloon-ttp/transient-0-40km-dwell-60min/report/report.md`, `.../figures/transient_T_history.csv` | The OFHC dwell study's own solved results — the comparison target for C8/C9 |
 
 ---
@@ -341,7 +341,7 @@ Start with C0.
 | --- | --- |
 | `outputs/balloon-ttp/transient-0-40km-etp-copper/assembly/`, `.../mesh/`, `.../case/9600/` | Source manifest, mesh and solved state — all copied into this study in C1 |
 | `outputs/balloon-ttp/transient-0-40km-dwell-60min/report/report.md` | OFHC dwell baseline — the comparison target for this study's C8/C9 |
-| [stage_transient_bcs.py](stage_transient_bcs.py) | Reused unmodified |
-| [transient_history.py](transient_history.py) | Reused unmodified |
-| [ollama/Modelfile.cfd](ollama/Modelfile.cfd) / [ollama/run_agent.ps1](ollama/run_agent.ps1) | `cfd-qwen` build + driver (`-AutoApprove`, proactive known-warning injection, loop-guard) |
+| [stage_transient_bcs.py](../../stage_transient_bcs.py) | Reused unmodified |
+| [transient_history.py](../../transient_history.py) | Reused unmodified |
+| [ollama/Modelfile.cfd](../Modelfile.cfd) / [ollama/run_agent.ps1](../run_agent.ps1) | `cfd-qwen` build + driver (`-AutoApprove`, proactive known-warning injection, loop-guard) |
 | `outputs/balloon-ttp/transient-0-40km-dwell-60min-etp-copper/` | This study's manifest, case, figures, and reports |

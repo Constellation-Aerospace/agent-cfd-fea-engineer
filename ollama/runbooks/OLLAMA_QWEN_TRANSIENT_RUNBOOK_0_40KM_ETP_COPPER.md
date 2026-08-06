@@ -38,7 +38,7 @@ Identical setup to the sibling runbooks — nothing to redo. Verify in one comma
 executing nothing:
 
 ```powershell
-.\ollama\run_agent.ps1 -SelfTest -Runbook OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md
+.\ollama\run_agent.ps1 -SelfTest -Runbook ollama\runbooks\OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md
 ```
 
 Expect the same readiness signature documented in the sibling runbooks: Ollama on
@@ -58,7 +58,7 @@ for after-the-fact review — supervision moves from per-command approval to tra
 review plus the verification gates already built into this document.
 
 ```powershell
-.\ollama\run_agent.ps1 -AutoApprove -Runbook OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md `
+.\ollama\run_agent.ps1 -AutoApprove -Runbook ollama\runbooks\OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md `
   -TranscriptPath ollama\transcripts\transient-0-40km-etp-copper.log -MaxTurns 200
 ```
 
@@ -71,8 +71,8 @@ run an installer**, see C0). Nothing new to install.
 | --- | --- | --- |
 | Source manifest, surfaces, mesh | `outputs/balloon-ttp/transient-0-40km/assembly/`, `.../mesh/` | Copied wholesale in C1 — **mesh is reused unchanged**, geometry didn't change |
 | Materials library | `agent-data/materials_library.json` → `solids.copper_etp` | New entry added alongside this runbook — Cu-ETP / C11000 properties, see table above |
-| Staging tool | [stage_transient_bcs.py](stage_transient_bcs.py) | Reused unmodified, altitude-indexed exactly as the baseline study |
-| Post-processing | [transient_history.py](transient_history.py) | Reused unmodified |
+| Staging tool | [stage_transient_bcs.py](../../stage_transient_bcs.py) | Reused unmodified, altitude-indexed exactly as the baseline study |
+| Post-processing | [transient_history.py](../../transient_history.py) | Reused unmodified |
 
 ---
 
@@ -397,8 +397,8 @@ Start with C0.
 | --- | --- |
 | `outputs/balloon-ttp/transient-0-40km/assembly/`, `.../mesh/` | Source manifest, surfaces and mesh — copied wholesale into this study in C1 |
 | `agent-data/materials_library.json` → `solids.copper_etp` | New material entry (Cu-ETP / C11000), added alongside this runbook |
-| [stage_transient_bcs.py](stage_transient_bcs.py) | Altitude-indexed BC restaging, reused unmodified |
-| [transient_history.py](transient_history.py) | CSV/PNG assembly across restart segments, reused unmodified |
-| [ollama/Modelfile.cfd](ollama/Modelfile.cfd) / [ollama/run_agent.ps1](ollama/run_agent.ps1) | `cfd-qwen` build + driver (`-AutoApprove` mode for unattended runs) |
+| [stage_transient_bcs.py](../../stage_transient_bcs.py) | Altitude-indexed BC restaging, reused unmodified |
+| [transient_history.py](../../transient_history.py) | CSV/PNG assembly across restart segments, reused unmodified |
+| [ollama/Modelfile.cfd](../Modelfile.cfd) / [ollama/run_agent.ps1](../run_agent.ps1) | `cfd-qwen` build + driver (`-AutoApprove` mode for unattended runs) |
 | `outputs/balloon-ttp/transient-0-40km/report/report.md` | OFHC baseline — the comparison target for this study's C8/C9 |
 | `outputs/balloon-ttp/transient-0-40km-etp-copper/` | This study's manifest, case, figures, and reports |

@@ -10,7 +10,7 @@ the `cfd-qwen` model itself. Everything below is executable — no cloud API key
 (`styrofoam_box`) insulated enclosure. Transient conduction + natural convection +
 grey radiation from ground level to **40 km over 9600 s (160 minutes)**.
 
-Input geometry: [inputs/balloon-ttp/spaced out rad+box.step](inputs/balloon-ttp/spaced%20out%20rad+box.step)
+Input geometry: [inputs/balloon-ttp/spaced out rad+box.step](../../inputs/balloon-ttp/spaced%20out%20rad+box.step)
 — the same 12-solid CAD used by the 0→10 km study (radiators spaced apart, box
 included in the same STEP file). **Status: this runbook has not been executed yet** —
 unlike the two sibling runbooks below, there is no "verified end-to-end" box here.
@@ -37,7 +37,7 @@ Identical setup to the other two runbooks — nothing to redo. Verify in one com
 executing nothing:
 
 ```powershell
-.\ollama\run_agent.ps1 -SelfTest -Runbook OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM.md
+.\ollama\run_agent.ps1 -SelfTest -Runbook ollama\runbooks\OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM.md
 ```
 
 Expect the same readiness signature documented in the sibling runbooks: Ollama on
@@ -61,11 +61,11 @@ install for this study.
 
 | Item | Location | Notes |
 | --- | --- | --- |
-| CAD | [inputs/balloon-ttp/spaced out rad+box.step](inputs/balloon-ttp/spaced%20out%20rad+box.step) | Same file the 0→10 km study used |
+| CAD | [inputs/balloon-ttp/spaced out rad+box.step](../../inputs/balloon-ttp/spaced%20out%20rad+box.step) | Same file the 0→10 km study used |
 | Reference manifest | `outputs/balloon-ttp/transient-0-10km/assembly/manifest.json` | Already has components renamed and materials assigned for this exact CAD — **copy it, don't re-inspect** |
-| Staging tool | [stage_transient_bcs.py](stage_transient_bcs.py) | Already in the repo root, altitude-indexed, reused unmodified |
-| Post-processing | [transient_history.py](transient_history.py) | Already in the repo root, reused unmodified |
-| Atmosphere model | [.tmp/scripts/atmosphere.py](.tmp/scripts/atmosphere.py) | US76 0–86 km — cross-checked against an independent source below, matches to within model differences |
+| Staging tool | [stage_transient_bcs.py](../../stage_transient_bcs.py) | Already in the repo root, altitude-indexed, reused unmodified |
+| Post-processing | [transient_history.py](../../transient_history.py) | Already in the repo root, reused unmodified |
+| Atmosphere model | [.tmp/scripts/atmosphere.py](../../.tmp/scripts/atmosphere.py) | US76 0–86 km — cross-checked against an independent source below, matches to within model differences |
 
 ---
 
@@ -324,7 +324,7 @@ t=0 before the real run:
 flight is run as **8 restart segments of 1200 s**, matching the atmosphere table in
 C2 exactly (each segment spans 5000 m). Stage 1 needs no staging call — C3 already set
 the ground-side seed BC in `0/`. Stages 2–8 use
-[stage_transient_bcs.py](stage_transient_bcs.py) (already in the repo root, reused
+[stage_transient_bcs.py](../../stage_transient_bcs.py) (already in the repo root, reused
 unmodified from the 0→20 km study) with **both `--h` and `--t-surface-est-C` omitted**
 — that lets it compute `h` from the Churchill natural-convection correlation at the
 segment's actual altitude, and read the linearisation reference temperature back from
@@ -506,14 +506,14 @@ Start with C0.
 
 | Path | Role |
 | --- | --- |
-| [inputs/balloon-ttp/spaced out rad+box.step](inputs/balloon-ttp/spaced%20out%20rad+box.step) | CAD source, 12 solids |
+| [inputs/balloon-ttp/spaced out rad+box.step](../../inputs/balloon-ttp/spaced%20out%20rad+box.step) | CAD source, 12 solids |
 | `outputs/balloon-ttp/transient-0-10km/assembly/manifest.json` | Source manifest — copied into this study in C1 |
-| [stage_transient_bcs.py](stage_transient_bcs.py) | Altitude-indexed BC restaging, reused unmodified |
-| [transient_history.py](transient_history.py) | CSV/PNG assembly across restart segments, reused unmodified |
-| [.tmp/scripts/atmosphere.py](.tmp/scripts/atmosphere.py) | US76 atmosphere, sky sink, `combined_film`, `natural_convection_h` |
-| [.tmp/scripts/cht_case.py](.tmp/scripts/cht_case.py) | OpenFOAM case factory; TCR `thicknessLayers`/`kappaLayers`, fixed-step transient controlDict |
-| [.tmp/scripts/cht_pipeline.py](.tmp/scripts/cht_pipeline.py) | `prepare()`/`solve()`, `disable_fpe_trap` handling |
-| [ollama/Modelfile.cfd](ollama/Modelfile.cfd) / [ollama/run_agent.ps1](ollama/run_agent.ps1) | `cfd-qwen` build + approval-gated driver |
+| [stage_transient_bcs.py](../../stage_transient_bcs.py) | Altitude-indexed BC restaging, reused unmodified |
+| [transient_history.py](../../transient_history.py) | CSV/PNG assembly across restart segments, reused unmodified |
+| [.tmp/scripts/atmosphere.py](../../.tmp/scripts/atmosphere.py) | US76 atmosphere, sky sink, `combined_film`, `natural_convection_h` |
+| [.tmp/scripts/cht_case.py](../../.tmp/scripts/cht_case.py) | OpenFOAM case factory; TCR `thicknessLayers`/`kappaLayers`, fixed-step transient controlDict |
+| [.tmp/scripts/cht_pipeline.py](../../.tmp/scripts/cht_pipeline.py) | `prepare()`/`solve()`, `disable_fpe_trap` handling |
+| [ollama/Modelfile.cfd](../Modelfile.cfd) / [ollama/run_agent.ps1](../run_agent.ps1) | `cfd-qwen` build + approval-gated driver |
 | `outputs/balloon-ttp/transient-0-40km/` | This study's manifest, case, figures, and reports |
 
 Sources for the C2 atmosphere cross-check:

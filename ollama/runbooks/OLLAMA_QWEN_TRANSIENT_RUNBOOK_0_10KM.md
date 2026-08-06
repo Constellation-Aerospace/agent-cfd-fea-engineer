@@ -33,7 +33,7 @@ Identical to the 0→20 km runbook — nothing to redo. Verify in one command,
 executing nothing:
 
 ```powershell
-.\ollama\run_agent.ps1 -SelfTest -Runbook OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_10KM.md
+.\ollama\run_agent.ps1 -SelfTest -Runbook ollama\runbooks\OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_10KM.md
 ```
 
 Expect the same readiness signature: Ollama 0.32.5 on `127.0.0.1:11434`,

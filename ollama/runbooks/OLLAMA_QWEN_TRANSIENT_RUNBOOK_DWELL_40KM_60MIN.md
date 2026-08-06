@@ -35,7 +35,7 @@ what is copied and why it's valid to drop the field data in unmodified.
 Identical setup to the sibling runbooks — nothing to redo:
 
 ```powershell
-.\ollama\run_agent.ps1 -SelfTest -Runbook OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN.md
+.\ollama\run_agent.ps1 -SelfTest -Runbook ollama\runbooks\OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN.md
 ```
 
 **Driver note:** `run_agent.ps1` gates every command on a `Read-Host` prompt. If you're
@@ -50,8 +50,8 @@ run an installer**, see C0). Nothing new to install.
 | --- | --- | --- |
 | Source manifest + mesh | `outputs/balloon-ttp/transient-0-40km/assembly/`, `.../mesh/` | Copied wholesale in C1 |
 | **Source solved state** | `outputs/balloon-ttp/transient-0-40km/case/9600/` | The actual field data this study starts from — copied wholesale in C1, **must exist and be complete** before starting |
-| Staging tool | [stage_transient_bcs.py](stage_transient_bcs.py) | Reused unmodified, called with `--altitude 40000` throughout (refreshes the linearisation reference temperature only — the altitude argument doesn't change between segments here) |
-| Post-processing | [transient_history.py](transient_history.py) | Reused unmodified |
+| Staging tool | [stage_transient_bcs.py](../../stage_transient_bcs.py) | Reused unmodified, called with `--altitude 40000` throughout (refreshes the linearisation reference temperature only — the altitude argument doesn't change between segments here) |
+| Post-processing | [transient_history.py](../../transient_history.py) | Reused unmodified |
 
 ---
 
@@ -289,6 +289,6 @@ Start with C0.
 | Path | Role |
 | --- | --- |
 | `outputs/balloon-ttp/transient-0-40km/assembly/`, `.../mesh/`, `.../case/9600/` | Source manifest, mesh and solved state — all three copied into this study in C1 |
-| [stage_transient_bcs.py](stage_transient_bcs.py) | Reused unmodified, called at a fixed altitude to refresh the linearisation reference temperature only |
-| [transient_history.py](transient_history.py) | Reused unmodified |
+| [stage_transient_bcs.py](../../stage_transient_bcs.py) | Reused unmodified, called at a fixed altitude to refresh the linearisation reference temperature only |
+| [transient_history.py](../../transient_history.py) | Reused unmodified |
 | `outputs/balloon-ttp/transient-0-40km-dwell-60min/` | This study's manifest, case, figures, and reports |

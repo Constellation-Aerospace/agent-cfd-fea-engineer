@@ -1,0 +1,126 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b8cf4d35-20260127 OPENFOAM=2412 patch=260127 version=2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : checkMesh
+Date   : Aug 06 2026
+Time   : 06:31:37
+Host   : FracktalCore
+PID    : 1924
+I/O    : uncollated
+Case   : /mnt/d/Constellation/Github/agent-cfd-fea-engineer/outputs/balloon-ttp/transient-0-40km-etp-copper/case
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+--> FOAM Warning : 
+    From static Foam::instantList Foam::timeSelector::select0(Foam::Time&, const Foam::argList&)
+    in file db/Time/timeSelector.C at line 284
+    No time specified or available, selecting 'constant'
+Create mesh for time = constant
+
+Check mesh...
+
+Time = constant
+
+Mesh stats 
+    points:           19200
+    faces:            161507
+    internal faces:   134333
+    cells:            73960
+    faces per cell:   4
+    boundary patches: 13
+    point zones:      0
+    face zones:       0
+    cell zones:       12
+
+Overall number of cells of each type:
+    hexahedra:     0
+    prisms:        0
+    wedges:        0
+    pyramids:      0
+    tet wedges:    0
+    tetrahedra:    73960
+    polyhedra:     0
+
+Checking topology...
+    Boundary definition OK.
+    Cell to face addressing OK.
+    Point usage OK.
+    Upper triangular ordering OK.
+    Face vertices OK.
+   *Number of regions: 2
+    The mesh has multiple regions which are not connected by any face.
+  <<Writing region information to "constant/cellToRegion"
+  <<Writing region 0 with 33461 cells to cellSet region0
+  <<Writing region 1 with 40499 cells to cellSet region1
+
+Checking patch topology for multiply connected surfaces...
+    Patch               Faces    Points     Surface topology
+    copper_strap_left_wall1216     626      ok (non-closed singly connected)  
+    copper_strap_right_wall1210     623      ok (non-closed singly connected)  
+    foam_box_outer      12782    6391     ok (closed singly connected)      
+    radiator_plate_outer3270     1638     ok (non-closed singly connected)  
+    radiator_plate_2_outer3286     1646     ok (non-closed singly connected)  
+    interface_plate_wall1134     688      ok (non-closed singly connected)  
+    jetson_heat_source  410      259      ok (non-closed singly connected)  
+    jetson_heatsink_wall762      454      ok (non-closed singly connected)  
+    jetson_module_wall  648      372      ok (non-closed singly connected)  
+    connector_block_left_wall1044     562      ok (non-closed singly connected)  
+    radiator_bracket_left_wall164      101      ok (non-closed singly connected)  
+    connector_block_right_wall1084     580      ok (non-closed singly connected)  
+    radiator_bracket_right_wall164      101      ok (non-closed singly connected)  
+    ".*"                27174    13579    ok (closed singly connected)      
+
+
+Checking faceZone topology for multiply connected surfaces...
+    No faceZones found.
+
+Checking basic cellZone addressing...
+    CellZone            Cells        Points       Volume       BoundingBox
+    radiator_plate      4736         1658         5.396349e-05 (0.06100015 0.008 -0.04499965) (0.06300015 0.308 0.04500035)
+    radiator_plate_2    4751         1666         5.396349e-05 (-0.1710002 0.008 -0.04500035) (-0.1690002 0.308 0.04499965)
+    interface_plate     4980         1720         2.883504e-05 (-0.1010002 0.17616 -0.03500035) (-0.007408153 0.18116 0.03499965)
+    jetson_heatsink     2251         755          9.718133e-06 (-0.07990015 0.18116 -0.01950035) (-0.02610015 0.18616 0.01949965)
+    jetson_module       2730         763          0.000140085  (-0.1057072 0.18616 -0.03241635) (-0.01570715 0.21446 0.02258365)
+    connector_block_left 4807         1287         2.902071e-05 (-0.1010002 0.16216 -0.03500035) (-0.07100015 0.17616 0.03499965)
+    copper_strap_left   1878         675          0.0001088152 (-0.1680002 0.088 -0.03250035) (-0.1010002 0.17516 0.03249965)
+    radiator_bracket_left 310          128          2.94e-05     (-0.1690002 0.058 -0.03500035) (-0.1550002 0.088 0.03499965)
+    connector_block_right 4844         1284         2.902028e-05 (-0.03699985 0.16216 -0.03499965) (-0.006999845 0.17616 0.03500035)
+    copper_strap_right  1864         670          0.0001088152 (-0.006999845 0.088 -0.03249965) (0.06000015 0.17516 0.03250035)
+    radiator_bracket_right 310          128          2.94e-05     (0.04700015 0.058 -0.03499965) (0.06100015 0.088 0.03500035)
+    styrofoam_box       40499        9868         0.00895915   (-0.1610002 -0.052 -0.08500035) (0.05299985 0.378 0.08499965)
+
+Checking basic pointZone addressing...
+    No pointZones found.
+
+Checking geometry...
+    Overall domain bounding box (-0.1710002 -0.052 -0.08500035) (0.06300015 0.378 0.08499965)
+    Mesh has 3 geometric (non-empty/wedge) directions (1 1 1)
+    Mesh has 3 solution (non-empty) directions (1 1 1)
+    Boundary openness (2.842347e-18 2.535346e-18 -1.830968e-17) OK.
+ ***High aspect ratio cells found, Max aspect ratio: 14133.08, number of cells 25
+  <<Writing 25 cells with high aspect ratio to set highAspectRatioCells
+    Minimum face area = 6.756459e-11. Maximum face area = 0.0001893751.  Face area magnitudes OK.
+    Min volume = 1.868007e-14. Max volume = 7.599001e-07.  Total volume = 0.009580187.  Cell volumes OK.
+    Mesh non-orthogonality Max: 89.99184 average: 25.61166
+   *Number of severely non-orthogonal (> 70 degrees) faces: 186.
+    Non-orthogonality check OK.
+  <<Writing 186 non-orthogonal faces to set nonOrthoFaces
+    Face pyramids OK.
+    Max skewness = 3.69282 OK.
+    Coupled point location match (average 0) OK.
+
+Failed 1 mesh checks.
+
+End
+

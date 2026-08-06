@@ -80,8 +80,14 @@ def main() -> int:
             comp["material"] = args.material
         if args.t_init is not None:
             comp["T_init_C"] = args.t_init
-        if args.overrides:
-            comp.setdefault("overrides", {}).update(json.loads(args.overrides))
+        if args.overrides is not None:
+            # Replace, not merge: an incremental .update() left stale keys behind
+            # when a caller passed '{}' meaning "clear the overrides" (e.g. switching
+            # a component to a different material's own defaults) -- it silently kept
+            # the old material's override values instead. Every caller in this repo's
+            # runbooks already passes the complete desired override set in one call,
+            # so replace-semantics doesn't break incremental-merge usage that never existed.
+            comp["overrides"] = json.loads(args.overrides)
         changed = True
 
     if args.patch:

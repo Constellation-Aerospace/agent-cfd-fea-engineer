@@ -1,0 +1,24 @@
+{
+  "study": "balloon-ttp/transient-0-40km-dwell-60min-etp-copper",
+  "application": "chtMultiRegionFoam",
+  "mode": "transient",
+  "completed": true,
+  "final_time": 13200.0,
+  "n_steps": 600,
+  "wall_clock_s": 438.2,
+  "n_procs": 4,
+  "final_residuals": {
+    "connector_block_left/h": 0.001100222,
+    "connector_block_right/h": 0.002318038,
+    "copper_strap_left/h": 0.0006569223,
+    "copper_strap_right/h": 0.0006508845,
+    "interface_plate/h": 0.001326872,
+    "jetson_heatsink/h": 0.009605882,
+    "jetson_module/h": 0.0005657312,
+    "radiator_bracket_left/h": 0.003794916,
+    "radiator_bracket_right/h": 0.003899373,
+    "radiator_plate/h": 9.838599e-05,
+    "radiator_plate_2/h": 9.512859e-05,
+    "styrofoam_box/h": 0.02520763
+  }
+}

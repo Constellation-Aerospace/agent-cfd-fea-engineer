@@ -13,6 +13,11 @@
       "rho": 8960, "cp": 385, "kappa": 401, "emissivity": 0.5,
       "molWeight": 63.55, "note": "oxidised; polished is ~0.03"
     },
+    "copper_etp": {
+      "rho": 8940, "cp": 385, "kappa": 386, "emissivity": 0.5,
+      "molWeight": 63.55,
+      "note": "Cu-ETP / C11000 (electrolytic tough-pitch, 99.90% Cu min, ~0.02-0.04% O2 as Cu2O inclusions), annealed, ~100% IACS. kappa from CDA/ASM handbook typical values, ~1% below OFHC (C10100/C10200, 101% IACS, kappa~390-391) at room temp -- the oxygen inclusions shorten electron mean free path slightly; density and cp are not meaningfully composition-sensitive so unchanged from the OFHC override used elsewhere in this project. Handbook value, not a vendor cert -- supersede with cert data if available."
+    },
     "brass": {
       "rho": 8530, "cp": 380, "kappa": 111, "emissivity": 0.22,
       "molWeight": 64.4, "note": "70/30 cartridge brass"

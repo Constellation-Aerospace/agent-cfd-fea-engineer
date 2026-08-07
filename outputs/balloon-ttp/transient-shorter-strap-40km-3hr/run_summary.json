@@ -1,0 +1,21 @@
+{
+  "study": "balloon-ttp/transient-shorter-strap-40km-3hr",
+  "application": "chtMultiRegionFoam",
+  "mode": "transient",
+  "completed": true,
+  "final_time": 10800.0,
+  "n_steps": 450,
+  "wall_clock_s": 152.5,
+  "n_procs": 4,
+  "final_residuals": {
+    "connector_bottom/h": 0.004759379,
+    "interface_plate/h": 0.0006370114,
+    "jetson_heatsink/h": 0.00534388,
+    "jetson_module/h": 0.0004248966,
+    "radiator_plate_bottom/h": 0.0003470997,
+    "radiator_plate_top/h": 0.0004501356,
+    "strap_bottom/h": 0.0001001983,
+    "strap_top/h": 0.00102983,
+    "styrofoam_box/h": 0.0003877803
+  }
+}

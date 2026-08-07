@@ -1,0 +1,438 @@
+{
+  "step_file": "D:\\Constellation\\Github\\agent-cfd-fea-engineer\\inputs\\balloon-ttp\\Shorter straps.step",
+  "components": {
+    "interface_plate": {
+      "step_label": "Shapes/Shorter straps/TTP Assembly:1/TTP Assembly/Component1:1/Component1",
+      "type": "solid",
+      "material": "aluminum_6061",
+      "overrides": {},
+      "T_init_C": 20.0,
+      "solids": [
+        1
+      ],
+      "volume_m3": 2.8883e-05,
+      "centroid_m": [
+        0.016,
+        0.019102,
+        0.003216
+      ],
+      "bbox_m": [
+        0.0135,
+        -0.0159,
+        -0.0438,
+        0.0185,
+        0.0541,
+        0.0502
+      ]
+    },
+    "jetson_heatsink": {
+      "step_label": "Shapes/Shorter straps/TTP Assembly:1/TTP Assembly/Jetson Heatsink:1/Jetson Heatsink",
+      "type": "solid",
+      "material": "aluminum_6061",
+      "overrides": {},
+      "T_init_C": 20.0,
+      "solids": [
+        2
+      ],
+      "volume_m3": 9.427e-06,
+      "centroid_m": [
+        0.011069,
+        0.019569,
+        0.0022
+      ],
+      "bbox_m": [
+        0.0085,
+        -0.0004,
+        -0.0247,
+        0.0135,
+        0.0386,
+        0.0291
+      ]
+    },
+    "radiator_plate_top": {
+      "step_label": "Shapes/Shorter straps/300mm radiator plate:1/300mm radiator plate",
+      "type": "solid",
+      "material": "white_paint_aluminum",
+      "overrides": {
+        "emissivity": 0.85
+      },
+      "T_init_C": 20.0,
+      "solids": [
+        3
+      ],
+      "volume_m3": 5.3661e-05,
+      "centroid_m": [
+        0.004475,
+        0.0191,
+        0.0812
+      ],
+      "bbox_m": [
+        -0.1455,
+        -0.0259,
+        0.0802,
+        0.1545,
+        0.0641,
+        0.0822
+      ]
+    },
+    "radiator_plate_bottom": {
+      "step_label": "Shapes/Shorter straps/300mm radiator plate:2/300mm radiator plate",
+      "type": "solid",
+      "material": "white_paint_aluminum",
+      "overrides": {
+        "emissivity": 0.85
+      },
+      "T_init_C": 20.0,
+      "solids": [
+        4
+      ],
+      "volume_m3": 5.3661e-05,
+      "centroid_m": [
+        0.004475,
+        0.0191,
+        -0.0748
+      ],
+      "bbox_m": [
+        -0.1455,
+        -0.0259,
+        -0.0758,
+        0.1545,
+        0.0641,
+        -0.0738
+      ]
+    },
+    "jetson_module": {
+      "step_label": "Shapes/Shorter straps/Jetson block:1/Jetson block",
+      "type": "solid",
+      "material": "fr4_pcb",
+      "overrides": {
+        "cp": 950
+      },
+      "T_init_C": 20.0,
+      "solids": [
+        5
+      ],
+      "volume_m3": 0.000140085,
+      "centroid_m": [
+        -0.00565,
+        0.0191,
+        0.0022
+      ],
+      "bbox_m": [
+        -0.0198,
+        -0.0084,
+        -0.0428,
+        0.0085,
+        0.0466,
+        0.0472
+      ]
+    },
+    "strap_top": {
+      "step_label": "Shapes/Component1",
+      "type": "solid",
+      "material": "copper",
+      "overrides": {
+        "rho": 8940,
+        "kappa": 390
+      },
+      "T_init_C": 20.0,
+      "solids": [
+        6
+      ],
+      "volume_m3": 1.1629e-05,
+      "centroid_m": [
+        0.030803,
+        0.0191,
+        0.061856
+      ],
+      "bbox_m": [
+        0.0185,
+        0.0041,
+        0.0332,
+        0.0535,
+        0.0341,
+        0.0802
+      ]
+    },
+    "connector_bottom": {
+      "step_label": "Shapes/Component1",
+      "type": "solid",
+      "material": "copper",
+      "overrides": {
+        "rho": 8940,
+        "kappa": 390
+      },
+      "T_init_C": 20.0,
+      "solids": [
+        7
+      ],
+      "volume_m3": 3.855e-06,
+      "centroid_m": [
+        0.0225,
+        0.0191,
+        -0.035271
+      ],
+      "bbox_m": [
+        0.0185,
+        0.0041,
+        -0.0438,
+        0.0265,
+        0.0341,
+        -0.0268
+      ]
+    },
+    "strap_bottom": {
+      "step_label": "Shapes/Component1",
+      "type": "solid",
+      "material": "copper",
+      "overrides": {
+        "rho": 8940,
+        "kappa": 390
+      },
+      "T_init_C": 20.0,
+      "solids": [
+        8
+      ],
+      "volume_m3": 7.774e-06,
+      "centroid_m": [
+        0.034919,
+        0.0191,
+        -0.065464
+      ],
+      "bbox_m": [
+        0.0205,
+        0.0041,
+        -0.0738,
+        0.0535,
+        0.0341,
+        -0.0438
+      ]
+    },
+    "styrofoam_box": {
+      "step_label": "Shapes/Shorter straps/Box:1/Box",
+      "type": "solid",
+      "material": "eps_foam",
+      "overrides": {
+        "rho": 30,
+        "cp": 1300
+      },
+      "T_init_C": 20.0,
+      "solids": [
+        9
+      ],
+      "volume_m3": 0.00693075,
+      "centroid_m": [
+        0.009987,
+        0.0191,
+        0.0032
+      ],
+      "bbox_m": [
+        -0.2055,
+        -0.0659,
+        -0.0818,
+        0.2245,
+        0.1041,
+        0.0882
+      ]
+    }
+  },
+  "interfaces": [
+    {
+      "components": [
+        "interface_plate",
+        "jetson_heatsink"
+      ],
+      "area_m2": 0.002007094,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "jetson_module",
+        "jetson_heatsink"
+      ],
+      "area_m2": 0.001789696,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "styrofoam_box",
+        "radiator_plate_top"
+      ],
+      "area_m2": 0.00156,
+      "n_surfaces": 4
+    },
+    {
+      "components": [
+        "styrofoam_box",
+        "radiator_plate_bottom"
+      ],
+      "area_m2": 0.00156,
+      "n_surfaces": 4
+    },
+    {
+      "components": [
+        "strap_top",
+        "radiator_plate_top"
+      ],
+      "area_m2": 0.00047073,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "strap_bottom",
+        "radiator_plate_bottom"
+      ],
+      "area_m2": 0.00047073,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "interface_plate",
+        "connector_bottom"
+      ],
+      "area_m2": 0.000456221,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "interface_plate",
+        "strap_top"
+      ],
+      "area_m2": 0.000456221,
+      "n_surfaces": 1
+    },
+    {
+      "components": [
+        "connector_bottom",
+        "strap_bottom"
+      ],
+      "area_m2": 0.0001,
+      "n_surfaces": 1
+    }
+  ],
+  "patches": {
+    "jetson_heat_source": {
+      "component": "interface_plate",
+      "select": "xmin",
+      "bc": {
+        "type": "heat_flux",
+        "q_W_m2": 7958.73,
+        "description": "30 W over the remaining TTP contact face on interface_plate xmin (0.003769446 m2, measured post-mesh)"
+      }
+    },
+    "radiator_plate_top_outer": {
+      "component": "radiator_plate_top",
+      "select": "zmax",
+      "bc": {
+        "type": "altitude_environment",
+        "altitude_m": 0,
+        "emissivity": 0.85,
+        "absorbed_flux_W_m2": 0.0,
+        "L_char_m": 0.15,
+        "h_W_m2K": 5.0
+      }
+    },
+    "radiator_plate_top_inner": {
+      "component": "radiator_plate_top",
+      "select": "zmin",
+      "bc": {
+        "type": "adiabatic"
+      }
+    },
+    "radiator_plate_bottom_outer": {
+      "component": "radiator_plate_bottom",
+      "select": "zmin",
+      "bc": {
+        "type": "altitude_environment",
+        "altitude_m": 0,
+        "emissivity": 0.85,
+        "absorbed_flux_W_m2": 0.0,
+        "L_char_m": 0.15,
+        "h_W_m2K": 5.0
+      }
+    },
+    "radiator_plate_bottom_inner": {
+      "component": "radiator_plate_bottom",
+      "select": "zmax",
+      "bc": {
+        "type": "adiabatic"
+      }
+    },
+    "styrofoam_box_outer": {
+      "component": "styrofoam_box",
+      "select": "remaining",
+      "bc": {
+        "type": "adiabatic"
+      }
+    }
+  },
+  "radiation": {
+    "model": "none",
+    "emissivity_default": 0.9
+  },
+  "solver": {
+    "mode": "transient",
+    "end_time_s": 10800,
+    "write_interval_s": 90,
+    "deltaT_s": 2.0,
+    "n_procs": 4,
+    "p_ref_Pa": 101325,
+    "T_init_C": 20,
+    "disable_fpe_trap": false
+  },
+  "thermal_contact_resistances": {
+    "interface_plate_jetson_heatsink": {
+      "components": [
+        "interface_plate",
+        "jetson_heatsink"
+      ],
+      "R_total_K_per_W": 0.1,
+      "area_m2": 0.002007094,
+      "material": "PTM7950 phase-change material",
+      "note": "Jetson die/TTP to Cold Plate contact (doc Sec.7) -- unchanged from prior studies"
+    },
+    "interface_plate_strap_top": {
+      "components": [
+        "interface_plate",
+        "strap_top"
+      ],
+      "R_total_K_per_W": 1.58,
+      "area_m2": 0.000456221,
+      "material": "bolted joint",
+      "note": "Cold Plate to shortened top TTP path (component1_2) -- analogous to the old connector_block bolted joint; this CAD merges connector+strap+bracket into one solid, so both its end joints get the same 1.58 K/W budget."
+    },
+    "strap_top_radiator_plate_top": {
+      "components": [
+        "strap_top",
+        "radiator_plate_top"
+      ],
+      "R_total_K_per_W": 1.58,
+      "area_m2": 0.00047073,
+      "material": "bolted joint",
+      "note": "Shortened top TTP path to top radiator -- analogous to the old copper_strap-to-radiator_bracket bolted joint"
+    },
+    "interface_plate_connector_bottom": {
+      "components": [
+        "interface_plate",
+        "connector_bottom"
+      ],
+      "R_total_K_per_W": 1.58,
+      "area_m2": 0.000456221,
+      "material": "bolted joint",
+      "note": "Cold Plate to bottom-path connector block (component1_3) -- analogous to the old connector_block bolted joint"
+    },
+    "strap_bottom_radiator_plate_bottom": {
+      "components": [
+        "strap_bottom",
+        "radiator_plate_bottom"
+      ],
+      "R_total_K_per_W": 1.58,
+      "area_m2": 0.00047073,
+      "material": "bolted joint",
+      "note": "Bottom TTP strap (component1_4) to bottom radiator -- analogous to the old copper_strap-to-radiator_bracket bolted joint. connector_bottom<->strap_bottom (component1_3<->component1_4) gets no separate TCR entry, matching the old connector_block<->copper_strap junction which was pure conduction with no added resistance."
+    }
+  },
+  "notes": {
+    "shorter_strap_geometry_assumptions": "inputs/balloon-ttp/Shorter straps.step re-layouts the assembly with the two radiator plates stacked above/below the box (Z axis) instead of split left/right (X axis) in the original CAD, and collapses each side's connector_block+copper_strap+radiator_bracket into 1 (top path, 'strap_top') or 2 (bottom path, 'connector_bottom' -> 'strap_bottom') unlabeled solids -- a real CAD-export gap (see step_assembly SKILL.md gotcha on unlabeled parts), not a modelling choice by us. All 3 unlabeled solids are assigned bulk OFHC copper (matching the original copper_strap material) since the sub-parts cannot be geometrically distinguished as aluminum-connector vs copper-strap -- this is a conservative choice (higher conductivity than the aluminum it likely partly represents) and, per the prior transient-0-40km-etp-copper study, strap material was already shown thermally negligible next to the bolted-joint TCRs, which are carried forward unchanged (1.58 K/W per bolted joint, 0.1 K/W PTM7950 at the die)."
+  }
+}

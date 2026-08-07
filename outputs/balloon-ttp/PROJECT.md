@@ -26,8 +26,12 @@ progress across increasing altitude/duration envelopes.
 | `styrofoam_box` | Insulated enclosure | `eps_foam` |
 
 CAD source: [inputs/balloon-ttp/](../../inputs/balloon-ttp/) — `assembly.step` (original,
-un-spaced radiators) and `spaced out rad+box.step` / `Spaced out radiators.step`
-(radiators moved apart, later geometry revision). See `inputs/README.md`'s table.
+un-spaced radiators), `spaced out rad+box.step` / `Spaced out radiators.step`
+(radiators moved apart, later geometry revision), and `Shorter straps.step` (a
+further revision: much shorter TTP path, radiators restacked above/below the box
+instead of split left/right — see the `transient-shorter-strap-40km-3hr` row below
+for its own component table, since the CAD's part labels/layout differ enough from
+the table above that reusing it would be misleading). See `inputs/README.md`'s table.
 
 Thermal contact resistances (bolted joints + PTM7950 phase-change interface at the
 die) are solved via `thicknessLayers`/`kappaLayers` on the coupled interfaces — see any
@@ -45,6 +49,7 @@ study's `assembly/manifest.json` → `thermal_contact_resistances`.
 | `transient-0-40km-etp-copper` | Transient CHT, `chtMultiRegionFoam` | Identical to `transient-0-40km` — same geometry/mesh/BCs/loads — with the twin straps re-materialed to **Cu-ETP/C11000** (κ 386, new `copper_etp` library entry) instead of OFHC copper (κ 390) | Completed (`final_time: 9600.0`, 600 steps) — see `report/report.md`. Result: `jetson_module` 71.334 °C / `interface_plate` 72.115 °C — **+0.06 K vs the OFHC baseline**, i.e. the strap material choice is thermally negligible for this hardware (the bolted-joint TCRs, 1.58 K/W each, dominate the die-to-radiator path over the strap's own conduction resistance). Radiators unchanged to 3 s.f. |
 | `transient-0-40km-dwell-60min` | Transient CHT, `chtMultiRegionFoam` | Continuation of `transient-0-40km` (OFHC straps): 60 min held at fixed 40 000 m from the ascent's solved t=9600s state, `end_time_s` 13200 | Completed (`final_time: 13200.0`, 600 steps) — see `report/report.md`. Result: `jetson_module` 78.152 °C / `interface_plate` 78.894 °C at t=13200s, ≈26.34 W rejected vs 30.1 W injected (shortfall shrinking vs the ascent's ~6 W — approaching but not reaching quasi-steady state) |
 | `transient-0-40km-dwell-60min-etp-copper` | Transient CHT, `chtMultiRegionFoam` | Continuation of `transient-0-40km-etp-copper` (Cu-ETP straps): identical dwell profile to the OFHC dwell study above | Completed (`final_time: 13200.0`, 600 steps) — see `report/report.md`. Result: `jetson_module` 78.183 °C / `interface_plate` 78.925 °C — **+0.031 K vs the OFHC dwell baseline, smaller than the +0.06 K delta at the ascent's own endpoint** — the material gap shrinks, not grows, over an extended hold. Restart continuity from the ETP ascent verified to 0.045 K |
+| `transient-shorter-strap-40km-3hr` | Transient CHT, `chtMultiRegionFoam` | **New geometry** (`Shorter straps.step`, radiators restacked above/below the box, much shorter TTP path) carried through a **single continuous 3-hour mission**: 0→40 km ascent (2 h, constant assumed 5.5556 m/s) directly followed by a 60-min dwell at 40 km, 30 W load, 12×900 s segments. **Two BC changes from every other study in this project:** ambient T below 30 km comes from a digitized real sounding (Kolkata, 12:00 UTC, 19 May 2026, `atmosphere.kolkata_12z_19may_T`/`ambient_T_blended`) instead of US76 from ground level, spliced to US76 at 30 km; and each radiator radiates from its **outer face only** (`..._outer` altitude_environment, `..._inner` adiabatic) — every prior study radiated the whole non-coupled surface | Completed (`final_time: 10800.0`, 12×450 steps) — see `report/report.md`. Result: `interface_plate` 135.5 °C / `jetson_module` 134.0 °C at t=10800s — **much hotter than any prior study** (e.g. 78 °C for the old whole-surface-radiating dwell), because outer-only radiation roughly halves each radiator's effective area at the same load; T⁴ scaling forces the whole TTP path hotter to reject ~30 W through half the area. 28.07 W rejected vs 30.11 W injected (93%, closer to balance than prior studies but still not steady — ~1 K/900s residual rise at mission end). **134 °C exceeds typical Jetson-class module limits — flagged as a design concern, not just reported.** The 3 unlabeled shortened-TTP-path solids (`strap_top`, `connector_bottom`, `strap_bottom`) are modelled as bulk OFHC copper — a real CAD-export gap (this CAD's own sub-parts carry no distinguishing label), not a modelling choice; see the manifest's `notes` key |
 
 Full step-by-step reproduction procedures (including the exact CLI commands, BC
 staging, and verification gates for each transient study) live in
@@ -57,10 +62,11 @@ agent but equally usable manually:
 - [OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN.md](../../ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN.md) — 60 min dwell at 40 km
 - [OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md](../../ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK_0_40KM_ETP_COPPER.md) — 0→40 km, Cu-ETP straps
 - [OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN_ETP_COPPER.md](../../ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK_DWELL_40KM_60MIN_ETP_COPPER.md) — 60 min dwell at 40 km, Cu-ETP straps
+- [OLLAMA_QWEN_TRANSIENT_RUNBOOK_SHORTER_STRAP_3HR.md](../../ollama/runbooks/OLLAMA_QWEN_TRANSIENT_RUNBOOK_SHORTER_STRAP_3HR.md) — shorter-strap geometry, continuous 3 h mission (0→40 km + 60-min dwell), Kolkata sounding, outer-face-only radiation. **`cfd-qwen` could not complete this one unattended** — see L016/L017 below
 
 `ollama/run_agent.ps1 -AutoApprove` drives a runbook unattended (no `Read-Host`
 approval loop) with `cfd-qwen`; see the tool's own `-?`/header comment. **Known
-limitations** (see `agent-data/lessons.md` for the full writeups, L012–L016):
+limitations** (see `agent-data/lessons.md` for the full writeups, L012–L017):
 `cfd-qwen` (qwen2.5-coder:7b) reliably drives simple deterministic sequences (env
 checks, file copies, material/solver assignment) but has repeatedly shown it cannot be
 trusted to run a multi-step Part C fully unattended without a human/Claude reviewing
@@ -87,24 +93,49 @@ the transcript before results are reported:
    solve compounded the error. No general fix implemented yet; continue reviewing
    `run_summary.json`/`n_steps` against each runbook's stated gate before trusting an
    unattended run's downstream results.
+5. **`transient-shorter-strap-40km-3hr` (L016):** conflated the C3 smoke test
+   (`--end-time 10`) with the real segment-1 solve (`--end-time 900`) — ran the
+   smoke test, then KPIs, then pruned, then jumped straight to staging segment 2,
+   never issuing the actual segment-1 command. The 4-repeat loop-guard caught it
+   stuck retrying the segment-2 staging call and stopped cleanly after 11 turns with
+   the case undamaged (the smoke window never reached `writeInterval`, so nothing
+   past `case/0` had been written) — but this is the same class of "skipped a
+   required step, didn't self-verify" failure as #4 above, now specifically at the
+   smoke-test/production-segment boundary. Claude drove the remaining 12-segment
+   solve directly rather than retry unattended. **Mitigation for the next runbook
+   this happens on:** make the smoke-test and first-production-segment commands
+   visually and numerically distinct in Part C (different end-time AND an explicit
+   "this is NOT segment 1" note on the smoke-test step), since `cfd-qwen` appears to
+   pattern-match on command shape more than on the runbook's own step labels.
 
 Shared helper scripts referenced by those runbooks (repo root, reused unmodified
 across studies): `stage_transient_bcs.py` (altitude-indexed BC restaging between
-segments), `transient_history.py` (CSV/PNG assembly across restart segments).
+segments — now also takes `--ambient-profile {us76,kolkata_12z_19may}`, default
+`us76` so every existing runbook is unaffected), `transient_history.py` (CSV/PNG
+assembly across restart segments), `plot_T_vs_time_and_altitude.py` (new: two-panel
+per-component temperature figure, vs. time and vs. altitude side by side, for a
+study with a known constant-rate-ascent-then-dwell profile).
 
 ## Assumptions carried across every transient study
 
 - **Ascent rate is assumed, not measured** — no flight profile document was supplied
   for this project. Each transient runbook picks a constant vertical rate (e.g.
-  4.1667 m/s for the 0→40 km study) chosen to land segment boundaries on clean
-  altitude/time splits. Re-stage against a real flight profile if one becomes
-  available.
+  4.1667 m/s for the 0→40 km study, 5.5556 m/s for the shorter-strap 3-hour mission)
+  chosen to land segment boundaries on clean altitude/time splits. Re-stage against a
+  real flight profile if one becomes available.
 - **Enclosure is modelled adiabatic** — conservative, forces 100% of the electrical
   load through the strap/radiator path rather than leaking through the foam.
 - **`altitude_environment` (US76 sky-sink) BC is used from ground level** even though
   it is only exact above ~20 km (below that, neglecting atmospheric IR undercounts the
-  sky sink term — conservative, not exact).
+  sky sink term — conservative, not exact). `transient-shorter-strap-40km-3hr` uses a
+  digitized real sounding instead of US76 below 30 km (see `atmosphere.py`
+  `ambient_T_blended`) — only the ambient/sink *temperature* is swapped, pressure/
+  density/transport properties driving the natural-convection film still come from
+  US76 (no pressure data was digitized from the source image).
 - Mesh independence has not been performed for any transient study in this project.
+- **Segment length must divide the manifest's `write_interval_s` evenly** (L017,
+  see gotchas below) — not previously stated because every prior study's segment
+  length (1200 s, 300 s) happened to divide the inherited default (120 s) cleanly.
 
 ## Known gotchas (see `agent-data/lessons.md` for the full harness-level writeups)
 
@@ -116,3 +147,20 @@ segments), `transient_history.py` (CSV/PNG assembly across restart segments).
 - Re-running `inspect_step.py` on an already-worked study reverts hand-applied
   component renames back to `part_N` — copy a sibling study's `assembly/manifest.json`
   instead of re-inspecting when reusing the same CAD.
+- **(L017) `write_interval_s` must divide the segment length evenly, or a segment
+  boundary silently gets only a partial field write.** `chtMultiRegionFoam`'s
+  postProcessing function objects (`wallHeatFlux`, `fieldMinMax`) have their own
+  `writeControl timeStep; writeInterval 10;` (10 timesteps = 20 s at `deltaT_s: 2.0`)
+  independent of the top-level `writeInterval`/`writeControl adjustable` — so a time
+  directory gets written every 20 s regardless, but only the ones landing on the
+  *top-level* `write_interval_s` get the full field set (`T`, `p`, ...); every other
+  20 s directory has only `wallHeatFlux`. If a segment's end time isn't a multiple of
+  `write_interval_s`, its own end-time directory is one of the partial ones — no `T`
+  field, so `stage_transient_bcs.py`/the next segment's restart fails with
+  `Missing field file`. Every prior study's segment length (1200 s, 300 s) happened to
+  divide the inherited default (120 s) cleanly, so this never surfaced until
+  `transient-shorter-strap-40km-3hr`'s 900 s segments (900/120 = 7.5). Fixed by
+  setting `write_interval_s: 90` (900/90 = 10) for that study. **Before picking a
+  segment length for a new transient study, either choose one that divides the
+  existing 120 s default, or set `write_interval_s` explicitly to a divisor of the
+  chosen segment length.**

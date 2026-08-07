@@ -1,0 +1,78 @@
+{
+  "study": "balloon-ttp/transient-shorter-strap-40km-3hr",
+  "streams": {},
+  "regions": {
+    "interface_plate": {
+      "T_min_C": 129.979,
+      "T_max_C": 135.536
+    },
+    "jetson_heatsink": {
+      "T_min_C": 133.523,
+      "T_max_C": 134.078
+    },
+    "radiator_plate_top": {
+      "T_min_C": 44.288,
+      "T_max_C": 71.192
+    },
+    "radiator_plate_bottom": {
+      "T_min_C": 44.335,
+      "T_max_C": 71.109
+    },
+    "jetson_module": {
+      "T_min_C": 110.865,
+      "T_max_C": 134.029
+    },
+    "strap_top": {
+      "T_min_C": 91.683,
+      "T_max_C": 109.081
+    },
+    "connector_bottom": {
+      "T_min_C": 106.701,
+      "T_max_C": 108.777
+    },
+    "strap_bottom": {
+      "T_min_C": 91.551,
+      "T_max_C": 106.947
+    },
+    "styrofoam_box": {
+      "T_min_C": 23.567,
+      "T_max_C": 63.645
+    }
+  },
+  "interfaces_W": {
+    "interface_plate:interface_plate_to_strap_top": -14.42,
+    "interface_plate:interface_plate_to_connector_bottom": -14.46,
+    "interface_plate:interface_plate_to_jetson_heatsink": -1.12,
+    "jetson_heatsink:jetson_heatsink_to_interface_plate": 1.09,
+    "jetson_heatsink:jetson_heatsink_to_jetson_module": -1.06,
+    "radiator_plate_top:radiator_plate_top_to_strap_top": 14.37,
+    "radiator_plate_top:radiator_plate_top_to_styrofoam_box": -0.21,
+    "radiator_plate_bottom:radiator_plate_bottom_to_strap_bottom": 14.37,
+    "radiator_plate_bottom:radiator_plate_bottom_to_styrofoam_box": -0.22,
+    "jetson_module:jetson_module_to_jetson_heatsink": 1.05,
+    "strap_top:strap_top_to_interface_plate": 14.42,
+    "strap_top:strap_top_to_radiator_plate_top": -14.37,
+    "connector_bottom:connector_bottom_to_interface_plate": 14.46,
+    "connector_bottom:connector_bottom_to_strap_bottom": -14.44,
+    "strap_bottom:strap_bottom_to_radiator_plate_bottom": -14.37,
+    "strap_bottom:strap_bottom_to_connector_bottom": 14.4,
+    "styrofoam_box:styrofoam_box_to_radiator_plate_bottom": 0.22,
+    "styrofoam_box:styrofoam_box_to_radiator_plate_top": 0.21
+  },
+  "external_W": {
+    "interface_plate:interface_plate_wall": 0.0,
+    "interface_plate:jetson_heat_source": 30.11,
+    "jetson_heatsink:jetson_heatsink_wall": 0.0,
+    "radiator_plate_top:radiator_plate_top_wall": 0.0,
+    "radiator_plate_top:radiator_plate_top_outer": -14.04,
+    "radiator_plate_top:radiator_plate_top_inner": 0.0,
+    "radiator_plate_bottom:radiator_plate_bottom_wall": 0.0,
+    "radiator_plate_bottom:radiator_plate_bottom_inner": 0.0,
+    "radiator_plate_bottom:radiator_plate_bottom_outer": -14.03,
+    "jetson_module:jetson_module_wall": 0.0,
+    "strap_top:strap_top_wall": 0.0,
+    "connector_bottom:connector_bottom_wall": 0.0,
+    "strap_bottom:strap_bottom_wall": 0.0,
+    "styrofoam_box:styrofoam_box_outer": 0.0
+  }
+}

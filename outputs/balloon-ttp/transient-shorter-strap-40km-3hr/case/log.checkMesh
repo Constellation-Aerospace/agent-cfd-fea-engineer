@@ -1,0 +1,121 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b8cf4d35-20260127 OPENFOAM=2412 patch=260127 version=2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : checkMesh
+Date   : Aug 07 2026
+Time   : 09:57:38
+Host   : FracktalCore
+PID    : 1406
+I/O    : uncollated
+Case   : /mnt/d/Constellation/Github/agent-cfd-fea-engineer/outputs/balloon-ttp/transient-shorter-strap-40km-3hr/case
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+--> FOAM Warning : 
+    From static Foam::instantList Foam::timeSelector::select0(Foam::Time&, const Foam::argList&)
+    in file db/Time/timeSelector.C at line 284
+    No time specified or available, selecting 'constant'
+Create mesh for time = constant
+
+Check mesh...
+
+Time = constant
+
+Mesh stats 
+    points:           31540
+    faces:            258388
+    internal faces:   210220
+    cells:            117152
+    faces per cell:   4
+    boundary patches: 14
+    point zones:      0
+    face zones:       0
+    cell zones:       9
+
+Overall number of cells of each type:
+    hexahedra:     0
+    prisms:        0
+    wedges:        0
+    pyramids:      0
+    tet wedges:    0
+    tetrahedra:    117152
+    polyhedra:     0
+
+Checking topology...
+    Boundary definition OK.
+    Cell to face addressing OK.
+    Point usage OK.
+    Upper triangular ordering OK.
+    Face vertices OK.
+    Number of regions: 1 (OK).
+
+Checking patch topology for multiply connected surfaces...
+    Patch               Faces    Points     Surface topology
+    interface_plate_wall5146     2728     ok (non-closed singly connected)  
+    jetson_heat_source  702      423      ok (non-closed singly connected)  
+    jetson_heatsink_wall1491     867      ok (non-closed singly connected)  
+    radiator_plate_top_wall626      445      ok (non-closed singly connected)  
+    radiator_plate_top_outer6164     3178     ok (non-closed singly connected)  
+    radiator_plate_top_inner4574     2377     ok (non-closed singly connected)  
+    radiator_plate_bottom_wall622      443      ok (non-closed singly connected)  
+    radiator_plate_bottom_inner4648     2414     ok (non-closed singly connected)  
+    radiator_plate_bottom_outer6050     3121     ok (non-closed singly connected)  
+    jetson_module_wall  815      482      ok (non-closed singly connected)  
+    strap_top_wall      2247     1168     ok (non-closed singly connected)  
+    connector_bottom_wall645      353      ok (non-closed singly connected)  
+    strap_bottom_wall   1610     826      ok (non-closed singly connected)  
+    styrofoam_box_outer 12828    6578     ok (non-closed singly connected)  
+    ".*"                48168    24028    ok (closed singly connected)      
+
+
+Checking faceZone topology for multiply connected surfaces...
+    No faceZones found.
+
+Checking basic cellZone addressing...
+    CellZone            Cells        Points       Volume       BoundingBox
+    interface_plate     17115        4830         2.894808e-05 (0.0135 -0.0159 -0.0438) (0.0185 0.0541 0.0502)
+    jetson_heatsink     11074        2990         9.444697e-06 (0.0085 -0.0004 -0.0247) (0.0135 0.0386 0.0291)
+    radiator_plate_top  16681        5794         5.367171e-05 (-0.1455 -0.0259 0.0802) (0.1545 0.0641 0.0822)
+    radiator_plate_bottom 16651        5775         5.367175e-05 (-0.1455 -0.0259 -0.0758) (0.1545 0.0641 -0.0738)
+    jetson_module       7287         1890         0.000140085  (-0.0198 -0.0084 -0.0428) (0.0085 0.0466 0.0472)
+    strap_top           4957         1519         1.164418e-05 (0.0185 0.0041 0.0332) (0.0535 0.0341 0.0802)
+    connector_bottom    1513         500          3.862839e-06 (0.0185 0.0041 -0.0438) (0.0265 0.0341 -0.0268)
+    strap_bottom        3390         1024         7.781328e-06 (0.0205 0.0041 -0.0738) (0.0535 0.0341 -0.0438)
+    styrofoam_box       38484        9662         0.00693075   (-0.2055 -0.06590035 -0.0818) (0.2245 0.1040996 0.0882)
+
+Checking basic pointZone addressing...
+    No pointZones found.
+
+Checking geometry...
+    Overall domain bounding box (-0.2055 -0.06590035 -0.0818) (0.2245 0.1040996 0.0882)
+    Mesh has 3 geometric (non-empty/wedge) directions (1 1 1)
+    Mesh has 3 solution (non-empty) directions (1 1 1)
+    Boundary openness (-4.958494e-17 -3.371866e-17 1.256522e-16) OK.
+    Max cell openness = 2.287531e-15 OK.
+    Max aspect ratio = 26.32757 OK.
+    Minimum face area = 7.061639e-10. Maximum face area = 0.0001727356.  Face area magnitudes OK.
+    Min volume = 9.8044e-14. Max volume = 6.799849e-07.  Total volume = 0.00723986.  Cell volumes OK.
+    Mesh non-orthogonality Max: 84.46198 average: 25.96913
+   *Number of severely non-orthogonal (> 70 degrees) faces: 151.
+    Non-orthogonality check OK.
+  <<Writing 151 non-orthogonal faces to set nonOrthoFaces
+    Face pyramids OK.
+ ***Max skewness = 8.485458, 1 highly skew faces detected which may impair the quality of the results
+  <<Writing 1 skew faces to set skewFaces
+    Coupled point location match (average 0) OK.
+
+Failed 1 mesh checks.
+
+End
+

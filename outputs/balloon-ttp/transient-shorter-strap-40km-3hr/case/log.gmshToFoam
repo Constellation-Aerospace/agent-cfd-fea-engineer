@@ -1,0 +1,150 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : _b8cf4d35-20260127 OPENFOAM=2412 patch=260127 version=2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : gmshToFoam ../mesh/assembly.msh
+Date   : Aug 07 2026
+Time   : 09:57:36
+Host   : FracktalCore
+PID    : 896
+I/O    : uncollated
+Case   : /mnt/d/Constellation/Github/agent-cfd-fea-engineer/outputs/balloon-ttp/transient-shorter-strap-40km-3hr/case
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Starting to read mesh format at line 2
+Read format version 2.2  ascii 0
+
+Starting to read physical names at line 5
+Physical names:23
+    Surface 10	jetson_heat_source
+    Surface 11	radiator_plate_top_outer
+    Surface 12	radiator_plate_top_inner
+    Surface 13	radiator_plate_bottom_outer
+    Surface 14	radiator_plate_bottom_inner
+    Surface 15	interface_plate_wall
+    Surface 16	jetson_heatsink_wall
+    Surface 17	radiator_plate_top_wall
+    Surface 18	radiator_plate_bottom_wall
+    Surface 19	jetson_module_wall
+    Surface 20	strap_top_wall
+    Surface 21	connector_bottom_wall
+    Surface 22	strap_bottom_wall
+    Surface 23	styrofoam_box_outer
+    Volume 1	interface_plate
+    Volume 2	jetson_heatsink
+    Volume 3	radiator_plate_top
+    Volume 4	radiator_plate_bottom
+    Volume 5	jetson_module
+    Volume 6	strap_top
+    Volume 7	connector_bottom
+    Volume 8	strap_bottom
+    Volume 9	styrofoam_box
+
+Starting to read points at line 31
+Vertices to be read: 31540
+Vertices read:31540
+
+Starting to read cells at line 31574
+Cells to be read: 165320
+
+Mapping region 15 to Foam patch 0
+Mapping region 10 to Foam patch 1
+Mapping region 16 to Foam patch 2
+Mapping region 17 to Foam patch 3
+Mapping region 11 to Foam patch 4
+Mapping region 12 to Foam patch 5
+Mapping region 18 to Foam patch 6
+Mapping region 14 to Foam patch 7
+Mapping region 13 to Foam patch 8
+Mapping region 19 to Foam patch 9
+Mapping region 20 to Foam patch 10
+Mapping region 21 to Foam patch 11
+Mapping region 22 to Foam patch 12
+Mapping region 23 to Foam patch 13
+Mapping region 1 to Foam cellZone 0
+Mapping region 2 to Foam cellZone 1
+Mapping region 3 to Foam cellZone 2
+Mapping region 4 to Foam cellZone 3
+Mapping region 5 to Foam cellZone 4
+Mapping region 6 to Foam cellZone 5
+Mapping region 7 to Foam cellZone 6
+Mapping region 8 to Foam cellZone 7
+Mapping region 9 to Foam cellZone 8
+Cells:
+    total:117152
+    hex  :0
+    prism:0
+    pyr  :0
+    tet  :117152
+
+CellZones:
+Zone	Size
+    0	17115
+    1	11074
+    2	16681
+    3	16651
+    4	7287
+    5	4957
+    6	1513
+    7	3390
+    8	38484
+
+Patch 0 gets name interface_plate_wall
+Patch 1 gets name jetson_heat_source
+Patch 2 gets name jetson_heatsink_wall
+Patch 3 gets name radiator_plate_top_wall
+Patch 4 gets name radiator_plate_top_outer
+Patch 5 gets name radiator_plate_top_inner
+Patch 6 gets name radiator_plate_bottom_wall
+Patch 7 gets name radiator_plate_bottom_inner
+Patch 8 gets name radiator_plate_bottom_outer
+Patch 9 gets name jetson_module_wall
+Patch 10 gets name strap_top_wall
+Patch 11 gets name connector_bottom_wall
+Patch 12 gets name strap_bottom_wall
+Patch 13 gets name styrofoam_box_outer
+
+--> FOAM Warning : 
+    From Foam::polyMesh::polyMesh(const Foam::IOobject&, Foam::pointField&&, const Foam::cellShapeList&, const Foam::faceListList&, const Foam::wordList&, const Foam::wordList&, const Foam::word&, const Foam::word&, const Foam::wordList&, bool)
+    in file meshes/polyMesh/polyMeshFromShapeMesh.C at line 640
+    Found 48168 undefined faces in mesh; adding to default patch defaultFaces
+Finding faces of patch 0
+Finding faces of patch 1
+Finding faces of patch 2
+Finding faces of patch 3
+Finding faces of patch 4
+Finding faces of patch 5
+Finding faces of patch 6
+Finding faces of patch 7
+Finding faces of patch 8
+Finding faces of patch 9
+Finding faces of patch 10
+Finding faces of patch 11
+Finding faces of patch 12
+Finding faces of patch 13
+
+FaceZones:
+Zone	Size
+
+Writing zone 0 to cellZone interface_plate and cellSet
+Writing zone 1 to cellZone jetson_heatsink and cellSet
+Writing zone 2 to cellZone radiator_plate_top and cellSet
+Writing zone 3 to cellZone radiator_plate_bottom and cellSet
+Writing zone 4 to cellZone jetson_module and cellSet
+Writing zone 5 to cellZone strap_top and cellSet
+Writing zone 6 to cellZone connector_bottom and cellSet
+Writing zone 7 to cellZone strap_bottom and cellSet
+Writing zone 8 to cellZone styrofoam_box and cellSet
+End
+

@@ -32,7 +32,12 @@ sys.path.insert(0, str(REPO_ROOT / ".tmp" / "scripts"))
 
 from atmosphere import (atmosphere, sky_sink_temperature,  # noqa: E402
                         equivalent_sink_temperature, natural_convection_h,
-                        combined_film)
+                        combined_film, ambient_T_blended)
+
+AMBIENT_PROFILES = {
+    "us76": None,  # atmosphere()'s own T_K, unchanged default behaviour
+    "kolkata_12z_19may": ambient_T_blended,
+}
 
 
 def latest_time_dir(case: Path) -> Path:
@@ -100,6 +105,12 @@ def main() -> int:
                          "surface temperature read back from the field file")
     ap.add_argument("--time", default=None,
                     help="Time directory to patch (default: latest)")
+    ap.add_argument("--ambient-profile", choices=sorted(AMBIENT_PROFILES), default="us76",
+                    help="Source for the ambient air temperature driving the film: "
+                         "'us76' (default, unchanged) or 'kolkata_12z_19may' (digitized "
+                         "12:00 UTC 19-May-2026 Kolkata sounding below 30 km, US76 at/"
+                         "above it -- see atmosphere.ambient_T_blended). Only T_air_K is "
+                         "swapped; p_Pa/rho/transport properties still come from US76.")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -111,9 +122,12 @@ def main() -> int:
         raise SystemExit(f"Time directory not found: {tdir}")
 
     air = atmosphere(args.altitude)
+    blend_fn = AMBIENT_PROFILES[args.ambient_profile]
+    T_air_K = blend_fn(args.altitude) if blend_fn else air["T_K"]
     t_sky_base = sky_sink_temperature(args.altitude)
     report = {"study": args.study, "time_dir": tdir.name, "altitude_m": args.altitude,
-              "T_air_K": round(air["T_K"], 2), "p_Pa": round(air["p_Pa"], 1),
+              "ambient_profile": args.ambient_profile,
+              "T_air_K": round(T_air_K, 2), "p_Pa": round(air["p_Pa"], 1),
               "patches": {}}
 
     targets = [(n, p) for n, p in manifest.get("patches", {}).items()
@@ -144,11 +158,11 @@ def main() -> int:
         t_ref = (args.t_surface_est_C + 273.15 if args.t_surface_est_C is not None
                  else surface_T_from_block(body))
         if t_ref is None:
-            t_ref = air["T_K"] + 20.0
+            t_ref = T_air_K + 20.0
         h_conv = args.h if args.h is not None else natural_convection_h(
-            args.altitude, L, max(abs(t_ref - air["T_K"]), 1.0))
+            args.altitude, L, max(abs(t_ref - T_air_K), 1.0))
         t_sink = equivalent_sink_temperature(eps, q_abs, t_sky_base)
-        film = combined_film(h_conv, air["T_K"], eps, t_sink, t_ref)
+        film = combined_film(h_conv, T_air_K, eps, t_sink, t_ref)
 
         body, ok_ta = set_entry(body, "Ta", f"uniform {film['Ta_K']:.2f}")
         body, ok_h = set_entry(body, "h", f"uniform {film['h_W_m2K']:.4g}")

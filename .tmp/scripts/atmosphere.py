@@ -132,3 +132,68 @@ def combined_film(h_conv_W_m2K: float, T_air_K: float, emissivity: float,
     ta = ((h_conv_W_m2K * T_air_K + h_rad * T_sink_K) / h_tot) if h_tot > 0 else T_air_K
     return {"h_W_m2K": h_tot, "h_conv_W_m2K": h_conv_W_m2K, "h_rad_W_m2K": h_rad,
             "Ta_K": ta, "T_ref_K": T_ref_K}
+
+
+# ---------------------------------------------------------------------------
+# Site-measured ambient temperature profile: Kolkata radiosonde, 12:00 UTC,
+# 19 May 2026 ("19 May" curve), digitized from
+# inputs/Graphs and other inputs/Temp profile 0-30km.jpeg (pixel-calibrated
+# against the plot's axis gridlines, 0.5 km altitude bins, 0-31 km). Used in
+# place of the US76 temperature for altitudes <= 30 km on balloon-ttp transient
+# studies that request it; US76 (`atmosphere()`) continues unchanged above
+# 30 km per the standard-atmosphere splice the study asked for. Pressure/
+# density/transport properties are NOT overridden by this table (no pressure
+# data was digitized from the image) -- only the ambient temperature used to
+# drive the radiative/convective film at the balloon's location and date.
+KOLKATA_12Z_19MAY_PROFILE_KM_C = [
+    (0.0, 27.77), (0.5, 27.77), (1.0, 25.5), (1.5, 22.05), (2.0, 19.39),
+    (2.5, 16.9), (3.0, 14.32), (3.5, 11.54), (4.0, 8.48), (4.5, 5.39),
+    (5.0, 2.32), (5.5, -0.76), (6.0, -3.67), (6.5, -6.1), (7.0, -8.39),
+    (7.5, -10.97), (8.0, -14.21), (8.5, -17.85), (9.0, -21.57), (9.5, -25.34),
+    (10.0, -29.01), (10.5, -32.63), (11.0, -36.34), (11.5, -40.56),
+    (12.0, -44.72), (12.5, -49.2), (13.0, -53.02), (13.5, -56.82),
+    (14.0, -60.72), (14.5, -64.46), (15.0, -67.8), (15.5, -71.13),
+    (16.0, -74.5), (16.5, -77.87), (17.0, -79.09), (17.5, -78.15),
+    (18.0, -77.2), (18.5, -76.28), (19.0, -73.98), (19.5, -70.43),
+    (20.0, -66.76), (20.5, -63.31), (21.0, -61.34), (21.5, -60.95),
+    (22.0, -60.55), (22.5, -60.26), (23.0, -59.96), (23.5, -59.56),
+    (24.0, -59.14), (24.5, -56.86), (25.0, -54.84), (25.5, -52.69),
+    (26.0, -50.6), (26.5, -48.22), (27.0, -48.05), (27.5, -47.89),
+    (28.0, -47.64), (28.5, -47.5), (29.0, -47.3), (29.5, -47.1),
+    (30.0, -46.9), (30.5, -46.71), (31.0, -46.51),
+]
+
+
+def kolkata_12z_19may_T(altitude_m: float) -> float:
+    """Digitized Kolkata 12:00 UTC, 19 May 2026 sounding temperature [K] at
+    `altitude_m`, linearly interpolated between the 0.5 km table rows above,
+    clamped to the table's 0-31 km span (flat extrapolation beyond either
+    end)."""
+    alt_km = altitude_m / 1000.0
+    xs = [p[0] for p in KOLKATA_12Z_19MAY_PROFILE_KM_C]
+    ys = [p[1] for p in KOLKATA_12Z_19MAY_PROFILE_KM_C]
+    if alt_km <= xs[0]:
+        return ys[0] + 273.15
+    if alt_km >= xs[-1]:
+        return ys[-1] + 273.15
+    for i in range(1, len(xs)):
+        if alt_km <= xs[i]:
+            x0, x1 = xs[i - 1], xs[i]
+            y0, y1 = ys[i - 1], ys[i]
+            t = (alt_km - x0) / (x1 - x0)
+            return (y0 + t * (y1 - y0)) + 273.15
+    return ys[-1] + 273.15  # pragma: no cover -- unreachable, xs is sorted+bounded
+
+
+def ambient_T_blended(altitude_m: float, splice_altitude_m: float = 30000.0,
+                      profile=kolkata_12z_19may_T) -> float:
+    """Ambient temperature [K] at `altitude_m`: `profile` (default: the Kolkata
+    12z/19-May sounding) below `splice_altitude_m`, US76 (`atmosphere()`)
+    at/above it -- the blend this project's transient studies use when a
+    measured low-altitude sounding is available but the flight goes higher
+    than the sounding covers. At the 30 km splice the two sources already
+    agree to ~0.3 K for the Kolkata profile (US76 226.51 K vs sounding 226.25
+    K), so the switch introduces no visible discontinuity in Ta."""
+    if altitude_m < splice_altitude_m:
+        return profile(altitude_m)
+    return atmosphere(altitude_m)["T_K"]

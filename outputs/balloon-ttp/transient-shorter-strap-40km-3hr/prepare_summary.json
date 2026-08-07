@@ -1,0 +1,60 @@
+{
+  "study": "balloon-ttp/transient-shorter-strap-40km-3hr",
+  "mesh": {
+    "msh_file": "D:\\Constellation\\Github\\agent-cfd-fea-engineer\\outputs\\balloon-ttp\\transient-shorter-strap-40km-3hr\\mesh\\assembly.msh",
+    "mesh_size_factor": 1.0,
+    "size_max_m": 0.009853,
+    "size_min_m": 0.001232,
+    "n_nodes": 31540,
+    "n_cells_3d": 117152,
+    "components": {
+      "interface_plate": 1,
+      "jetson_heatsink": 1,
+      "radiator_plate_top": 1,
+      "radiator_plate_bottom": 1,
+      "jetson_module": 1,
+      "strap_top": 1,
+      "connector_bottom": 1,
+      "strap_bottom": 1,
+      "styrofoam_box": 1
+    },
+    "patches": {
+      "jetson_heat_source": 0.003769446,
+      "radiator_plate_top_outer": 0.026830354,
+      "radiator_plate_top_inner": 0.026359624,
+      "radiator_plate_bottom_outer": 0.026830354,
+      "radiator_plate_bottom_inner": 0.026359624,
+      "interface_plate_wall": 0.007580905,
+      "jetson_heatsink_wall": 0.001701941,
+      "radiator_plate_top_wall": 0.000301593,
+      "radiator_plate_bottom_wall": 0.000301593,
+      "jetson_module_wall": 0.016317304,
+      "strap_top_wall": 0.004989971,
+      "connector_bottom_wall": 0.001372284,
+      "strap_bottom_wall": 0.003617687,
+      "styrofoam_box_outer": 0.45413
+    },
+    "elapsed_s": 4.0
+  },
+  "checkMesh": {
+    "ok": false,
+    "cells": 117152,
+    "max_non_ortho": 84.46198,
+    "avg_non_ortho": 25.96913,
+    "max_skewness": 8.485458
+  },
+  "fluid_regions": [],
+  "solid_regions": [
+    "connector_bottom",
+    "interface_plate",
+    "jetson_heatsink",
+    "jetson_module",
+    "radiator_plate_bottom",
+    "radiator_plate_top",
+    "strap_bottom",
+    "strap_top",
+    "styrofoam_box"
+  ],
+  "radiation": "none",
+  "case_dir": "D:\\Constellation\\Github\\agent-cfd-fea-engineer\\outputs\\balloon-ttp\\transient-shorter-strap-40km-3hr\\case"
+}

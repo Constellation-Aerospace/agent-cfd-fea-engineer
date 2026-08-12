@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Envisys Tech TVAC Test Plan: Jetson with Copper Straps and Radiator Variants</title>
+    <style>
+        :root {
+            --ink: #16232d;
+            --muted: #6c7780;
+            --marine: #0f4c68;
+            --thermal: #b5501f;
+            --panel: #ffffff;
+            --line: #c7d0d8;
+            --soft: #eef6fb;
+            --paper: #f6f8fa;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 36px 40px 56px;
+            background: #fff;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0 0 12px;
+            line-height: 1.15;
+        }
+
+        h1 {
+            font-size: 29px;
+            color: var(--marine);
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 26px;
+            border-top: 1px solid var(--line);
+            padding-top: 18px;
+        }
+
+        h3 {
+            font-size: 16px;
+            color: var(--thermal);
+            margin-top: 14px;
+        }
+
+        p,
+        li {
+            font-size: 14px;
+            line-height: 1.55;
+        }
+
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px 24px;
+            margin: 16px 0 22px;
+            padding: 14px 16px;
+            background: var(--soft);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+        }
+
+        .meta div {
+            font-size: 13px;
+        }
+
+        .meta strong {
+            display: inline-block;
+            min-width: 120px;
+        }
+
+        .callout {
+            padding: 14px 16px;
+            background: #fff9f2;
+            border-left: 4px solid var(--thermal);
+            border-radius: 10px;
+            margin: 14px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 16px;
+            font-size: 13px;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--line);
+            padding: 9px 10px;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f2f5f8;
+            text-align: left;
+        }
+
+        figure {
+            margin: 18px 0;
+            padding: 12px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        figure img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        figcaption {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .small {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        ol,
+        ul {
+            margin-top: 8px;
+        }
+
+        .footer {
+            margin-top: 28px;
+            font-size: 12px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            padding-top: 14px;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+            }
+
+            .page {
+                box-shadow: none;
+                max-width: none;
+                padding: 0;
+            }
+
+            h2 {
+                break-before: auto;
+            }
+
+            figure {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <h1>Envisys Tech TVAC Test Plan: Jetson with Copper Straps and Radiator Variants</h1>
+        <div class="meta">
+            <div><strong>Project:</strong> balloon-ttp</div>
+            <div><strong>Facility:</strong> Envisys Tech TVAC chamber</div>
+            <div><strong>Deliverable:</strong> technician-facing test plan</div>
+            <div><strong>Test window:</strong> 8 hours total</div>
+            <div><strong>Prepared for:</strong> chamber technician and test lead</div>
+            <div><strong>Source files:</strong> report + SVG figures</div>
+        </div>
+
+        <h2>1. Executive Summary</h2>
+        <p>This document defines a single, repeatable TVAC sequence for screening the latest Jetson payload
+            configuration with copper straps and two radiator options. The goal is to execute four quick thermal tests
+            inside one 8-hour chamber window, using one common chamber profile for all cases so the only meaningful
+            variables are payload power and radiator count.</p>
+        <p>The four required cases are: 30 W with both radiators, 10 W with both radiators, 10 W with a single radiator,
+            and 30 W with a single radiator. The chamber operator reported that it typically takes 30 to 40 minutes to
+            reach about 10 mbar and -30 C, then about another hour to pull down further. That behavior is consistent
+            with a useful screening profile: a controlled pull-down to low pressure and low temperature, followed by a
+            hold long enough to compare thermal response between the four configurations.</p>
+        <div class="callout"><strong>Purpose:</strong> the chamber run is not trying to reproduce the full flight
+            profile to 40 km. It is a controlled comparison exercise to show whether the latest radiator setup keeps the
+            Jetson within an acceptable thermal range and whether the single-radiator configuration is acceptable at
+            both 10 W and 30 W.</div>
+
+        <h2>2. What Needs To Be Achieved</h2>
+        <ul>
+            <li>Determine whether the dual-radiator configuration provides a meaningful thermal benefit over the
+                single-radiator configuration.</li>
+            <li>Verify the 10 W dual-radiator case as the lower-load reference point.</li>
+            <li>Verify the 10 W single-radiator case as the reduced-hardware comparison point.</li>
+            <li>Stress the 30 W single-radiator case as the main risk case.</li>
+            <li>Capture enough chamber and payload data to support a clear hardware decision after the test.</li>
+        </ul>
+
+        <h2>3. Test Article and Cases</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Case</th>
+                    <th>Hardware configuration</th>
+                    <th>Jetson power</th>
+                    <th>Why it matters</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Both radiators installed</td>
+                    <td>30 W</td>
+                    <td>Highest load with the strongest thermal hardware</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Both radiators installed</td>
+                    <td>10 W</td>
+                    <td>Lower load baseline for the full-radiator build</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Single radiator installed</td>
+                    <td>10 W</td>
+                    <td>Lower-stress check of the reduced-radiator build</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Single radiator installed</td>
+                    <td>30 W</td>
+                    <td>Highest-stress and most important risk case</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>The recommended order is Case 1 -&gt; Case 2 -&gt; Case 3 -&gt; Case 4. That sequence verifies the stronger
+            configuration first, then moves to the more severe single-radiator cases later in the 8-hour window.</p>
+
+        <h2>4. Chamber Profile</h2>
+        <p>Use the same profile for all four tests unless the chamber has a validated better equivalent. The operator
+            should log the actual chamber behavior against the requested profile so the results can be compared later.
+        </p>
+
+        <h3>4.0 Client-Supplied Reference Profile</h3>
+        <p>This is the temperature profile supplied in the inputs folder. It is the reference the technician should use
+            when setting up the chamber sequence and explaining what the TVAC run is intended to approximate.</p>
+        <figure>
+            <img src="../diagrams/temp_profile_0_30km.jpeg" alt="Client-supplied temperature profile" />
+            <figcaption>Figure 0. Client-supplied temperature profile from the inputs folder. The chamber run should
+                reproduce the thermal intent of this profile within the available 8-hour window.</figcaption>
+        </figure>
+        <p>The chamber run does not try to reproduce this entire flight profile exactly. Instead, it reproduces the
+            important thermal intent of the supplied profile within the available 8-hour chamber window: a strong
+            pull-down, a low-pressure hold, and enough dwell to compare the hardware configurations.</p>
+
+        <div class="two-col">
+            <figure>
+                <img src="../diagrams/chamber_pressure_profile.svg" alt="Chamber pressure profile" />
+                <figcaption>Figure 1. Pressure target: quick pull-down to about 10 mbar in 30 to 40 minutes, then a
+                    stable hold near that level for the rest of the test.</figcaption>
+            </figure>
+            <figure>
+                <img src="../diagrams/chamber_temperature_profile.svg" alt="Chamber temperature profile" />
+                <figcaption>Figure 2. Temperature target: reach about -30 C during the first pull-down window, then
+                    continue to the coldest stable setpoint available.</figcaption>
+            </figure>
+        </div>
+
+        <p>The chamber temperature should continue downward after the first pull-down if the facility can do so. If the
+            chamber cannot reliably reach -40 C, use the lowest stable temperature available and log the actual achieved
+            value. The key requirement is comparability: each case should see the same chamber environment, so the
+            temperature response differences come from the hardware setup and power level rather than from a different
+            thermal history.</p>
+
+        <h2>5. 8-Hour Execution Timeline</h2>
+        <figure>
+            <img src="../diagrams/test_sequence_timeline.svg" alt="8-hour test sequence timeline" />
+            <figcaption>Figure 3. Planned pacing: one case every two hours, including pull-down, cold soak, and a short
+                changeover review.</figcaption>
+        </figure>
+        <table>
+            <thead>
+                <tr>
+                    <th>Window</th>
+                    <th>Activity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0:00 to 2:00</td>
+                    <td>Case 1: 30 W, both radiators</td>
+                </tr>
+                <tr>
+                    <td>2:00 to 2:10</td>
+                    <td>Changeover and log review</td>
+                </tr>
+                <tr>
+                    <td>2:10 to 4:10</td>
+                    <td>Case 2: 10 W, both radiators</td>
+                </tr>
+                <tr>
+                    <td>4:10 to 4:20</td>
+                    <td>Changeover and log review</td>
+                </tr>
+                <tr>
+                    <td>4:20 to 6:20</td>
+                    <td>Case 3: 10 W, single radiator</td>
+                </tr>
+                <tr>
+                    <td>6:20 to 6:30</td>
+                    <td>Changeover and log review</td>
+                </tr>
+                <tr>
+                    <td>6:30 to 8:00</td>
+                    <td>Case 4: 30 W, single radiator</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>6. Detailed Technician Procedure</h2>
+        <h3>6.1 Before the First Run</h3>
+        <ul>
+            <li>Confirm the payload configuration matches Case 1.</li>
+            <li>Verify the chamber instrumentation is ready and zeroed.</li>
+            <li>Confirm temperature and pressure logging is active.</li>
+            <li>Check that the payload power command can be set to 30 W and 10 W on demand.</li>
+            <li>Confirm the chamber operator is aware that the same profile will be repeated four times.</li>
+        </ul>
+
+        <h3>6.2 During Each Test</h3>
+        <ol>
+            <li>Start from the agreed initial chamber condition.</li>
+            <li>Pull down toward 10 mbar and -30 C over the first 30 to 40 minutes.</li>
+            <li>Continue lowering the chamber temperature to the coldest stable setpoint available.</li>
+            <li>Hold that condition long enough to capture the Jetson thermal response.</li>
+            <li>Record any anomalies, control adjustments, or deviations from the requested profile.</li>
+        </ol>
+
+        <h3>6.3 Between Tests</h3>
+        <ul>
+            <li>Change only what is needed for the next case: Jetson power level or radiator configuration.</li>
+            <li>Record the time required for the changeover.</li>
+            <li>If the chamber profile must be shortened, keep the last 30 W single-radiator case as the priority run.
+            </li>
+        </ul>
+
+        <h2>7. What To Record</h2>
+        <ul>
+            <li>Chamber pressure versus time</li>
+            <li>Chamber temperature versus time</li>
+            <li>Jetson temperature versus time</li>
+            <li>Radiator temperature versus time</li>
+            <li>Payload power level and start time</li>
+            <li>End time for the run</li>
+            <li>Any control notes during pull-down, soak, or changeover</li>
+        </ul>
+        <p class="small">Recommended logging interval: 30 to 60 seconds.</p>
+
+        <h2>8. What Success Looks Like</h2>
+        <p>The test campaign is successful if the technician returns with a clean comparison set for the four cases
+            under one common chamber profile. The result should make it obvious whether the second radiator provides a
+            meaningful thermal benefit, whether the 10 W cases stay comfortably controlled, whether the 30 W
+            single-radiator case is acceptable or clearly risky, and whether the profile and log quality are good enough
+            to support the next hardware decision.</p>
+        <p>At minimum, the final package should allow the engineering team to compare the four cases directly without
+            guessing about chamber history or changeover conditions.</p>
+
+        <h2>9. Files and Figures Used</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>File</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Source plan</td>
+                    <td>envisys-tvac-test-plan-jetson-radiators.md</td>
+                </tr>
+                <tr>
+                    <td>Technician figure sources</td>
+                    <td>diagrams/README.md</td>
+                </tr>
+                <tr>
+                    <td>Client-supplied temperature profile</td>
+                    <td>diagrams/temp_profile_0_30km.jpeg</td>
+                </tr>
+                <tr>
+                    <td>Pressure figure</td>
+                    <td>diagrams/chamber_pressure_profile.svg</td>
+                </tr>
+                <tr>
+                    <td>Temperature figure</td>
+                    <td>diagrams/chamber_temperature_profile.svg</td>
+                </tr>
+                <tr>
+                    <td>Execution timeline figure</td>
+                    <td>diagrams/test_sequence_timeline.svg</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>10. Closing Note</h2>
+        <p>This is a screening plan, not a full flight replication. The chamber run should be treated as a controlled
+            comparison exercise whose purpose is to validate the latest radiator and strap arrangement under consistent
+            low-pressure, low-temperature conditions. The value of the test is in the repeatable comparison across the
+            four cases and in the quality of the recorded profiles.</p>
+
+        <div class="footer">Generated for the balloon-ttp project. The PDF should be produced from this HTML so the
+            embedded figures stay intact.</div>
+    </div>
+</body>
+
+</html>

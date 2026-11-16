@@ -1,0 +1,204 @@
+{
+  "tool": "tools/quick_plate_fea.py (scikit-fem Morley + gmsh)",
+  "solver": "scikit-fem native plate solver (ccx not available on macOS)",
+  "model": {
+    "t_mm": 2.0,
+    "E_MPa": 69000.0,
+    "nu": 0.33,
+    "Fty": 240.0,
+    "Ftu": 290.0,
+    "support": "rigid bed over the shroud footprint, bore free",
+    "load": "D20 washer patch, T = 144 N / ear (12 g envelope)",
+    "support_band_excluded_mm": 3.0
+  },
+  "validation": {
+    "w_tip": 0.34620625174640235,
+    "w_beam": 0.36231884057971014,
+    "sigma_root": 7.927437784406613,
+    "sigma_beam": 7.5,
+    "n_elements": 4646,
+    "ratio_w": 0.9555292548200705,
+    "ratio_s": 1.0569917045875483
+  },
+  "convergence": [
+    {
+      "lc_min": 1.6,
+      "n_elements": 64705,
+      "n_dofs": 131571,
+      "ear_peak": 122.32601524317457,
+      "body_peak": 0.4487155916845845,
+      "w_max": 0.37776727529803095
+    },
+    {
+      "lc_min": 1.1,
+      "n_elements": 74297,
+      "n_dofs": 151011,
+      "ear_peak": 120.92450876140127,
+      "body_peak": 0.26452132813676815,
+      "w_max": 0.37479018469462144
+    },
+    {
+      "lc_min": 0.8,
+      "n_elements": 131038,
+      "n_dofs": 265074,
+      "ear_peak": 118.14219778709132,
+      "body_peak": 0.1927350485053609,
+      "w_max": 0.36690248506797585
+    }
+  ],
+  "base": {
+    "ear_peak": 120.92450876140127,
+    "ear_at": [
+      -125.78947183533694,
+      -129.10690088058575
+    ],
+    "body_peak": 0.26452132813676815,
+    "global_peak": 536.8808659513743,
+    "w_max": 0.37479018469462144,
+    "n_elements": 74297,
+    "n_dofs": 151011,
+    "seconds": 3.15
+  },
+  "variants": {
+    "revB 2.0 mm, R4, R15 ear": {
+      "ear_peak": 120.92450876140127,
+      "body_peak": 0.26452132813676815,
+      "global_peak": 536.8808659513743,
+      "w_max": 0.37479018469462144,
+      "n_elements": 74297,
+      "n_dofs": 151011,
+      "seconds": 3.05,
+      "mass_pair": 373.4
+    },
+    "blend R0": {
+      "ear_peak": 206.82461534047093,
+      "body_peak": 0.19738451897763276,
+      "global_peak": 449.0759649478029,
+      "w_max": 0.43458428825242923,
+      "n_elements": 44643,
+      "n_dofs": 91403,
+      "seconds": 1.52,
+      "mass_pair": 373.0
+    },
+    "blend R2": {
+      "ear_peak": 151.7542157180091,
+      "body_peak": 0.19132273130937205,
+      "global_peak": 697.9889634052519,
+      "w_max": 0.3746867187274537,
+      "n_elements": 78369,
+      "n_dofs": 159279,
+      "seconds": 3.47,
+      "mass_pair": 373.1
+    },
+    "blend R4": {
+      "ear_peak": 120.92450876140127,
+      "body_peak": 0.26452132813676815,
+      "global_peak": 536.8808659513743,
+      "w_max": 0.37479018469462144,
+      "n_elements": 74297,
+      "n_dofs": 151011,
+      "seconds": 3.39,
+      "mass_pair": 373.4
+    },
+    "blend R6": {
+      "ear_peak": 103.91933437207122,
+      "body_peak": 0.3686002954074521,
+      "global_peak": 470.7615913779565,
+      "w_max": 0.36711095810490024,
+      "n_elements": 71003,
+      "n_dofs": 144303,
+      "seconds": 3.53,
+      "mass_pair": 373.8
+    },
+    "blend R8": {
+      "ear_peak": 106.27586261610148,
+      "body_peak": 0.5832842664947863,
+      "global_peak": 397.65535894628744,
+      "w_max": 0.3755351250069213,
+      "n_elements": 69421,
+      "n_dofs": 141055,
+      "seconds": 3.3,
+      "mass_pair": 374.2
+    },
+    "blend R10": {
+      "ear_peak": 100.62958377930842,
+      "body_peak": 0.675916385584662,
+      "global_peak": 362.81659809495585,
+      "w_max": 0.3713329238543148,
+      "n_elements": 67217,
+      "n_dofs": 136569,
+      "seconds": 3.59,
+      "mass_pair": 374.7
+    },
+    "ear R18, blend R4": {
+      "ear_peak": 89.92680004422871,
+      "body_peak": 0.8039904759707358,
+      "global_peak": 456.6495588907597,
+      "w_max": 0.35011219174158625,
+      "n_elements": 78595,
+      "n_dofs": 159489,
+      "seconds": 4.19,
+      "mass_pair": 384.9
+    },
+    "ear R21, blend R4": {
+      "ear_peak": 79.92215697546155,
+      "body_peak": 1.984752656408943,
+      "global_peak": 393.1384494886594,
+      "w_max": 0.3388609012054004,
+      "n_elements": 78921,
+      "n_dofs": 160045,
+      "seconds": 4.09,
+      "mass_pair": 398.2
+    },
+    "ear inboard 2 mm": {
+      "ear_peak": 72.12123930349577,
+      "body_peak": 0.0889928188731392,
+      "global_peak": 382.5023639622767,
+      "w_max": 0.22073711837981022,
+      "n_elements": 74393,
+      "n_dofs": 151173,
+      "seconds": 3.64,
+      "mass_pair": 371.6
+    },
+    "ear inboard 4 mm": {
+      "ear_peak": 50.89780972378281,
+      "body_peak": 0.029311700399420985,
+      "global_peak": 248.5676866572747,
+      "w_max": 0.13775179766900938,
+      "n_elements": 76103,
+      "n_dofs": 154577,
+      "seconds": 3.84,
+      "mass_pair": 369.4
+    },
+    "2.5 mm sheet": {
+      "ear_peak": 77.39168560292933,
+      "body_peak": 0.16929365005412414,
+      "global_peak": 343.6037541757974,
+      "w_max": 0.19189257455064418,
+      "n_elements": 74297,
+      "n_dofs": 151011,
+      "seconds": 4.42,
+      "mass_pair": 466.8
+    },
+    "washer D30": {
+      "ear_peak": 123.62952765468893,
+      "body_peak": 0.22413425381941696,
+      "global_peak": 531.7587002080919,
+      "w_max": 0.40500839649083004,
+      "n_elements": 74297,
+      "n_dofs": 151011,
+      "seconds": 4.43,
+      "mass_pair": 373.4
+    },
+    "top plate (no aperture)": {
+      "ear_peak": 120.91824899270149,
+      "body_peak": 0.23663920934190064,
+      "global_peak": 544.7769375787634,
+      "w_max": 0.37477078333630026,
+      "n_elements": 74885,
+      "n_dofs": 152123,
+      "seconds": 5.8,
+      "mass_pair": 373.4
+    }
+  }
+}

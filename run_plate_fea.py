@@ -659,13 +659,23 @@ def main() -> int:
     fea.mkdir(parents=True, exist_ok=True)
 
     # ------------------------------------------------------------------ part
-    outer, holes = read_dxf(Path(args.plate_dir) / "plate.dxf")
+    # revision B: the camera-side part is plate_bottom.dxf (the top plate is
+    # not cut for the camera and is only carried for the all-up mass)
+    plate_dir = Path(args.plate_dir)
+    dxf_name = "plate_bottom.dxf"
+    if not (plate_dir / dxf_name).exists():
+        dxf_name = "plate.dxf"                       # revision A single part
+    outer, holes = read_dxf(plate_dir / dxf_name)
     cut = abs(_area(outer)) - sum(abs(_area(h)) for h in holes)
     pts, tris = build_mesh(outer, holes, args.mesh_scale, fea)
     area = nodal_areas(pts, tris)
     sets = build_sets(pts)
     plate_t = cut * T * RHO                          # tonnes
-    W = (M_PAYLOAD + 2 * plate_t * 1000.0 + M_RIG) * G     # N, all-up weight
+    top_t = plate_t                                  # revision A fallback
+    if (plate_dir / "plate_top.dxf").exists():
+        o2, h2 = read_dxf(plate_dir / "plate_top.dxf")
+        top_t = (abs(_area(o2)) - sum(abs(_area(h)) for h in h2)) * T * RHO
+    W = (M_PAYLOAD + (plate_t + top_t) * 1000.0 + M_RIG) * G     # N, all-up
     print(f"profile {len(holes) + 1} contours, cut area {cut:.1f} mm2, "
           f"mesh {len(pts)} nodes / {len(tris)} S6, all-up {W:.2f} N")
 
@@ -679,6 +689,8 @@ def main() -> int:
                                "Fty_MPa": FTY, "Ftu_MPa": FTU}},
         "geometry": {"cut_area_mm2": round(cut, 1),
                      "plate_mass_g": round(plate_t * 1e6, 1),
+                     "top_plate_mass_g": round(top_t * 1e6, 1),
+                     "dxf": dxf_name,
                      "mesh_scale": args.mesh_scale,
                      "n_nodes": int(len(pts)), "n_elements": int(len(tris))},
         "all_up_weight_N": round(W, 2),
@@ -818,7 +830,8 @@ def report(study: Path, s: dict) -> None:
     add(f"| load | {model['load']} |")
     add(f"| mesh | {geo['n_elements']} S6 elements, {geo['n_nodes']} nodes "
         f"(scale {geo['mesh_scale']}) |")
-    add(f"| geometry | design/plate.dxf, cut area {geo['cut_area_mm2']:.0f} mm2, "
+    add(f"| geometry | design/{geo.get('dxf', 'plate.dxf')}, "
+        f"cut area {geo['cut_area_mm2']:.0f} mm2, "
         f"plate {geo['plate_mass_g']:.0f} g |")
     add(f"| all-up weight | {s['all_up_weight_N']:.2f} N (4.89 kg) |")
     add("")

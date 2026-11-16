@@ -27,5 +27,6 @@
     "**/.tmp": true,
     "**/__pycache__": true,
     "**/.venv": true
-  }
+  },
+  "python.terminal.useEnvFile": true
 }

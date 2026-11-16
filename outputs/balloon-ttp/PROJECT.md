@@ -41,6 +41,7 @@ study's `assembly/manifest.json` → `thermal_contact_resistances`.
 
 | Study | Type | Envelope | Status |
 | --- | --- | --- | --- |
+| `plate-fea` | Structural FEA, CalculiX `ccx` (WSL), S6 shells on the laser-cut DXF profile | Payload support plate, 2.0 mm Al 6061-T6: clamp-loop tension per ear (1-16.2 g, loop pretension, one loop lost), rigid thermocol bed, 20 mm washer patch loads | Completed — `fea/fea_summary.json` + `report/fea_report.md` (copied to the payload project as `design/fea.md`). Result: ear/outline blend governs, 223 MPa at the 12 g envelope (SF 1.07), first yield ≈13 g vs the 33.7 g the hand calc claims; 5 MPa away from the ears; cantilever benchmark 0.353 mm vs 0.362 mm beam theory |
 | `cht-30km` | Steady CHT, `chtMultiRegionSimpleFoam` | 30 km US76 ambient (1197 Pa, 193.15 K), convection disabled (negligible at this density), original `assembly.step` geometry, component names not yet renamed | Completed — baseline radiation+conduction check |
 | `cht-30km-spaced-radiators` | Steady CHT, `chtMultiRegionSimpleFoam` | Same as above, spaced-radiator geometry variant | Completed — radiator-spacing comparison |
 | `transient-0-10km` | Transient CHT, `chtMultiRegionFoam` | 0→10 km, 2400 s (40 min), 60 W load, 8×300 s mission-time segments | Completed (`final_time: 2400.0`) — source manifest for the later transient studies |

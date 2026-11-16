@@ -257,6 +257,35 @@
       "slug": "balloon-ttp/transient-shorter-strap-40km-3hr"
     }
   },
-  "fea_analysis": {},
+  "fea_analysis": {
+    "balloon-ttp/plate-fea": {
+      "features": {
+        "cut_area_mm2": 32674.7,
+        "mesh_scale": 1.0,
+        "n_elements": 12776.0,
+        "n_nodes": 28472.0,
+        "plate_mass_g": 176.4
+      },
+      "harvested": "2026-11-16",
+      "knobs": {},
+      "outcome": {},
+      "quality": 0.7,
+      "slug": "balloon-ttp/plate-fea"
+    },
+    "balloon-ttp/plate-fea-smoke": {
+      "features": {
+        "cut_area_mm2": 32674.7,
+        "mesh_scale": 1.45,
+        "n_elements": 7102.0,
+        "n_nodes": 16236.0,
+        "plate_mass_g": 176.4
+      },
+      "harvested": "2026-11-16",
+      "knobs": {},
+      "outcome": {},
+      "quality": 0.7,
+      "slug": "balloon-ttp/plate-fea-smoke"
+    }
+  },
   "multiphase_cfd": {}
 }
